@@ -1,0 +1,30 @@
+HackPackageSource:
+    javac HackPackageSource/Hack/*/*.java -d InstallDir/bin/lib/
+    jar cf InstallDir/bin/lib/Hack.jar InstallDir/bin/lib/Hack/ComputerParts/*.class InstallDir/bin/lib/Hack/Controller/*.class InstallDir/bin/lib/Hack/Events/*.class InstallDir/bin/lib/Hack/Translators/*.class InstallDir/bin/lib/Hack/Utilities/*.class
+
+HackGUIPackageSource:
+    javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java -d InstallDir/bin/lib/
+    jar cf InstallDir/bin/lib/HackGUI.jar InstallDir/bin/lib/HackGUI/*.class
+
+CompilersPackageSource:
+    javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/*/*/*.java CompilersPackageSource/Hack/*/*.java -d InstallDir/bin/lib/
+    jar cf InstallDir/bin/lib/Compilers.jar InstallDir/bin/lib/Hack/Assembler/*.class InstallDir/bin/lib/Hack/VirtualMachine/*.class
+
+SimulatorsPackageSource:
+    javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java -d InstallDir/bin/lib/
+    jar cf InstallDir/bin/lib/Simulators.jar InstallDir/bin/lib/Hack/CPUEmulator/*.class InstallDir/bin/lib/Hack/Gates/*.class InstallDir/bin/lib/Hack/HardwareSimulator/*.class
+
+SimulatorsGUIPackageSource:
+    javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java SimulatorsGUIPackageSource/SimulatorsGUI/*.java -d InstallDir/bin/lib/
+    jar cf InstallDir/bin/lib/SimulatorsGUI.jar InstallDir/bin/lib/SimulatorsGUI/*.class
+
+BuiltInChipsSource:
+    javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java SimulatorsGUIPackageSource/SimulatorsGUI/*.java BuiltInChipsSource/*.java  -d InstallDir/bin/lib/
+    # Move contents to InstallDir/lib/BuiltinChips
+
+BuiltinVMCodeSource:
+    javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java SimulatorsGUIPackageSource/SimulatorsGUI/*.java BuiltInChipsSource/*.java  BuiltInVMCodeSource/*.java MainClassesSource/*.java -d InstallDir/bin/lib/
+    # Move contents to InstallDir/lib/BuiltinVMCode
+
+MainClassesSources:
+    javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java SimulatorsGUIPackageSource/SimulatorsGUI/*.java BuiltInChipsSource/*.java  BuiltInVMCodeSource/*.java MainClassesSource/*.java -d InstallDir/bin/classes/

@@ -1,0 +1,6 @@
+/temp
+/InstallDir/bin/classes
+/InstallDir/bin/lib
+/InstallDir/builtInChips/*.class
+/InstallDir/builtInChips/*.class
+/.idea
