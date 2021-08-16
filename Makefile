@@ -18,34 +18,34 @@ $(Lib)/Hack.jar: $(HackPackageSource)
 	javac HackPackageSource/Hack/*/*.java -d $(Lib)/
 	jar cf $(Lib)/Hack.jar $(Lib)/Hack/ComputerParts/*.class $(Lib)/Hack/Controller/*.class $(Lib)/Hack/Events/*.class $(Lib)/Hack/Translators/*.class $(Lib)/Hack/Utilities/*.class
 
-$(Lib)/HackGUI.jar: $(HackGUIPackageSource) $(HackPackageSource)
+$(Lib)/HackGUI.jar: $(HackGUIPackageSource)
 	javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java -d $(Lib)/
 	jar cf $(Lib)/HackGUI.jar $(Lib)/HackGUI/*.class
 
-$(Lib)/Compilers.jar: $(HackGUIPackageSource) $(HackPackageSource) $(CompilersPackageSource)
+$(Lib)/Compilers.jar: $(CompilersPackageSource)
 	javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/*/*/*.java CompilersPackageSource/Hack/*/*.java -d $(Lib)/
 	jar cf $(Lib)/Compilers.jar $(Lib)/Hack/Assembler/*.class $(Lib)/Hack/VirtualMachine/*.class
 
-$(Lib)/Simulators.jar: $(HackGUIPackageSource) $(HackPackageSource) $(CompilersPackageSource) $(SimulatorsPackageSource)
+$(Lib)/Simulators.jar: $(SimulatorsPackageSource)
 	javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java -d $(Lib)/
 	jar cf $(Lib)/Simulators.jar $(Lib)/Hack/CPUEmulator/*.class $(Lib)/Hack/Gates/*.class $(Lib)/Hack/HardwareSimulator/*.class
 
-$(Lib)/SimulatorsGUI.jar: $(HackGUIPackageSource) $(HackPackageSource) $(CompilersPackageSource) $(SimulatorsPackageSource) $(SimulatorsGUIPackageSource)
+$(Lib)/SimulatorsGUI.jar: $(SimulatorsGUIPackageSource)
 	javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java SimulatorsGUIPackageSource/SimulatorsGUI/*.java -d $(Lib)/
 	jar cf $(Lib)/SimulatorsGUI.jar $(Lib)/SimulatorsGUI/*.class
 
-$(BuiltinChipsJar): $(HackGUIPackageSource) $(HackPackageSource) $(CompilersPackageSource) $(SimulatorsPackageSource) $(SimulatorsGUIPackageSource) $(BuiltInChipsSource)
+$(BuiltinChipsJar): $(BuiltInChipsSource)
 	javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java SimulatorsGUIPackageSource/SimulatorsGUI/*.java BuiltInChipsSource/*.java -d InstallDir/temp/
 	jar cf InstallDir/temp/builtInChips/Chips.jar InstallDir/temp/builtInChips/*.class
 	rsync -a InstallDir/temp/builtInChips/ InstallDir/builtInChips/
 	rm -r InstallDir/temp/
 
-$(BuiltinVMCodeJar): $(HackGUIPackageSource) $(HackPackageSource) $(CompilersPackageSource) $(SimulatorsPackageSource) $(SimulatorsGUIPackageSource) $(BuiltInChipsSource) $(BuiltInVMCodeSource)
+$(BuiltinVMCodeJar): $(BuiltInVMCodeSource)
 	javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java SimulatorsGUIPackageSource/SimulatorsGUI/*.java BuiltInChipsSource/*.java BuiltInVMCodeSource/*.java -d InstallDir/temp/
 	jar cf $(BuiltinVMCodeJar) InstallDir/temp/builtInVMCode/*.class
 	rsync -a InstallDir/temp/builtInVMCode/ InstallDir/builtInVMCode/
 	rm -r InstallDir/temp/
 
-$(MainClassesJar): $(HackGUIPackageSource) $(HackPackageSource) $(CompilersPackageSource) $(SimulatorsPackageSource) $(SimulatorsGUIPackageSource) $(BuiltInChipsSource) $(BuiltInVMCodeSource) $(MainClassesSource)
+$(MainClassesJar): $(MainClassesSource)
 	javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java SimulatorsGUIPackageSource/SimulatorsGUI/*.java BuiltInChipsSource/*.java  BuiltInVMCodeSource/*.java MainClassesSource/*.java -d InstallDir/bin/classes/
 	jar cf $(MainClassesJar) InstallDir/bin/classes/*.class
