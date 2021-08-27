@@ -56,7 +56,7 @@ public class HardwareSimulator extends HackSimulator
     private static final File INITIAL_BUILTIN_DIR = new File("builtInChips");
 
     // null value
-    private static final short NULL_VALUE = 0;
+    private static final int NULL_VALUE = 0;
 
     // The gui of the simulator.
     private HardwareSimulatorGUI gui;
@@ -132,7 +132,7 @@ public class HardwareSimulator extends HackSimulator
 
     // Initializes the hardware simulator
     private void init() {
-        Gate.CLOCK_NODE.set((short)1);
+        Gate.CLOCK_NODE.set((int)1);
         clockUp = false;
         time = 0;
         GatesManager.getInstance().setErrorHandler(this);
@@ -239,11 +239,11 @@ public class HardwareSimulator extends HackSimulator
         if (gate == null)
             throw new VariableException("cannot get var's value since no gate is currently loaded", varName);
 
-        short numValue;
+        int numValue;
 
         try {
             value = Conversions.toDecimalForm(value);
-            numValue = Short.parseShort(value);
+            numValue = Integer.parseInt(value);
         } catch (NumberFormatException nfe) {
             throw new VariableException("'" + value + "' is not a legal value for variable",
                                         varName);
@@ -302,7 +302,7 @@ public class HardwareSimulator extends HackSimulator
      * Returns true if the width of the given value is less or equal to the width
      * of the given pin (name).
      */
-    private boolean isLegalWidth(String pinName, short value) {
+    private boolean isLegalWidth(String pinName, int value) {
         byte maxWidth = gate.getGateClass().getPinInfo(pinName).width;
         byte width = (byte)(value > 0 ? (int)(Math.log(value) / Math.log(2)) + 1 : 1);
         return (width <= maxWidth);
@@ -446,7 +446,7 @@ public class HardwareSimulator extends HackSimulator
             gate.eval();
 
         time = 0;
-        Gate.CLOCK_NODE.set((short)1);
+        Gate.CLOCK_NODE.set((int)1);
         clockUp = false;
     }
 
@@ -734,7 +734,7 @@ public class HardwareSimulator extends HackSimulator
 
     // Performs tick on the current gate
     private void performTick() {
-        Gate.CLOCK_NODE.set((short)0);
+        Gate.CLOCK_NODE.set((int)0);
         gate.tick();
         clockUp = true;
 
@@ -749,7 +749,7 @@ public class HardwareSimulator extends HackSimulator
 
     // Performs tick on the current gate
     private void performTock() {
-        Gate.CLOCK_NODE.set((short)1);
+        Gate.CLOCK_NODE.set((int)1);
         gate.tock();
         clockUp = false;
         time++;
@@ -772,7 +772,7 @@ public class HardwareSimulator extends HackSimulator
     // receives a variable name of the form xxx[i] and returns the numeric
     // value of i.
     // Throws VariableException if i is negative.
-    private static short getIndex(String varName) throws VariableException {
+    private static int getIndex(String varName) throws VariableException {
         if (varName.indexOf("]") == -1)
             throw new VariableException("Missing ']'", varName);
 
@@ -781,7 +781,7 @@ public class HardwareSimulator extends HackSimulator
         if (index < 0)
             throw new VariableException("Illegal variable index", varName);
 
-        return (short)index;
+        return (int)index;
     }
 
     // Returns the given pin name including its sub bus specification.

@@ -33,23 +33,23 @@ public class Memory extends JackOSClass {
 		writeMemory(HEAP_START_ADDRESS+1, HEAP_END_ADDRESS+1);
     }
 
-	public static short peek(short address)
+	public static int peek(int address)
 			throws TerminateVMProgramThrowable {
 		return readMemory(address);
 	}
 
-    public static void poke(short address, short value)
+    public static void poke(int address, int value)
 			throws TerminateVMProgramThrowable {
 		writeMemory(address, value);
     }
 
-    public static short alloc(short size)
+    public static int alloc(int size)
 			throws TerminateVMProgramThrowable {
         if (size < 1) {
             callFunction("Sys.error", MEMORY_ALLOC_NONPOSITIVE_SIZE);
         }
-		short segmentAddress = HEAP_START_ADDRESS;
-		short segmentCapacity = 0;
+		int segmentAddress = HEAP_START_ADDRESS;
+		int segmentCapacity = 0;
         while (segmentAddress <= HEAP_END_ADDRESS &&
 			   (segmentCapacity=readMemory(segmentAddress)) < size) {
 			segmentAddress = readMemory(segmentAddress+1);
@@ -63,15 +63,15 @@ public class Memory extends JackOSClass {
 			writeMemory(segmentAddress+1, segmentAddress+size+2);
 		}
 		writeMemory(segmentAddress, 0);
-		return (short)(segmentAddress+2);
+		return (int)(segmentAddress+2);
     }
 
-    public static void deAlloc(short arr)
+    public static void deAlloc(int arr)
 			throws TerminateVMProgramThrowable {
-		short segmentAddress = (short)(arr-2);
-		short segmentCapacity = readMemory(segmentAddress);
-		short nextSegmentAddress = readMemory(segmentAddress+1);
-		short nextCapacity;
+		int segmentAddress = (int)(arr-2);
+		int segmentCapacity = readMemory(segmentAddress);
+		int nextSegmentAddress = readMemory(segmentAddress+1);
+		int nextCapacity;
         if (nextSegmentAddress > HEAP_END_ADDRESS ||
 			(nextCapacity=readMemory(nextSegmentAddress)) == 0) {
 			writeMemory(segmentAddress, nextSegmentAddress-segmentAddress-2);

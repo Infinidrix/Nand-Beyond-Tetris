@@ -39,55 +39,55 @@ public class HackAssemblerTranslator {
     /**
      * Indicates an assembly line with no operation
      */
-    public static final short NOP = (short)0x8000;
+    public static final int NOP = (int)0x8000;
 
     // exp constants
-    private static final Short ZERO         = new Short((short)0xea80);
-    private static final Short ONE          = new Short((short)0xefc0);
-    private static final Short MINUS_ONE    = new Short((short)0xee80);
-    private static final Short EXP_D        = new Short((short)0xe300);
-    private static final Short NOT_D        = new Short((short)0xe340);
-    private static final Short EXP_M        = new Short((short)0xfc00);
-    private static final Short EXP_A        = new Short((short)0xec00);
-    private static final Short NOT_M        = new Short((short)0xfc40);
-    private static final Short NOT_A        = new Short((short)0xec40);
-    private static final Short MINUS_D      = new Short((short)0xe3c0);
-    private static final Short MINUS_M      = new Short((short)0xfcc0);
-    private static final Short MINUS_A      = new Short((short)0xecc0);
-    private static final Short D_PLUS_ONE   = new Short((short)0xe7c0);
-    private static final Short M_PLUS_ONE   = new Short((short)0xfdc0);
-    private static final Short A_PLUS_ONE   = new Short((short)0xedc0);
-    private static final Short D_MINUS_ONE  = new Short((short)0xe380);
-    private static final Short M_MINUS_ONE  = new Short((short)0xfc80);
-    private static final Short A_MINUS_ONE  = new Short((short)0xec80);
-    private static final Short D_PLUS_M     = new Short((short)0xf080);
-    private static final Short D_PLUS_A     = new Short((short)0xe080);
-    private static final Short D_MINUS_M    = new Short((short)0xf4c0);
-    private static final Short D_MINUS_A    = new Short((short)0xe4c0);
-    private static final Short M_MINUS_D    = new Short((short)0xf1c0);
-    private static final Short A_MINUS_D    = new Short((short)0xe1c0);
-    private static final Short D_AND_M      = new Short((short)0xf000);
-    private static final Short D_AND_A      = new Short((short)0xe000);
-    private static final Short D_OR_M       = new Short((short)0xf540);
-    private static final Short D_OR_A       = new Short((short)0xe540);
+    private static final Integer ZERO         = new Integer((int)0xea80);
+    private static final Integer ONE          = new Integer((int)0xefc0);
+    private static final Integer MINUS_ONE    = new Integer((int)0xee80);
+    private static final Integer EXP_D        = new Integer((int)0xe300);
+    private static final Integer NOT_D        = new Integer((int)0xe340);
+    private static final Integer EXP_M        = new Integer((int)0xfc00);
+    private static final Integer EXP_A        = new Integer((int)0xec00);
+    private static final Integer NOT_M        = new Integer((int)0xfc40);
+    private static final Integer NOT_A        = new Integer((int)0xec40);
+    private static final Integer MINUS_D      = new Integer((int)0xe3c0);
+    private static final Integer MINUS_M      = new Integer((int)0xfcc0);
+    private static final Integer MINUS_A      = new Integer((int)0xecc0);
+    private static final Integer D_PLUS_ONE   = new Integer((int)0xe7c0);
+    private static final Integer M_PLUS_ONE   = new Integer((int)0xfdc0);
+    private static final Integer A_PLUS_ONE   = new Integer((int)0xedc0);
+    private static final Integer D_MINUS_ONE  = new Integer((int)0xe380);
+    private static final Integer M_MINUS_ONE  = new Integer((int)0xfc80);
+    private static final Integer A_MINUS_ONE  = new Integer((int)0xec80);
+    private static final Integer D_PLUS_M     = new Integer((int)0xf080);
+    private static final Integer D_PLUS_A     = new Integer((int)0xe080);
+    private static final Integer D_MINUS_M    = new Integer((int)0xf4c0);
+    private static final Integer D_MINUS_A    = new Integer((int)0xe4c0);
+    private static final Integer M_MINUS_D    = new Integer((int)0xf1c0);
+    private static final Integer A_MINUS_D    = new Integer((int)0xe1c0);
+    private static final Integer D_AND_M      = new Integer((int)0xf000);
+    private static final Integer D_AND_A      = new Integer((int)0xe000);
+    private static final Integer D_OR_M       = new Integer((int)0xf540);
+    private static final Integer D_OR_A       = new Integer((int)0xe540);
 
     // dest constants
-    private static final Short A   = new Short((short)0x20);
-    private static final Short M   = new Short((short)0x8);
-    private static final Short D   = new Short((short)0x10);
-    private static final Short AM  = new Short((short)0x28);
-    private static final Short AD  = new Short((short)0x30);
-    private static final Short MD  = new Short((short)0x18);
-    private static final Short AMD = new Short((short)0x38);
+    private static final Integer A   = new Integer((int)0x20);
+    private static final Integer M   = new Integer((int)0x8);
+    private static final Integer D   = new Integer((int)0x10);
+    private static final Integer AM  = new Integer((int)0x28);
+    private static final Integer AD  = new Integer((int)0x30);
+    private static final Integer MD  = new Integer((int)0x18);
+    private static final Integer AMD = new Integer((int)0x38);
 
     // jmp constants
-    private static final Short JMP              = new Short((short)0x7);
-    private static final Short JMP_LESS_THEN    = new Short((short)0x4);
-    private static final Short JMP_EQUAL        = new Short((short)0x2);
-    private static final Short JMP_GREATER_THEN  = new Short((short)0x1);
-    private static final Short JMP_NOT_EQUAL    = new Short((short)0x5);
-    private static final Short JMP_LESS_EQUAL   = new Short((short)0x6);
-    private static final Short JMP_GREATER_EQUAL = new Short((short)0x3);
+    private static final Integer JMP              = new Integer((int)0x7);
+    private static final Integer JMP_LESS_THEN    = new Integer((int)0x4);
+    private static final Integer JMP_EQUAL        = new Integer((int)0x2);
+    private static final Integer JMP_GREATER_THEN  = new Integer((int)0x1);
+    private static final Integer JMP_NOT_EQUAL    = new Integer((int)0x5);
+    private static final Integer JMP_LESS_EQUAL   = new Integer((int)0x6);
+    private static final Integer JMP_GREATER_EQUAL = new Integer((int)0x3);
 
     private static final String[] symbols = new String[] {"_", "-", "|", "!", "--", "++", "", "", "+", "&"};
     private static final String[] registers = new String[] { "A", "D", "M", "P", "C", "B", "I", "T", "R" };
@@ -98,7 +98,7 @@ public class HackAssemblerTranslator {
 
     // The translation tables from text to codes
     private Hashtable expToCode, destToCode, jmpToCode;
-    private Map<String, Short> symbolLoc, registerLoc;
+    private Map<String, Integer> symbolLoc, registerLoc;
 
     // The translation table from code to text.
     private Hashtable expToText, destToText, jmpToText;
@@ -118,13 +118,13 @@ public class HackAssemblerTranslator {
     private void initNewInst() {
         symbolLoc= new HashMap<>();
         for (int loc = 0; loc < symbols.length; loc++) {
-            symbolLoc.put(symbols[loc], (short) loc);
+            symbolLoc.put(symbols[loc], (int) loc);
         }
 
         registerLoc= new HashMap<>();
         for (int loc = 0; loc < registers.length; loc++) {
-            registerLoc.put(registers[loc], (short) loc);
-            registerLoc.put(registers[loc].toLowerCase(Locale.ROOT), (short) loc);
+            registerLoc.put(registers[loc], (int) loc);
+            registerLoc.put(registers[loc].toLowerCase(Locale.ROOT), (int) loc);
         }
     }
 
@@ -141,8 +141,8 @@ public class HackAssemblerTranslator {
      * Returns the code which represents the given exp text.
      * If doesn't exist, throws AssemblerException.
      */
-    public short getExpByText(String text) throws AssemblerException {
-        Short code = (Short)expToCode.get(text);
+    public int getExpByText(String text) throws AssemblerException {
+        Integer code = (Integer)expToCode.get(text);
         if (code == null)
             throw new AssemblerException("Illegal exp: " + text);
         return code.shortValue();
@@ -152,8 +152,8 @@ public class HackAssemblerTranslator {
      * Returns the text which represents the given exp code.
      * If doesn't exist, throws AssemblerException.
      */
-    public String getExpByCode(short code) throws AssemblerException {
-        String result = (String)expToText.get(new Short(code));
+    public String getExpByCode(int code) throws AssemblerException {
+        String result = (String)expToText.get(new Integer(code));
         if (result == null)
             throw new AssemblerException("Illegal exp: " + code);
         return result;
@@ -163,8 +163,8 @@ public class HackAssemblerTranslator {
      * Returns the code which represents the given dest text.
      * If doesn't exist, throws AssemblerException.
      */
-    public short getDestByText(String text) throws AssemblerException {
-        Short code = (Short)destToCode.get(text);
+    public int getDestByText(String text) throws AssemblerException {
+        Integer code = (Integer)destToCode.get(text);
         if (code == null)
             throw new AssemblerException("Illegal dest: " + text);
         return code.shortValue();
@@ -174,8 +174,8 @@ public class HackAssemblerTranslator {
      * Returns the text which represents the given dest code.
      * If doesn't exist, throws AssemblerException.
      */
-    public String getDestByCode(short code) throws AssemblerException {
-        String result = (String)destToText.get(new Short(code));
+    public String getDestByCode(int code) throws AssemblerException {
+        String result = (String)destToText.get(new Integer(code));
         if (result == null)
             throw new AssemblerException("Illegal dest: " + code);
         return result;
@@ -185,8 +185,8 @@ public class HackAssemblerTranslator {
      * Returns the code which represents the given jmp text.
      * If doesn't exist, throws AssemblerException.
      */
-    public short getJmpByText(String text) throws AssemblerException {
-        Short code = (Short)jmpToCode.get(text);
+    public int getJmpByText(String text) throws AssemblerException {
+        Integer code = (Integer)jmpToCode.get(text);
         if (code == null)
             throw new AssemblerException("Illegal jmp: " + text);
         return code.shortValue();
@@ -196,8 +196,8 @@ public class HackAssemblerTranslator {
      * Returns the text which represents the given jmp code.
      * If doesn't exist, throws AssemblerException.
      */
-    public String getJmpByCode(short code) throws AssemblerException {
-        String result = (String)jmpToText.get(new Short(code));
+    public String getJmpByCode(int code) throws AssemblerException {
+        String result = (String)jmpToText.get(new Integer(code));
         if (result == null)
             throw new AssemblerException("Illegal jmp: " + code);
         return result;
@@ -208,9 +208,9 @@ public class HackAssemblerTranslator {
      * machine language code.
      * If the command is not legal, throws AssemblerException.
      */
-    public short textToCode(String command) throws AssemblerException {
-        short code = 0;
-        short expCode = 0, jmpCode = 0, destCode = 0;
+    public int textToCode(String command) throws AssemblerException {
+        int code = 0;
+        int expCode = 0, jmpCode = 0, destCode = 0;
 
         try {
             AssemblyLineTokenizer input = new AssemblyLineTokenizer(command);
@@ -218,15 +218,15 @@ public class HackAssemblerTranslator {
             if (input.isToken("@")) {
                 input.advance(true);
                 try {
-                    code = Short.parseShort(input.token());
+                    code = Integer.parseInt(input.token());
                 } catch (NumberFormatException nfe) {
                     throw new AssemblerException("A numeric value is expected");
                 }
             } else if (input.isToken("jmp")){
-                code = (short) 0xffc7;
+                code = (int) 0xffc7;
             }
             else if (input.isToken("=")){
-                short dest = 0, src = 0, exp = 0, type = 0xa, i = 0;
+                int dest = 0, src = 0, exp = 0, type = 0xa, i = 0;
                 input.advance(true);
                 String secondToken = input.token();
                 dest = registerLoc.get(secondToken.substring(i, i + 1));
@@ -248,7 +248,7 @@ public class HackAssemblerTranslator {
                     throw new AssemblerException("Instruction longer than expected");
                 }
                 input.ensureEnd();
-                code = (short) (type << 12 | exp << 8 | src << 4 | dest);
+                code = (int) (type << 12 | exp << 8 | src << 4 | dest);
             }
             else { // compute-store-jump command
 
@@ -257,7 +257,7 @@ public class HackAssemblerTranslator {
 
                 // find dest (if any)
                 if (input.isToken("=")) {
-                    Short dest = (Short)destToCode.get(firstToken);
+                    Integer dest = (Integer)destToCode.get(firstToken);
                     if (dest == null)
                         throw new AssemblerException("Destination expected");
 
@@ -266,11 +266,11 @@ public class HackAssemblerTranslator {
                 }
 
                 // find exp
-                Short exp;
+                Integer exp;
                 if (!firstToken.equals("=") && destCode == 0)
-                    exp = (Short)expToCode.get(firstToken);
+                    exp = (Integer)expToCode.get(firstToken);
                 else
-                    exp = (Short)expToCode.get(input.token());
+                    exp = (Integer)expToCode.get(input.token());
 
                 if (exp == null)
                     throw new AssemblerException("Expression expected");
@@ -283,7 +283,7 @@ public class HackAssemblerTranslator {
 
                 // find jmp (if any)
                 if (!input.isEnd()) {
-                    Short jmp = (Short)jmpToCode.get(input.token());
+                    Integer jmp = (Integer)jmpToCode.get(input.token());
                     if (jmp == null)
                         throw new AssemblerException("Jump directive expected");
 
@@ -291,7 +291,7 @@ public class HackAssemblerTranslator {
                     input.ensureEnd();
                 }
 
-                code = (short)(destCode + expCode + jmpCode);
+                code = (int)(destCode + expCode + jmpCode);
             }
 
         } catch (IOException ioe) {
@@ -308,7 +308,7 @@ public class HackAssemblerTranslator {
      * language command (String).
      * If illegal, throws AssemblerException.
      */
-    public String codeToText(short code) throws AssemblerException {
+    public String codeToText(int code) throws AssemblerException {
         StringBuffer command = new StringBuffer();
 
         if (code != HackAssemblerTranslator.NOP) {
@@ -316,9 +316,9 @@ public class HackAssemblerTranslator {
                 command.append('@');
                 command.append(code);
             } else if ((code & 0xf000) == 0xa000){
-                short src = (short) ((code & 0x00f0) >> 4);
-                short dest = (short) (code & 0x000f);
-                short symb = (short) ((code & 0x0f00) >> 8);
+                int src = (int) ((code & 0x00f0) >> 4);
+                int dest = (int) (code & 0x000f);
+                int symb = (int) ((code & 0x0f00) >> 8);
 
                 command.append("=");
                 command.append(registers[dest]);
@@ -327,9 +327,9 @@ public class HackAssemblerTranslator {
 
             }
             else {
-                short exp = (short)(code & 0xffc0);
-                short dest = (short)(code & 0x0038);
-                short jmp = (short)(code & 0x0007);
+                int exp = (int)(code & 0xffc0);
+                int dest = (int)(code & 0x0038);
+                int jmp = (int)(code & 0x0007);
 
                 String expText = getExpByCode(exp);
                 if (!expText.equals("")) {
@@ -357,16 +357,16 @@ public class HackAssemblerTranslator {
      * the given size that contains the program. The given null value will be used
      * to fill the memory array initially.
      */
-    public static short[] loadProgram(String fileName, int size, short nullValue)
+    public static int[] loadProgram(String fileName, int size, int nullValue)
      throws AssemblerException {
-        short[] memory = null;
+        int[] memory = null;
 
         File file = new File(fileName);
         if (!file.exists())
             throw new AssemblerException(fileName + " doesn't exist");
 
         if (fileName.endsWith(".hack")) {
-            memory = new short[size];
+            memory = new int[size];
             for (int i = 0; i < size; i++)
                 memory[i] = nullValue;
 
@@ -377,13 +377,13 @@ public class HackAssemblerTranslator {
 
                 while ((line = reader.readLine()) != null) {
 
-                    short value = 0;
+                    int value = 0;
 
                     if (pc >= size)
                         throw new AssemblerException("Program too large");
 
                     try {
-                        value = (short)Conversions.binaryToInt(line);
+                        value = (int)Conversions.binaryToInt(line);
                     } catch (NumberFormatException nfe) {
                         throw new AssemblerException("Illegal character");
                     }

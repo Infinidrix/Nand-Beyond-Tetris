@@ -27,11 +27,11 @@ import Hack.Gates.BuiltInGate;
 public class DMux4Way extends BuiltInGate {
 
     protected void reCompute() {
-        short in = inputPins[0].get();
-        short sel = inputPins[1].get();
-        outputPins[0].set((short)(sel == 0 ? in : 0));
-        outputPins[1].set((short)(sel == 1 ? in : 0));
-        outputPins[2].set((short)(sel == 2 ? in : 0));
-        outputPins[3].set((short)(sel == 3 ? in : 0));
+        int in = inputPins[0].get();
+        int sel = inputPins[1].get();
+        outputPins[0].set((int)(sel == 0 ? in : 0));
+        outputPins[1].set((int)(sel == 1 ? in : 0));
+        outputPins[2].set((int)(sel == 2 ? in : 0));
+        outputPins[3].set((int)(sel == 3 ? in : 0));
     }
 }

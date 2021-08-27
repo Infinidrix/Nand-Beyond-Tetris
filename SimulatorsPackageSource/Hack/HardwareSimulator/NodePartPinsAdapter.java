@@ -39,7 +39,7 @@ public class NodePartPinsAdapter extends Node {
         this.index = index;
     }
 
-    public void set(short value) {
+    public void set(int value) {
         this.value = value;
         partPins.quietUpdateGUI(index, get());
     }

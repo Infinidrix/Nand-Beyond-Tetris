@@ -25,7 +25,7 @@ import Hack.Gates.BuiltInGate;
 public class Inc16 extends BuiltInGate {
 
     protected void reCompute() {
-        short in = inputPins[0].get();
-        outputPins[0].set((short)(in + 1));
+        int in = inputPins[0].get();
+        outputPins[0].set((int)(in + 1));
     }
 }

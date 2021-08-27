@@ -26,10 +26,10 @@ import Hack.Gates.BuiltInGate;
 public class Bit extends BuiltInGate {
 
     // The state (0/1) of the bit.
-    private short state;
+    private int state;
 
     protected void clockUp() {
-        short load = inputPins[1].get();
+        int load = inputPins[1].get();
         if (load == 1)
             state = inputPins[0].get();
     }

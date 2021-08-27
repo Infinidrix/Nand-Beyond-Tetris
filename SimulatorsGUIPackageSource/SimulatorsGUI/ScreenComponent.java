@@ -33,7 +33,7 @@ public class ScreenComponent extends JPanel implements ScreenGUI, ActionListener
     private static final int STATIC_CLOCK_INTERVALS = 500;
 
     // The screen memory array
-    private short[] data;
+    private int[] data;
 
     // redraw flag
     private boolean redraw = true;
@@ -60,7 +60,7 @@ public class ScreenComponent extends JPanel implements ScreenGUI, ActionListener
         setSize(Definitions.SCREEN_WIDTH + borderWidth,
                 Definitions.SCREEN_HEIGHT + borderHeight);
 
-        data = new short[Definitions.SCREEN_SIZE];
+        data = new int[Definitions.SCREEN_SIZE];
         x = new int[Definitions.SCREEN_SIZE];
         y = new int[Definitions.SCREEN_SIZE];
         x[0] = borderInsets.left;
@@ -84,7 +84,7 @@ public class ScreenComponent extends JPanel implements ScreenGUI, ActionListener
      * Updates the screen at the given index with the given value
      * (Assumes legal index)
      */
-    public void setValueAt(int index, short value) {
+    public void setValueAt(int index, int value) {
         data[index] = value;
         redraw = true;
     }
@@ -93,7 +93,7 @@ public class ScreenComponent extends JPanel implements ScreenGUI, ActionListener
      * Updates the screen's contents with the given values array.
      * (Assumes that the length of the values array equals the screen memory size.
      */
-    public void setContents(short[] values) {
+    public void setContents(int[] values) {
         data = values;
         redraw = true;
     }
@@ -154,13 +154,13 @@ public class ScreenComponent extends JPanel implements ScreenGUI, ActionListener
                 if (data[i] == 0xffff) // draw a full line
                     g.drawLine(x[i], y[i], x[i] + 15, y[i]);
                 else {
-                    short value = data[i];
+                    int value = data[i];
                     for (int j = 0; j < 16; j++) {
                         if ((value & 0x1) == 1)
                             // since there's no drawPixel, uses drawLine to draw one pixel
                             g.drawLine(x[i] + j, y[i], x[i] + j, y[i]);
 
-                        value = (short)(value >> 1);
+                        value = (int)(value >> 1);
                     }
                 }
             }

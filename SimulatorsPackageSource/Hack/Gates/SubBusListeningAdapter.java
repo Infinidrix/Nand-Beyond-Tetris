@@ -24,7 +24,7 @@ package Hack.Gates;
 public class SubBusListeningAdapter extends Node {
 
     // The mask which filters out the non-relevant part of the sub-node
-    private short mask;
+    private int mask;
 
     // The amount of bits to shift left before masking
     private byte shiftLeft;
@@ -46,9 +46,9 @@ public class SubBusListeningAdapter extends Node {
      * Sets the node's value with the given value.
      * Notifies the listeners on the change by calling their set() method.
      */
-    public void set(short value) {
-        short masked1 = (short)(targetNode.get() & (~mask));
-        short masked2 = (short)((short)(value << shiftLeft) & mask);
-        targetNode.set((short)(masked1 | masked2));
+    public void set(int value) {
+        int masked1 = (int)(targetNode.get() & (~mask));
+        int masked2 = (int)((int)(value << shiftLeft) & mask);
+        targetNode.set((int)(masked1 | masked2));
     }
 }

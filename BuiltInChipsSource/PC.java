@@ -32,7 +32,7 @@ import java.awt.*;
 public class PC extends BuiltInGateWithGUI implements ComputerPartEventListener {
 
     // The 16 bit value
-    private short value;
+    private int value;
 
     // The gui
     private RegisterComponent gui;
@@ -52,10 +52,10 @@ public class PC extends BuiltInGateWithGUI implements ComputerPartEventListener 
     }
 
     protected void clockUp() {
-        short in = inputPins[0].get(); // 16 bit input
-        short load = inputPins[1].get(); // load bit
-        short inc = inputPins[2].get(); // incerement bit
-        short reset = inputPins[3].get(); // reset bit
+        int in = inputPins[0].get(); // 16 bit input
+        int load = inputPins[1].get(); // load bit
+        int inc = inputPins[2].get(); // incerement bit
+        int reset = inputPins[3].get(); // reset bit
         if (reset == 1)
             value = 0;
         else if (load == 1)
@@ -76,7 +76,7 @@ public class PC extends BuiltInGateWithGUI implements ComputerPartEventListener 
     }
 
     public void valueChanged(ComputerPartEvent event) {
-        short newValue = event.getValue();
+        int newValue = event.getValue();
         clearErrorListeners();
         if (newValue < 0 || newValue > 32767) {
             notifyErrorListeners("Illegal address value");
@@ -88,7 +88,7 @@ public class PC extends BuiltInGateWithGUI implements ComputerPartEventListener 
     }
 
     // updates the given value
-    private void updateValue(short newValue) {
+    private void updateValue(int newValue) {
         value = newValue;
         outputPins[0].set(newValue);
         evalParent();
@@ -99,7 +99,7 @@ public class PC extends BuiltInGateWithGUI implements ComputerPartEventListener 
     public void guiGainedFocus() {
     }
 
-    public short getValueAt(int index) throws GateException {
+    public int getValueAt(int index) throws GateException {
         checkIndex(index);
         return value;
     }
@@ -110,7 +110,7 @@ public class PC extends BuiltInGateWithGUI implements ComputerPartEventListener 
             throw new GateException("PC has no index. Use PC[]");
     }
 
-    public void setValueAt(int index, short value) throws GateException {
+    public void setValueAt(int index, int value) throws GateException {
         checkIndex(index);
         updateValue(value);
     }

@@ -25,7 +25,7 @@ import Hack.Gates.*;
 public class DFF extends BuiltInGate {
 
     // The state (0/1) of the DFF.
-    private short state;
+    private int state;
 
     protected void clockUp() {
         state = inputPins[0].get();

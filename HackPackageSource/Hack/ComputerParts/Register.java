@@ -25,7 +25,7 @@ import java.util.EventObject;
 public class Register extends InteractiveValueComputerPart implements ComputerPartEventListener {
 
     // The 16-bit value.
-    protected short value;
+    protected int value;
 
     // The register's gui component
     protected RegisterGUI gui;
@@ -34,7 +34,7 @@ public class Register extends InteractiveValueComputerPart implements ComputerPa
      * Constructs a new register with the given GUI component and the legal
      * values range.
      */
-    public Register(RegisterGUI gui, short minValue, short maxValue) {
+    public Register(RegisterGUI gui, int minValue, int maxValue) {
         super(gui != null, minValue, maxValue);
         init(gui);
     }
@@ -60,22 +60,22 @@ public class Register extends InteractiveValueComputerPart implements ComputerPa
     /**
      * Returns the value of the register.
      */
-    public short get() {
+    public int get() {
         return getValueAt(0);
     }
 
     /**
      * Sets the value of the register with the given value.
      */
-    public void store(short value) {
+    public void store(int value) {
         setValueAt(0, value, false);
     }
 
-    public short getValueAt(int index) {
+    public int getValueAt(int index) {
         return value;
     }
 
-    public void doSetValueAt(int index, short value) {
+    public void doSetValueAt(int index, int value) {
         this.value = value;
     }
 

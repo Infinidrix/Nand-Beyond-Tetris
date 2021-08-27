@@ -114,12 +114,12 @@ public abstract class BuiltInGateWithGUI extends BuiltInGate
      * Returns the value of the chip at the given index.
      * Throws GateException if index is not legal.
      */
-    public abstract short getValueAt(int index) throws GateException;
+    public abstract int getValueAt(int index) throws GateException;
 
     /**
      * Sets the value at the given index with the value.
      */
-    public abstract void setValueAt(int index, short value) throws GateException;
+    public abstract void setValueAt(int index, int value) throws GateException;
 
     /**
      * Executes the given command, given in args[] style.

@@ -26,49 +26,49 @@ import Hack.VMEmulator.TerminateVMProgramThrowable;
 
 public class String extends JackOSClass {
 
-    public static short NEW(short maxLength)
+    public static int NEW(int maxLength)
 			throws TerminateVMProgramThrowable {
 		if (maxLength < 0) {
 			callFunction("Sys.error", STRING_NEW_NEGATIVE_LENGTH);
 		}
-		short str = callFunction("Memory.alloc", maxLength+2);
+		int str = callFunction("Memory.alloc", maxLength+2);
 		writeMemory(str, maxLength);
 		writeMemory(str+1, 0);
         return str;
     }
 
-    public static void dispose(short str)
+    public static void dispose(int str)
 			throws TerminateVMProgramThrowable {
 		callFunction("Memory.deAlloc", str);
     }
 
-    public static short length(short str)
+    public static int length(int str)
 			throws TerminateVMProgramThrowable {
         return readMemory(str+1);
     }
 
-    public static char charAt(short str, short j)
+    public static char charAt(int str, int j)
 			throws TerminateVMProgramThrowable {
-		short l = readMemory(str+1);
+		int l = readMemory(str+1);
 		if (j < 0 || j >= l) {
 			callFunction("Sys.error", STRING_CHARAT_ILLEGAL_INDEX);
 		}
 		return (char)readMemory(str+2+j);
     }
 
-    public static void setCharAt(short str, short j, short c)
+    public static void setCharAt(int str, int j, int c)
 			throws TerminateVMProgramThrowable {
-		short l = readMemory(str+1);
+		int l = readMemory(str+1);
 		if (j < 0 || j >= l) {
 			callFunction("Sys.error", STRING_SETCHARAT_ILLEGAL_INDEX);
 		}
 		writeMemory(str+2+j, c);
     }
 
-    public static short appendChar(short str, short c)
+    public static int appendChar(int str, int c)
 			throws TerminateVMProgramThrowable {
-		short capacity = readMemory(str);
-		short l = readMemory(str+1);
+		int capacity = readMemory(str);
+		int l = readMemory(str+1);
 		if (l == capacity) {
 			callFunction("Sys.error", STRING_APPENDCHAR_FULL);
 		}
@@ -77,30 +77,30 @@ public class String extends JackOSClass {
         return str;
     }
 
-    public static void eraseLastChar(short str)
+    public static void eraseLastChar(int str)
 			throws TerminateVMProgramThrowable {
-		short l = readMemory(str+1);
+		int l = readMemory(str+1);
 		if (l == 0) {
 			callFunction("Sys.error", STRING_ERASELASTCHAR_EMPTY);
 		}
 		writeMemory(str+1, l-1);
     }
 
-    public static short intValue(short str)
+    public static int intValue(int str)
 			throws TerminateVMProgramThrowable {
 		StringBuffer javaStr = new StringBuffer();
-		short l = readMemory(str+1);
+		int l = readMemory(str+1);
 		for (int i=0; i<l; ++i) {
 			javaStr.append((char)readMemory(str+2+i));
 		}
 		return javaStringToInt(javaStr.toString());
 	}
 
-    public static void setInt(short str, short j)
+    public static void setInt(int str, int j)
 			throws TerminateVMProgramThrowable {
 		java.lang.String s = ""+j;
-		short l = (short)s.length();
-		short capacity = readMemory(str);
+		int l = (int)s.length();
+		int capacity = readMemory(str);
 		if (capacity < l) {
 			callFunction("Sys.error", STRING_SETINT_INSUFFICIENT_CAPACITY);
 		}

@@ -30,24 +30,24 @@ import Hack.VMEmulator.TerminateVMProgramThrowable;
 class JackOSClass extends BuiltInVMClass {
 
 	/* Jack OS Error Codes */
-	public static final short SYS_WAIT_NEGATIVE_DURATION = 1;
-	public static final short ARRAY_NEW_NONPOSITIVE_SIZE = 2;
-	public static final short MATH_DIVIDE_ZERO = 3;
-	public static final short MATH_SQRT_NEGATIVE = 4;
-	public static final short MEMORY_ALLOC_NONPOSITIVE_SIZE = 5;
-	public static final short MEMORY_ALLOC_HEAP_OVERFLOW = 6;
-	public static final short SCREEN_DRAWPIXEL_ILLEGAL_COORDS = 7;
-	public static final short SCREEN_DRAWLINE_ILLEGAL_COORDS = 8;
-	public static final short SCREEN_DRAWRECTANGLE_ILLEGAL_COORDS = 9;
-	public static final short SCREEN_DRAWCIRCLE_ILLEGAL_CENTER = 12;
-	public static final short SCREEN_DRAWCIRCLE_ILLEGAL_RADIUS = 13;
-	public static final short STRING_NEW_NEGATIVE_LENGTH = 14;
-	public static final short STRING_CHARAT_ILLEGAL_INDEX = 15;
-	public static final short STRING_SETCHARAT_ILLEGAL_INDEX = 16;
-	public static final short STRING_APPENDCHAR_FULL = 17;
-	public static final short STRING_ERASELASTCHAR_EMPTY = 18;
-	public static final short STRING_SETINT_INSUFFICIENT_CAPACITY = 19;
-	public static final short OUTPUT_MOVECURSOR_ILLEGAL_POSITION = 20;
+	public static final int SYS_WAIT_NEGATIVE_DURATION = 1;
+	public static final int ARRAY_NEW_NONPOSITIVE_SIZE = 2;
+	public static final int MATH_DIVIDE_ZERO = 3;
+	public static final int MATH_SQRT_NEGATIVE = 4;
+	public static final int MEMORY_ALLOC_NONPOSITIVE_SIZE = 5;
+	public static final int MEMORY_ALLOC_HEAP_OVERFLOW = 6;
+	public static final int SCREEN_DRAWPIXEL_ILLEGAL_COORDS = 7;
+	public static final int SCREEN_DRAWLINE_ILLEGAL_COORDS = 8;
+	public static final int SCREEN_DRAWRECTANGLE_ILLEGAL_COORDS = 9;
+	public static final int SCREEN_DRAWCIRCLE_ILLEGAL_CENTER = 12;
+	public static final int SCREEN_DRAWCIRCLE_ILLEGAL_RADIUS = 13;
+	public static final int STRING_NEW_NEGATIVE_LENGTH = 14;
+	public static final int STRING_CHARAT_ILLEGAL_INDEX = 15;
+	public static final int STRING_SETCHARAT_ILLEGAL_INDEX = 16;
+	public static final int STRING_APPENDCHAR_FULL = 17;
+	public static final int STRING_ERASELASTCHAR_EMPTY = 18;
+	public static final int STRING_SETINT_INSUFFICIENT_CAPACITY = 19;
+	public static final int OUTPUT_MOVECURSOR_ILLEGAL_POSITION = 20;
 
 	/**
 	 * Converts a java string to a Jack String by using whatever implementation
@@ -56,12 +56,12 @@ class JackOSClass extends BuiltInVMClass {
 	 * using String.appendChar.
 	 * Returns the VM address to the Jack String.
 	 */
-	public static short javaStringToJackStringUsingVM(java.lang.String javaStr) 
+	public static int javaStringToJackStringUsingVM(java.lang.String javaStr) 
 			throws TerminateVMProgramThrowable {
 		if (javaStr.length() == 0) {
 			return callFunction("String.new", 1);
 		}
-		short jackStr = callFunction("String.new", javaStr.length());
+		int jackStr = callFunction("String.new", javaStr.length());
         StringCharacterIterator i = new StringCharacterIterator(javaStr);
         for (i.first(); i.current() != CharacterIterator.DONE; i.next()) {
 			callFunction("String.appendChar", jackStr, i.current());
@@ -77,7 +77,7 @@ class JackOSClass extends BuiltInVMClass {
 	 * String.getChar
 	 */
 	/*
-	public static java.lang.String jackStringToJavaStringUsingVM(short jackStr) 
+	public static java.lang.String jackStringToJavaStringUsingVM(int jackStr) 
 			throws TerminateVMProgramThrowable {
 		StringBuffer javaStr = new StringBuffer();
 		int l = callFunction("String.length", jackStr);
@@ -93,7 +93,7 @@ class JackOSClass extends BuiltInVMClass {
 	 * the line (a - as a first character os allowed and is not considered
 	 * such a non-digit character).
 	 */
-	public static short javaStringToInt(java.lang.String str) {
+	public static int javaStringToInt(java.lang.String str) {
         StringCharacterIterator i = new StringCharacterIterator(str);
 		i.first();
 		boolean neg = false;
@@ -109,9 +109,9 @@ class JackOSClass extends BuiltInVMClass {
 			value = value*10 + (c-'0');
 		}
 		if (neg) {
-			return (short)-value;
+			return (int)-value;
 		} else {
-			return (short)value;
+			return (int)value;
 		}
 	}
 }

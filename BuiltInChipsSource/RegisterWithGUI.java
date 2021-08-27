@@ -30,7 +30,7 @@ import java.awt.*;
 public class RegisterWithGUI extends BuiltInGateWithGUI implements ComputerPartEventListener {
 
     // The 16 bit value
-    protected short value;
+    protected int value;
 
     // The gui
     protected RegisterComponent gui;
@@ -50,8 +50,8 @@ public class RegisterWithGUI extends BuiltInGateWithGUI implements ComputerPartE
     }
 
     protected void clockUp() {
-        short in = inputPins[0].get(); // 16 bit input
-        short load = inputPins[1].get(); // load bit
+        int in = inputPins[0].get(); // 16 bit input
+        int load = inputPins[1].get(); // load bit
         if (load == 1) {
             value = in;
             if (gui != null)
@@ -73,7 +73,7 @@ public class RegisterWithGUI extends BuiltInGateWithGUI implements ComputerPartE
     }
 
     // updates the given value
-    private void updateValue(short newValue) {
+    private void updateValue(int newValue) {
         value = newValue;
         outputPins[0].set(newValue);
         evalParent();
@@ -84,7 +84,7 @@ public class RegisterWithGUI extends BuiltInGateWithGUI implements ComputerPartE
     public void guiGainedFocus() {
     }
 
-    public short getValueAt(int index) throws GateException {
+    public int getValueAt(int index) throws GateException {
         checkIndex(index);
         return value;
     }
@@ -95,7 +95,7 @@ public class RegisterWithGUI extends BuiltInGateWithGUI implements ComputerPartE
             throw new GateException("Register has no index. Use Register[]");
     }
 
-    public void setValueAt(int index, short value) throws GateException {
+    public void setValueAt(int index, int value) throws GateException {
         checkIndex(index);
         updateValue(value);
     }

@@ -62,14 +62,14 @@ public class ALU extends BuiltInGateWithGUI {
     }
 
     public void reCompute() {
-        short x = inputPins[0].get(); // 16 bit d input
-        short y = inputPins[1].get(); // 16 bit m/a input
-        short zx = inputPins[2].get(); // 1 bit flag
-        short nx = inputPins[3].get(); // 1 bit flag
-        short zy = inputPins[4].get(); // 1 bit flag
-        short ny = inputPins[5].get(); // 1 bit flag
-        short f = inputPins[6].get(); // 1 bit flag
-        short no = inputPins[7].get(); // 1 bit flag
+        int x = inputPins[0].get(); // 16 bit d input
+        int y = inputPins[1].get(); // 16 bit m/a input
+        int zx = inputPins[2].get(); // 1 bit flag
+        int nx = inputPins[3].get(); // 1 bit flag
+        int zy = inputPins[4].get(); // 1 bit flag
+        int ny = inputPins[5].get(); // 1 bit flag
+        int f = inputPins[6].get(); // 1 bit flag
+        int no = inputPins[7].get(); // 1 bit flag
 
         if (gui != null) {
             gui.setValueAt(0, x);
@@ -79,29 +79,29 @@ public class ALU extends BuiltInGateWithGUI {
         int function = (zx << 11) | (nx << 10) | (zy << 9) | (ny << 8) | (f << 7) | (no << 6);
 
         try {
-            String command = assemblerTranslator.getExpByCode((short)(function | 0xf000));
+            String command = assemblerTranslator.getExpByCode((int)(function | 0xf000));
             if (command.equals(""))
-                command = assemblerTranslator.getExpByCode((short)(function | 0xe000));
+                command = assemblerTranslator.getExpByCode((int)(function | 0xe000));
             if (gui != null)
                 gui.setCommand(command);
         } catch (AssemblerException ae) {}
 
-        short result = Definitions.computeALU(x, y, zx == 1, nx == 1, zy == 1, ny == 1,
+        int result = Definitions.computeALU(x, y, zx == 1, nx == 1, zy == 1, ny == 1,
                                               f == 1, no == 1);
 
         outputPins[0].set(result); // out
-        outputPins[1].set((short)(result == 0 ? 1 : 0)); // zr
-        outputPins[2].set((short)(result < 0 ? 1 : 0));  // ng
+        outputPins[1].set((int)(result == 0 ? 1 : 0)); // zr
+        outputPins[2].set((int)(result < 0 ? 1 : 0));  // ng
 
         if (gui != null)
             gui.setValueAt(2, result);
     }
 
-    public short getValueAt(int index) throws GateException {
+    public int getValueAt(int index) throws GateException {
         throw new GateException("ALU cannot be used as a variable");
     }
 
-    public void setValueAt(int index, short value) throws GateException {
+    public void setValueAt(int index, int value) throws GateException {
         throw new GateException("ALU cannot be used as a variable");
     }
 }

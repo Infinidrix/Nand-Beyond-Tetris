@@ -39,7 +39,7 @@ public class StackCalculator extends JPanel implements CalculatorGUI {
     private final static BasicStroke regularStroke = new BasicStroke(1.0f);
 
     // The null value of this component.
-    protected short nullValue;
+    protected int nullValue;
 
     // A boolean field specifying if the null value should be activated or not.
     protected boolean hideNullValue;
@@ -67,15 +67,15 @@ public class StackCalculator extends JPanel implements CalculatorGUI {
     /**
      * Sets the null value of this component.
      */
-    public void setNullValue (short value, boolean hideNullValue) {
+    public void setNullValue (int value, boolean hideNullValue) {
         nullValue = value;
         this.hideNullValue = hideNullValue;
     }
 
     /**
-     * Translates a given short to a string according to the current format.
+     * Translates a given int to a string according to the current format.
      */
-    protected String translateValueToString(short value) {
+    protected String translateValueToString(int value) {
         if(hideNullValue) {
             if(value == nullValue)
                 return "";
@@ -223,7 +223,7 @@ public class StackCalculator extends JPanel implements CalculatorGUI {
     /**
      * Sets the element at the given index with the given value.
      */
-    public void setValueAt(int index, short value) {
+    public void setValueAt(int index, int value) {
         String data = translateValueToString(value);
         switch(index) {
             case 0:

@@ -28,12 +28,12 @@ public interface ScreenGUI extends ComputerPartGUI {
      * Updates the screen at the given index with the given value
      * (Assumes legal index)
      */
-    public void setValueAt(int index, short value);
+    public void setValueAt(int index, int value);
 
     /**
      * Updates the screen's contents with the given values array.
      */
-    public void setContents(short[] values);
+    public void setContents(int[] values);
 
     /**
      * Refreshes the screen

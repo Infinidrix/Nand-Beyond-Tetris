@@ -607,7 +607,7 @@ public class HackController
                     throw new VariableException("Variable is not numeric", varList[i].varName);
                 }
                 if (varList[i].format == VariableFormat.HEX_FORMAT)
-                    value = Conversions.decimalToHex(numValue, 4);
+                    value = Conversions.decimalToHex(numValue, 8);
                 else if (varList[i].format == VariableFormat.BINARY_FORMAT)
                     value = Conversions.decimalToBinary(numValue, 16);
             }

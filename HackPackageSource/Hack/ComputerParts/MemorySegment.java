@@ -46,8 +46,8 @@ public class MemorySegment extends InteractiveValueComputerPart {
      * Constructs a new Memory Segment with the given main memory, GUI and the legal
      * values range.
      */
-    public MemorySegment(Memory mainMemory, MemorySegmentGUI gui, short minValue,
-                         short maxValue) {
+    public MemorySegment(Memory mainMemory, MemorySegmentGUI gui, int minValue,
+                         int maxValue) {
         super(gui != null, minValue, maxValue);
         init(mainMemory, gui);
     }
@@ -79,12 +79,12 @@ public class MemorySegment extends InteractiveValueComputerPart {
         return startAddress;
     }
 
-    public void doSetValueAt(int index, short value) {
+    public void doSetValueAt(int index, int value) {
         if (mainMemory.getValueAt(startAddress + index) != value)
             mainMemory.setValueAt(startAddress + index, value, true);
     }
 
-    public short getValueAt(int index) {
+    public int getValueAt(int index) {
         return mainMemory.getValueAt(startAddress + index);
     }
 

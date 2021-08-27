@@ -29,7 +29,7 @@ public class ComputerPartEvent extends EventObject {
     private int index;
 
     // the changed value
-    private short value;
+    private int value;
 
     /**
      * Constructs a new ComputerPartEvent with the given source.
@@ -42,7 +42,7 @@ public class ComputerPartEvent extends EventObject {
      * Constructs a new ComputerPartEvent with the given source, the index (in which the value
      * was changed) and the new value.
      */
-    public ComputerPartEvent(ComputerPartGUI source, int index, short value) {
+    public ComputerPartEvent(ComputerPartGUI source, int index, int value) {
         super(source);
         this.index = index;
         this.value = value;
@@ -58,7 +58,7 @@ public class ComputerPartEvent extends EventObject {
     /**
      * Returns the new value.
      */
-    public short getValue() {
+    public int getValue() {
         return value;
     }
 }

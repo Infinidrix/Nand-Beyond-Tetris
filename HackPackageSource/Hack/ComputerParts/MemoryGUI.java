@@ -45,7 +45,7 @@ public interface MemoryGUI extends InteractiveValueComputerPartGUI {
     /**
      * Sets the memory contents with the given values array.
      */
-    public void setContents(short[] values);
+    public void setContents(int[] values);
 
     /**
      * Selects the commands in the range fromIndex..toIndex

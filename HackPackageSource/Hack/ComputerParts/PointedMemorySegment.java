@@ -34,7 +34,7 @@ public class PointedMemorySegment extends MemorySegment {
      * and the legal values range.
      */
     public PointedMemorySegment(Memory mainMemory, PointedMemorySegmentGUI gui,
-                                short minValue, short maxValue) {
+                                int minValue, int maxValue) {
         super(mainMemory, gui, minValue, maxValue);
     }
 

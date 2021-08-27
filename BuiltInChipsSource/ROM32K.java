@@ -37,13 +37,13 @@ public class ROM32K extends BuiltInGateWithGUI
     private ROMComponent gui;
 
     // The memory array
-    private short[] values;
+    private int[] values;
 
     /**
      * Constructs a new ROM32K.
      */
     public ROM32K() {
-        values = new short[Definitions.ROM_SIZE];
+        values = new int[Definitions.ROM_SIZE];
 
         if (GatesManager.getInstance().isChipsGUIEnabled()) {
             gui = new ROMComponent();
@@ -59,7 +59,7 @@ public class ROM32K extends BuiltInGateWithGUI
     }
 
     protected void reCompute() {
-        short address = inputPins[0].get(); // 15 bit address
+        int address = inputPins[0].get(); // 15 bit address
         outputPins[0].set(values[address]);
         if (gui != null)
             gui.setPointer(address);
@@ -73,9 +73,9 @@ public class ROM32K extends BuiltInGateWithGUI
      * Loads the given file into the rom.
      */
     protected void loadProgram(String fileName) throws AssemblerException {
-        short[] program = HackAssemblerTranslator.loadProgram(fileName,
+        int[] program = HackAssemblerTranslator.loadProgram(fileName,
                                                               Definitions.ROM_SIZE,
-                                                              (short)0);
+                                                              (int)0);
 
         if (gui != null) {
             if (fileName.endsWith(".hack"))
@@ -116,7 +116,7 @@ public class ROM32K extends BuiltInGateWithGUI
      * Called when the contents of the memory are changed through the memory gui.
      */
     public void valueChanged(ComputerPartEvent event) {
-        short newValue = event.getValue();
+        int newValue = event.getValue();
         int newAddress = event.getIndex();
         clearErrorListeners();
         try {
@@ -130,7 +130,7 @@ public class ROM32K extends BuiltInGateWithGUI
     }
 
     // updates the given value
-    private void updateValue(int address, short value) {
+    private void updateValue(int address, int value) {
         values[address] = value;
         if (gui != null)
             gui.setValueAt(address, value);
@@ -141,7 +141,7 @@ public class ROM32K extends BuiltInGateWithGUI
     public void guiGainedFocus() {
     }
 
-    public short getValueAt(int index) throws GateException {
+    public int getValueAt(int index) throws GateException {
         checkIndex(index);
         return values[index];
     }
@@ -152,7 +152,7 @@ public class ROM32K extends BuiltInGateWithGUI
             throw new GateException("Illegal index");
     }
 
-    public void setValueAt(int index, short value) throws GateException {
+    public void setValueAt(int index, int value) throws GateException {
         checkIndex(index);
         updateValue(index, value);
     }

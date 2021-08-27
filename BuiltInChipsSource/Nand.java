@@ -25,8 +25,8 @@ import Hack.Gates.*;
 public class Nand extends BuiltInGate {
 
     protected void reCompute() {
-        short a = inputPins[0].get();
-        short b = inputPins[1].get();
-        outputPins[0].set((short)(0x1 - (a & b)));
+        int a = inputPins[0].get();
+        int b = inputPins[1].get();
+        outputPins[0].set((int)(0x1 - (a & b)));
     }
 }

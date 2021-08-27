@@ -40,14 +40,14 @@ public class BuiltInFunctionsRunner implements Runnable {
 	private class BuiltInToProgramRequest {
 		int request;
 		String details;
-		short[] params;
-		short returnValue;
+		int[] params;
+		int returnValue;
 	}
     private class ProgramToBuiltInRequest {
 		int request;
 		Method functionObject;
 		Object[] params;
-		short returnValue;
+		int returnValue;
 	};
 	private BuiltInToProgramRequest builtInToProgram;
 	private ProgramToBuiltInRequest programToBuiltIn;
@@ -114,7 +114,7 @@ public class BuiltInFunctionsRunner implements Runnable {
 	 * to resume an already-running built-in function which was waiting for
 	 * a return value from another function.
 	 */
-	public void returnToBuiltInFunction(short returnValue) throws ProgramException {
+	public void returnToBuiltInFunction(int returnValue) throws ProgramException {
 		programToBuiltIn.request = RETURN_REQUEST;
 		programToBuiltIn.returnValue = returnValue;
 		sendBuiltInRequestAndWaitForAnswer();
@@ -127,7 +127,7 @@ public class BuiltInFunctionsRunner implements Runnable {
 	 * to call the named built-in function with the given params.
 	 * Throws a ProgramException if no built-in implementation was found.
 	 */
-	public void callBuiltInFunction(String functionName, short[] params) throws ProgramException {
+	public void callBuiltInFunction(String functionName, int[] params) throws ProgramException {
         int dotLocation = functionName.indexOf(".");
         if (dotLocation == -1) {
             throw new ProgramException("Illegal function name: " + functionName);
@@ -165,8 +165,8 @@ public class BuiltInFunctionsRunner implements Runnable {
 		Class[] paramsClasses = new Class[params.length];
 		Object[] requestParams = new Object[params.length];
 		for (int i=0; i<params.length; ++i) {
-			requestParams[i] = new Short(params[i]);
-			paramsClasses[i] = short.class;
+			requestParams[i] = new Integer(params[i]);
+			paramsClasses[i] = int.class;
 		}
 
 		Method functionObject;
@@ -177,9 +177,9 @@ public class BuiltInFunctionsRunner implements Runnable {
 			throw new ProgramException("Can't find "+className+".vm or a built-in implementation for function "+methodName+" in class "+className+" taking "+params.length+" argument"+(params.length==1?"":"s")+".");
 		}
 		Class returnType = functionObject.getReturnType();
-		if (returnType != short.class && returnType != void.class &&
+		if (returnType != int.class && returnType != void.class &&
 			returnType != char.class && returnType != boolean.class) {
-			throw new ProgramException("Can't find "+className+".vm and the built-in implementation for "+functionName+" taking "+params.length+" arguments doesn't return short/char/void/boolean.");
+			throw new ProgramException("Can't find "+className+".vm and the built-in implementation for "+functionName+" taking "+params.length+" arguments doesn't return int/char/void/boolean.");
 		}
 		programToBuiltIn.request = CALL_REQUEST;
 		programToBuiltIn.params = requestParams;
@@ -256,7 +256,7 @@ public class BuiltInFunctionsRunner implements Runnable {
 	 * The calling built-in function may catch this object, perform any
 	 * necessary cleanups, and rethrow it.
      */
-	public short builtInFunctionRequestsCall(String functionName, short[] params) throws TerminateVMProgramThrowable {
+	public int builtInFunctionRequestsCall(String functionName, int[] params) throws TerminateVMProgramThrowable {
 		builtInToProgram.request = CALL_REQUEST;
 		builtInToProgram.details = functionName;
 		builtInToProgram.params = params;
@@ -274,13 +274,13 @@ public class BuiltInFunctionsRunner implements Runnable {
 					programToBuiltIn.functionObject.invoke(null,
 														   programToBuiltIn.params);
 				builtInToProgram.request = RETURN_REQUEST;
-				if (returnType == short.class) {
-					builtInToProgram.returnValue = ((Short)returnValue).shortValue();
+				if (returnType == int.class) {
+					builtInToProgram.returnValue = ((Integer)returnValue).shortValue();
 				} else if (returnType == char.class) {
-					builtInToProgram.returnValue = (short)((Character)returnValue).charValue();
+					builtInToProgram.returnValue = (int)((Character)returnValue).charValue();
 				} else if (returnType == boolean.class) {
 					if (((Boolean)returnValue).booleanValue()) {
-						builtInToProgram.returnValue = (short)-1;
+						builtInToProgram.returnValue = (int)-1;
 					} else {
 						builtInToProgram.returnValue = 0;
 					}
@@ -315,7 +315,7 @@ public class BuiltInFunctionsRunner implements Runnable {
 	 * Thread that an exception occured, waits for a signal from it and
 	 * throws a TerminateVMProgramThrowable.
 	 */
-	private void checkMemoryAddress(short address) throws TerminateVMProgramThrowable {
+	private void checkMemoryAddress(int address) throws TerminateVMProgramThrowable {
         if (!((address >= Definitions.HEAP_START_ADDRESS && address <= Definitions.HEAP_END_ADDRESS) ||
               (address >= Definitions.SCREEN_START_ADDRESS && address <= Definitions.SCREEN_END_ADDRESS) ||
               address == 0)) {
@@ -349,7 +349,7 @@ public class BuiltInFunctionsRunner implements Runnable {
      * Called by a built-in function through the BuiltInVMClass class.
 	 * Writes the given value top the given address in the VM memory.
 	 */
-	public void builtInFunctionRequestsMemoryWrite(short address, short value) throws TerminateVMProgramThrowable {
+	public void builtInFunctionRequestsMemoryWrite(int address, int value) throws TerminateVMProgramThrowable {
 		checkMemoryAddress(address);
 		cpu.getRAM().setValueAt(address, value, false);
 	}
@@ -358,7 +358,7 @@ public class BuiltInFunctionsRunner implements Runnable {
      * Called by a built-in function through the BuiltInVMClass class.
 	 * Returns the contents of the given address in the VM memory.
 	 */
-	public short builtInFunctionRequestsMemoryRead(short address) throws TerminateVMProgramThrowable {
+	public int builtInFunctionRequestsMemoryRead(int address) throws TerminateVMProgramThrowable {
 		checkMemoryAddress(address);
 		return cpu.getRAM().getValueAt(address);
 	}

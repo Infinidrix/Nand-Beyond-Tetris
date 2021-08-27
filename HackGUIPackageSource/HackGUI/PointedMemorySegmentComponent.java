@@ -25,7 +25,7 @@ import javax.swing.table.*;
 public class PointedMemorySegmentComponent extends MemorySegmentComponent implements PointedMemorySegmentGUI {
 
     // The pointer address
-    protected short pointerAddress = -1;
+    protected int pointerAddress = -1;
 
     // Indicates whether this component has the focus.
     protected boolean hasFocus = false;
@@ -49,7 +49,7 @@ public class PointedMemorySegmentComponent extends MemorySegmentComponent implem
      * Sets the pointer with the given pointer address (absolute address).
      */
     public void setPointer(int pointerAddress) {
-        this.pointerAddress = (short)pointerAddress;
+        this.pointerAddress = (int)pointerAddress;
         scrollToPointer();
     }
 

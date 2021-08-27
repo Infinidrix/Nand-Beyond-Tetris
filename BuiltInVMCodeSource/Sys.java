@@ -40,7 +40,7 @@ public class Sys extends JackOSClass {
 		infiniteLoop("Program Halted");
 	}
 
-	public static void wait(short duration) throws TerminateVMProgramThrowable {
+	public static void wait(int duration) throws TerminateVMProgramThrowable {
 		if (duration < 0) {
 			error(SYS_WAIT_NEGATIVE_DURATION);
 		}
@@ -49,7 +49,7 @@ public class Sys extends JackOSClass {
 		} catch (InterruptedException e) { }
 	}
 
-	public static void error(short errorCode)
+	public static void error(int errorCode)
 			throws TerminateVMProgramThrowable {
 		callFunction("Output.printString",
 					 javaStringToJackStringUsingVM("ERR"));

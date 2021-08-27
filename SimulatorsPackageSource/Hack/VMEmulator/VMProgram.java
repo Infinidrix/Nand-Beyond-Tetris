@@ -33,7 +33,7 @@ public class VMProgram extends InteractiveComputerPart
  implements ProgramEventListener {
 
 	// pseudo address for returning to built-in functions
-	public static final short BUILTIN_FUNCTION_ADDRESS = -1;
+	public static final int BUILTIN_FUNCTION_ADDRESS = -1;
 
 	// Possible values for the current status - has the user allowed
 	// access to built-in vm functions?
@@ -50,15 +50,15 @@ public class VMProgram extends InteractiveComputerPart
 	private int visibleInstructionsLength;
 
     // The program counter - points to the next instruction that should be executed.
-    private short nextPC;
-    private short currentPC;
-    private short prevPC;
+    private int nextPC;
+    private int currentPC;
+    private int prevPC;
 
     // The gui of the program.
     private VMProgramGUI gui;
 
     // The address of the initial instruction
-    private short startAddress;
+    private int startAddress;
 
     // Mapping from file names to an array of two elements, containing the start and
     // end addresses of the corresponding static segment.
@@ -66,7 +66,7 @@ public class VMProgram extends InteractiveComputerPart
 
 	// Addresses of functions by name
 	private Hashtable functions;
-	private short infiniteLoopForBuiltInsAddress;
+	private int infiniteLoopForBuiltInsAddress;
 	
     // The current index of the static variables
     private int currentStaticIndex;
@@ -190,14 +190,14 @@ public class VMProgram extends InteractiveComputerPart
 			if (addCallBuiltInSysInit) {
 				instructionsLength += 1;
 			}
-			short indexInInvisibleCode = 0;
+			int indexInInvisibleCode = 0;
 			// Add a jump to the end (noone should get here since
 			// both calls to built-in functions indicate that
 			// that this is a function-based program and not a script
 			// a-la proj7, but just to be on the safe side...).
 			instructions[nextPC] =
 				new VMEmulatorInstruction(HVMInstructionSet.GOTO_CODE,
-										  (short)instructionsLength,
+										  (int)instructionsLength,
 										  indexInInvisibleCode);
 			instructions[nextPC].setStringArg("afterInvisibleCode");
 			nextPC++;
@@ -208,7 +208,7 @@ public class VMProgram extends InteractiveComputerPart
 			// finish running - a problem for the OS tests.
 			instructions[nextPC] =
 				new VMEmulatorInstruction(HVMInstructionSet.LABEL_CODE,
-										  (short)-1);
+										  (int)-1);
 			instructions[nextPC].setStringArg("infiniteLoopForBuiltIns");
 			nextPC++;
 			infiniteLoopForBuiltInsAddress = nextPC;
@@ -220,7 +220,7 @@ public class VMProgram extends InteractiveComputerPart
 			if (addCallBuiltInSysInit) { // Add a call to the built-in Sys.init
 				instructions[nextPC] =
 					new VMEmulatorInstruction(HVMInstructionSet.CALL_CODE,
-											  getAddress("Sys.init"), (short)0,
+											  getAddress("Sys.init"), (int)0,
 											  ++indexInInvisibleCode);
 				instructions[nextPC].setStringArg("Sys.init");
 				startAddress = nextPC;
@@ -229,13 +229,13 @@ public class VMProgram extends InteractiveComputerPart
 			// Add the label that the first invisible code line jumps to
 			instructions[nextPC] =
 				new VMEmulatorInstruction(HVMInstructionSet.LABEL_CODE,
-										  (short)-1);
+										  (int)-1);
 			instructions[nextPC].setStringArg("afterInvisibleCode");
 			nextPC++;
 		}
 
 		if (!addCallBuiltInSysInit) {
-			Short sysInitAddress = (Short)symbols.get("Sys.init");
+			Integer sysInitAddress = (Integer)symbols.get("Sys.init");
 			if (sysInitAddress == null) // Single file, no Sys.init - start at 0
 				startAddress = 0;
 			else // Implemented Sys.init - start there
@@ -278,14 +278,14 @@ public class VMProgram extends InteractiveComputerPart
                         if (symbols.containsKey(currentFunction))
                             throw new ProgramException("subroutine " + currentFunction +
                                                        " already exists");
-                        functions.put(currentFunction, new Short(nextPC));
-                        symbols.put(currentFunction, new Short(nextPC));
+                        functions.put(currentFunction, new Integer(nextPC));
+                        symbols.put(currentFunction, new Integer(nextPC));
                     }
                     else if (line.startsWith("label ")) {
                         StringTokenizer tokenizer = new StringTokenizer(line);
                         tokenizer.nextToken();
                         label = currentFunction + "$" + tokenizer.nextToken();
-                        symbols.put(label, new Short((short)(nextPC + 1)));
+                        symbols.put(label, new Integer((int)(nextPC + 1)));
                     }
 
                     nextPC++;
@@ -319,10 +319,10 @@ public class VMProgram extends InteractiveComputerPart
         String label;
         String instructionName;
         String currentFunction = null;
-        short indexInFunction = 0;
+        int indexInFunction = 0;
         byte opCode;
-        short arg0, arg1;
-        short pc = nextPC;
+        int arg0, arg1;
+        int pc = nextPC;
         HVMInstructionSet instructionSet = HVMInstructionSet.getInstance();
 
 		isSlashStar = false;
@@ -347,7 +347,7 @@ public class VMProgram extends InteractiveComputerPart
                             } catch (ProgramException pe) {
                                 throw new ProgramException("in line " + lineNumber + pe.getMessage());
                             }
-                            arg1 = Short.parseShort(tokenizer.nextToken());
+                            arg1 = Integer.parseInt(tokenizer.nextToken());
                             if (arg1 < 0)
                                 throw new ProgramException("in line " + lineNumber +
                                                            ": Illegal argument - " + line);
@@ -367,7 +367,7 @@ public class VMProgram extends InteractiveComputerPart
                             } catch (ProgramException pe) {
                                 throw new ProgramException("in line " + lineNumber + pe.getMessage());
                             }
-                            arg1 = Short.parseShort(tokenizer.nextToken());
+                            arg1 = Integer.parseInt(tokenizer.nextToken());
 
                             if (arg1 < 0)
                                 throw new ProgramException("in line " + lineNumber +
@@ -383,7 +383,7 @@ public class VMProgram extends InteractiveComputerPart
                         case HVMInstructionSet.FUNCTION_CODE:
                             currentFunction = tokenizer.nextToken();
                             indexInFunction = 0;
-                            arg0 = Short.parseShort(tokenizer.nextToken());
+                            arg0 = Integer.parseInt(tokenizer.nextToken());
 
                             if (arg0 < 0)
                                 throw new ProgramException("in line " + lineNumber +
@@ -402,7 +402,7 @@ public class VMProgram extends InteractiveComputerPart
 														   lineNumber + ": " +
 														   pe.getMessage());
 							}
-                            arg1 = Short.parseShort(tokenizer.nextToken());
+                            arg1 = Integer.parseInt(tokenizer.nextToken());
 
                             if (arg1 < 0 || ((arg0 < 0 || arg0 > Definitions.ROM_SIZE) && arg0 != BUILTIN_FUNCTION_ADDRESS))
                                 throw new ProgramException("in line " + lineNumber +
@@ -415,14 +415,14 @@ public class VMProgram extends InteractiveComputerPart
 
                         case HVMInstructionSet.LABEL_CODE:
                             label = currentFunction + "$" + tokenizer.nextToken();
-                            instructions[pc] = new VMEmulatorInstruction(opCode, (short)(-1));
+                            instructions[pc] = new VMEmulatorInstruction(opCode, (int)(-1));
                             instructions[pc].setStringArg(label);
                             indexInFunction--; // since Label is not a "physical" instruction
                             break;
 
                         case HVMInstructionSet.GOTO_CODE:
                             label = currentFunction + "$" + tokenizer.nextToken();
-                            Short labelAddress = (Short)symbols.get(label);
+                            Integer labelAddress = (Integer)symbols.get(label);
                             if (labelAddress == null)
                                 throw new ProgramException("in line " + lineNumber +
                                                            ": Unknown label - " + label);
@@ -438,7 +438,7 @@ public class VMProgram extends InteractiveComputerPart
 
                         case HVMInstructionSet.IF_GOTO_CODE:
                             label = currentFunction + "$" + tokenizer.nextToken();
-                            labelAddress = (Short)symbols.get(label);
+                            labelAddress = (Integer)symbols.get(label);
                             if (labelAddress == null)
                                 throw new ProgramException("in line " + lineNumber +
                                                            ": Unknown label - " + label);
@@ -460,7 +460,7 @@ public class VMProgram extends InteractiveComputerPart
                                 instructions[pc] = new VMEmulatorInstruction(opCode, indexInFunction);
                             }
                             else {
-                                arg0 = Short.parseShort(tokenizer.nextToken());
+                                arg0 = Integer.parseInt(tokenizer.nextToken());
 
                                 if (arg0 < 0)
                                     throw new ProgramException("in line " + lineNumber +
@@ -544,8 +544,8 @@ public class VMProgram extends InteractiveComputerPart
         return instructionsLength;
     }
 
-	public short getAddress(String functionName) throws ProgramException {
-		Short address = (Short)functions.get(functionName);
+	public int getAddress(String functionName) throws ProgramException {
+		Integer address = (Integer)functions.get(functionName);
 		if (address != null) {
 			return address.shortValue();
 		} else {
@@ -581,28 +581,28 @@ public class VMProgram extends InteractiveComputerPart
     /**
      * Returns the next program counter.
      */
-    public short getPC() {
+    public int getPC() {
         return nextPC;
     }
 
     /**
      * Returns the current value of the program counter.
      */
-    public short getCurrentPC() {
+    public int getCurrentPC() {
         return currentPC;
     }
 
     /**
      * Returns the previous value of the program counter.
      */
-    public short getPreviousPC() {
+    public int getPreviousPC() {
         return prevPC;
     }
 
     /**
      * Sets the program counter with the given address.
      */
-    public void setPC(short address) {
+    public void setPC(int address) {
         prevPC = currentPC;
         currentPC = nextPC;
         nextPC = address;

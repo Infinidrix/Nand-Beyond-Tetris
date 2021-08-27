@@ -26,9 +26,9 @@ import Hack.Gates.BuiltInGate;
 public class Mux extends BuiltInGate {
 
     protected void reCompute() {
-        short a = inputPins[0].get();
-        short b = inputPins[1].get();
-        short sel = inputPins[2].get();
-        outputPins[0].set((short)(sel == 0 ? a : b));
+        int a = inputPins[0].get();
+        int b = inputPins[1].get();
+        int sel = inputPins[2].get();
+        outputPins[0].set((int)(sel == 0 ? a : b));
     }
 }

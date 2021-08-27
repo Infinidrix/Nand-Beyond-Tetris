@@ -42,7 +42,7 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
     private Vector errorEventListeners;
 
     // The value of the register
-    protected short value;
+    protected int value;
 
     // The old value of this component
     protected String oldValue;
@@ -51,7 +51,7 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
     protected int dataFormat;
 
     // The null value of this component.
-    protected short nullValue;
+    protected int nullValue;
 
     // A boolean field specifying if the null value should be activated or not.
     protected boolean hideNullValue;
@@ -74,7 +74,7 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
     /**
      * Sets the null value of this component.
      */
-    public void setNullValue (short newValue, boolean hideNullValue) {
+    public void setNullValue (int newValue, boolean hideNullValue) {
         nullValue = newValue;
         this.hideNullValue = hideNullValue;
         if (value == nullValue && hideNullValue)
@@ -89,7 +89,7 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
         listeners.removeElement(listener);
     }
 
-    public void notifyListeners(int address, short value) {
+    public void notifyListeners(int address, int value) {
         ComputerPartEvent event = new ComputerPartEvent(this,0,value);
         for(int i=0;i<listeners.size();i++) {
             ((ComputerPartEventListener)listeners.elementAt(i)).valueChanged(event);
@@ -143,9 +143,9 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
     }
 
     /**
-     * Translates a given short to a string according to the current format.
+     * Translates a given int to a string according to the current format.
      */
-    protected String translateValueToString(short value) {
+    protected String translateValueToString(int value) {
         if(hideNullValue) {
             if(value==nullValue)
                 return "";
@@ -158,7 +158,7 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
     /**
      * Sets the value of the register with the given value.
      */
-    public void setValueAt(int index, short value) {
+    public void setValueAt(int index, int value) {
         String data = translateValueToString(value);
         this.value = value;
         registerValue.setText(data);
@@ -241,7 +241,7 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
         String text = registerValue.getText();
         if(!text.equals(oldValue)) {
             try {
-                value = Format.translateValueToShort(text,dataFormat);
+                value = Format.translateValueToInt(text,dataFormat);
                 notifyListeners(0,value);
                 oldValue = text;
             }

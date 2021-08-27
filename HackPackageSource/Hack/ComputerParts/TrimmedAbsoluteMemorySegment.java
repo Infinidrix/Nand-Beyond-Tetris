@@ -38,11 +38,11 @@ public class TrimmedAbsoluteMemorySegment extends AbsolutePointedMemorySegment {
      * values range.
      */
     public TrimmedAbsoluteMemorySegment(Memory mainMemory, PointedMemorySegmentGUI gui,
-                                        short minValue, short maxValue) {
+                                        int minValue, int maxValue) {
         super(mainMemory, gui, minValue, maxValue);
     }
 
-    public void setValueAt(int index, short value, boolean quiet) {
+    public void setValueAt(int index, int value, boolean quiet) {
         if (displayChanges)
             ((PointedMemorySegmentGUI)gui).setPointer(index + 1);
 

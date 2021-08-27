@@ -27,12 +27,12 @@ import Hack.Gates.BuiltInGate;
 public class Mux4Way16 extends BuiltInGate {
 
     protected void reCompute() {
-        short a = inputPins[0].get();
-        short b = inputPins[1].get();
-        short c = inputPins[2].get();
-        short d = inputPins[3].get();
-        short sel = inputPins[4].get();
-        short out = 0;
+        int a = inputPins[0].get();
+        int b = inputPins[1].get();
+        int c = inputPins[2].get();
+        int d = inputPins[3].get();
+        int sel = inputPins[4].get();
+        int out = 0;
 
         switch (sel) {
             case 0: out = a; break;

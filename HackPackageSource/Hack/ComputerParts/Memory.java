@@ -28,7 +28,7 @@ public class Memory extends InteractiveValueComputerPart implements ClearEventLi
     protected int size;
 
     // the memory array
-    protected short[] mem;
+    protected int[] mem;
 
     // The main gui of the memory.
     protected MemoryGUI gui;
@@ -45,7 +45,7 @@ public class Memory extends InteractiveValueComputerPart implements ClearEventLi
      * Constructs a new Memory with the given size, a memory GUI and the
      * legal values range.
      */
-    public Memory(int size, MemoryGUI gui, short minValue, short maxValue) {
+    public Memory(int size, MemoryGUI gui, int minValue, int maxValue) {
         super(gui != null, minValue, maxValue);
         init(size, gui);
     }
@@ -54,7 +54,7 @@ public class Memory extends InteractiveValueComputerPart implements ClearEventLi
     private void init(int size, MemoryGUI gui) {
         this.size = size;
         this.gui = gui;
-        mem = new short[size];
+        mem = new int[size];
 
         if (hasGUI) {
             gui.setContents(mem);
@@ -64,18 +64,18 @@ public class Memory extends InteractiveValueComputerPart implements ClearEventLi
         }
     }
 
-    public short getValueAt(int address) {
+    public int getValueAt(int address) {
         return mem[address];
     }
 
-    public void doSetValueAt(int address, short value) {
+    public void doSetValueAt(int address, int value) {
         mem[address] = value;
     }
 
     /**
      * Returns the contents of the memory as a an array.
      */
-    public short[] getContents() {
+    public int[] getContents() {
         return mem;
     }
 
@@ -83,7 +83,7 @@ public class Memory extends InteractiveValueComputerPart implements ClearEventLi
      * Puts the given contents array in the memory, starting from the given address.
      * (Assumes that the contents fits)
      */
-    public void setContents(short[] contents, int startAddress) {
+    public void setContents(int[] contents, int startAddress) {
         System.arraycopy(contents, 0, mem, startAddress, contents.length);
         refreshGUI();
     }

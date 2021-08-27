@@ -96,7 +96,7 @@ public class LabeledMemoryComponent extends PointedMemoryComponent implements La
      * Sets the memory contents with the given values array. (assumes that the
      * length of the given array equals to the gui's size)
      */
-    public void setContents(short[] newValues) {
+    public void setContents(int[] newValues) {
         String[] oldLabels = labels;
         labels = new String[newValues.length];
         System.arraycopy(oldLabels, 0, labels, 0, Math.min(oldLabels.length, labels.length));

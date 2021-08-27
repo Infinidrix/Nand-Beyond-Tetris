@@ -89,12 +89,12 @@ public interface VirtualMachine {
     /**
      * Pushes the value of the given segment in the given entry to the stack
      */
-    public abstract void push(String segment, short entry);
+    public abstract void push(String segment, int entry);
 
     /**
      * Pops an item from the stack into the given segment in the given entry
      */
-    public abstract void pop(String segment, short entry);
+    public abstract void pop(String segment, int entry);
 
 
     //----  Program flow commands ---//
@@ -130,7 +130,7 @@ public interface VirtualMachine {
      * @param functionName The function name
      * @param numberOfLocals The number of local variables
      */
-    public abstract void function(String functionName, short numberOfLocals);
+    public abstract void function(String functionName, int numberOfLocals);
 
     /**
      * Returns the value of the function to the top of the stack.
@@ -143,5 +143,5 @@ public interface VirtualMachine {
      * @param functionName The function name
      * @param numberOfArguments The number of arguments of the function
      */
-    public abstract void callFunction(String functionName, short numberOfArguments);
+    public abstract void callFunction(String functionName, int numberOfArguments);
 }

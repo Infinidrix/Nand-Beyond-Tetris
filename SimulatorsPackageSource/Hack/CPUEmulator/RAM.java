@@ -28,7 +28,7 @@ public class RAM extends PointedMemory
     // The amount of miliseconds that a label should flash.
     private static final int LABEL_FLASH_TIME = 500;
 
-    private static final short[] emptyScreen = new short[Definitions.SCREEN_SIZE_IN_WORDS];
+    private static final int[] emptyScreen = new int[Definitions.SCREEN_SIZE_IN_WORDS];
 
     // The gui of the screen
     private ScreenGUI screen;
@@ -56,13 +56,13 @@ public class RAM extends PointedMemory
     /**
      * Returns the value stored at the given address
      */
-    public void setValueAt(int address, short value, boolean quiet) {
+    public void setValueAt(int address, int value, boolean quiet) {
         super.setValueAt(address, value, quiet);
 
         // if screen area changed, update its GUI
         if (screen != null && address >= Definitions.SCREEN_START_ADDRESS
              && address < Definitions.SCREEN_START_ADDRESS + Definitions.SCREEN_SIZE_IN_WORDS)
-            screen.setValueAt((short)(address - Definitions.SCREEN_START_ADDRESS), value);
+            screen.setValueAt((int)(address - Definitions.SCREEN_START_ADDRESS), value);
 
         // if a memory segment pointer changed, update its GUI
         if (segments != null && segments[address] != null) {

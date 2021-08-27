@@ -25,11 +25,11 @@ import Hack.Gates.*;
 public class Register extends BuiltInGate {
 
     // The 16 bit value
-    protected short value;
+    protected int value;
 
     protected void clockUp() {
-        short in = inputPins[0].get(); // 16 bit input
-        short load = inputPins[1].get(); // load bit
+        int in = inputPins[0].get(); // 16 bit input
+        int load = inputPins[1].get(); // load bit
         if (load == 1)
             value = in;
     }

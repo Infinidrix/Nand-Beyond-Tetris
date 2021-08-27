@@ -37,12 +37,12 @@ public class PointerAddressRegisterAdapter extends Register {
      * the pointedMemory object.
      */
     public PointerAddressRegisterAdapter(RegisterGUI gui, PointedMemory memory) {
-        super(gui, (short)(-32768), (short)32767);
+        super(gui, (int)(-32768), (int)32767);
         this.memory = memory;
         updatePointer = true;
     }
 
-    public void setValueAt(int index, short value, boolean quiet) {
+    public void setValueAt(int index, int value, boolean quiet) {
         super.setValueAt(0, value, quiet);
         if (updatePointer)
             memory.setPointerAddress(value);

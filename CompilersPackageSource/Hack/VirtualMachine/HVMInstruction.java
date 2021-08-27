@@ -28,19 +28,19 @@ public class HVMInstruction {
     private byte opCode;
 
     // the operation arguments
-    private short arg0;
-    private short arg1;
+    private int arg0;
+    private int arg1;
 
     // A string argument
     private String stringArg;
 
     // The number of arguments
-    private short numberOfArgs;
+    private int numberOfArgs;
 
     /**
      * Constructs a new instruction with two arguments.
      */
-    public HVMInstruction(byte opCode, short arg0, short arg1) {
+    public HVMInstruction(byte opCode, int arg0, int arg1) {
         this.opCode = opCode;
         this.arg0 = arg0;
         this.arg1 = arg1;
@@ -50,7 +50,7 @@ public class HVMInstruction {
     /**
      * Constructs a new instruction with one argument.
      */
-    public HVMInstruction(byte opCode, short arg0) {
+    public HVMInstruction(byte opCode, int arg0) {
         this.opCode = opCode;
         this.arg0 = arg0;
         numberOfArgs = 1;
@@ -67,21 +67,21 @@ public class HVMInstruction {
     /**
      * Returns the operation code
      */
-    public short getOpCode() {
+    public int getOpCode() {
         return opCode;
     }
 
     /**
      * Returns arg0
      */
-    public short getArg0() {
+    public int getArg0() {
         return arg0;
     }
 
     /**
      * Returns arg1
      */
-    public short getArg1() {
+    public int getArg1() {
         return arg1;
     }
 
@@ -102,7 +102,7 @@ public class HVMInstruction {
     /**
      * Returns the number of arguments.
      */
-    public short getNumberOfArgs() {
+    public int getNumberOfArgs() {
         return numberOfArgs;
     }
 

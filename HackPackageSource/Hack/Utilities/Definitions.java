@@ -43,7 +43,7 @@ public class Definitions {
     /**
      * Number of bits per memory word
      */
-    public static final int BITS_PER_WORD = 16;
+    public static final int BITS_PER_WORD = 32;
 
     // screen size
     private static final int SCREEN_WIDTH_IN_WORDS = 32;
@@ -52,7 +52,7 @@ public class Definitions {
     /**
      * Number of words in the screen
      */
-    public static final short SCREEN_SIZE_IN_WORDS = SCREEN_WIDTH_IN_WORDS * SCREEN_HEIGHT_IN_WORDS;
+    public static final int SCREEN_SIZE_IN_WORDS = SCREEN_WIDTH_IN_WORDS * SCREEN_HEIGHT_IN_WORDS;
 
     /**
      * Screen width in pixels
@@ -73,12 +73,12 @@ public class Definitions {
     /**
      * Address of the beginning of variable storage area
      */
-    public static final short VAR_START_ADDRESS = 16;
+    public static final int VAR_START_ADDRESS = 16;
 
     /**
      * Address of the end of variable storage area
      */
-    public static final short VAR_END_ADDRESS = 255;
+    public static final int VAR_END_ADDRESS = 255;
 
 
     // Memory segments
@@ -86,47 +86,47 @@ public class Definitions {
     /**
      * The start address of the global stack
      */
-    public static final short STACK_START_ADDRESS = 256;
+    public static final int STACK_START_ADDRESS = 256;
 
     /**
      * The end address of the global stack
      */
-    public static final short STACK_END_ADDRESS = 2047;
+    public static final int STACK_END_ADDRESS = 2047;
 
     /**
      * The start address of the heap
      */
-    public static final short HEAP_START_ADDRESS = 2048;
+    public static final int HEAP_START_ADDRESS = 2048;
 
     /**
      * The end address of the heap
      */
-    public static final short HEAP_END_ADDRESS = 16383;
+    public static final int HEAP_END_ADDRESS = 16383;
 
     /**
      * The start address of the screen
      */
-    public static final short SCREEN_START_ADDRESS = 16384;
+    public static final int SCREEN_START_ADDRESS = 16384;
 
     /**
      * The end address of the screen
      */
-    public static final short SCREEN_END_ADDRESS = SCREEN_START_ADDRESS + SCREEN_SIZE_IN_WORDS;
+    public static final int SCREEN_END_ADDRESS = SCREEN_START_ADDRESS + SCREEN_SIZE_IN_WORDS;
 
     /**
      * The address of the memory-mapped keyboard
      */
-    public static final short KEYBOARD_ADDRESS = 24576;
+    public static final int KEYBOARD_ADDRESS = 24576;
 
     /**
      * The start address of the temp memory segment
      */
-    public static final short TEMP_START_ADDRESS = 5;
+    public static final int TEMP_START_ADDRESS = 5;
 
     /**
      * The end address of the temp memory segment
      */
-    public static final short TEMP_END_ADDRESS = 12;
+    public static final int TEMP_END_ADDRESS = 12;
 
 
     // pointers addresses
@@ -134,27 +134,27 @@ public class Definitions {
     /**
      * The address of the SP regsiter
      */
-    public static final short SP_ADDRESS = 0;
+    public static final int SP_ADDRESS = 0;
 
     /**
      * The address of the LOCAL regsiter
      */
-    public static final short LOCAL_POINTER_ADDRESS = 1;
+    public static final int LOCAL_POINTER_ADDRESS = 1;
 
     /**
      * The address of the ARG regsiter
      */
-    public static final short ARG_POINTER_ADDRESS = 2;
+    public static final int ARG_POINTER_ADDRESS = 2;
 
     /**
      * The address of the THIS regsiter
      */
-    public static final short THIS_POINTER_ADDRESS = 3;
+    public static final int THIS_POINTER_ADDRESS = 3;
 
     /**
      * The address of the THAT regsiter
      */
-    public static final short THAT_POINTER_ADDRESS = 4;
+    public static final int THAT_POINTER_ADDRESS = 4;
 
 
     // Register addresses
@@ -162,87 +162,87 @@ public class Definitions {
     /**
      * The address of the R0 register
      */
-    public static final short R0_ADDRESS = 0;
+    public static final int R0_ADDRESS = 0;
 
     /**
      * The address of the R1 register
      */
-    public static final short R1_ADDRESS = 1;
+    public static final int R1_ADDRESS = 1;
 
     /**
      * The address of the R2 register
      */
-    public static final short R2_ADDRESS = 2;
+    public static final int R2_ADDRESS = 2;
 
     /**
      * The address of the R3 register
      */
-    public static final short R3_ADDRESS = 3;
+    public static final int R3_ADDRESS = 3;
 
     /**
      * The address of the R4 register
      */
-    public static final short R4_ADDRESS = 4;
+    public static final int R4_ADDRESS = 4;
 
     /**
      * The address of the R5 register
      */
-    public static final short R5_ADDRESS = 5;
+    public static final int R5_ADDRESS = 5;
 
     /**
      * The address of the R6 register
      */
-    public static final short R6_ADDRESS = 6;
+    public static final int R6_ADDRESS = 6;
 
     /**
      * The address of the R7 register
      */
-    public static final short R7_ADDRESS = 7;
+    public static final int R7_ADDRESS = 7;
 
     /**
      * The address of the R8 register
      */
-    public static final short R8_ADDRESS = 8;
+    public static final int R8_ADDRESS = 8;
 
     /**
      * The address of the R9 register
      */
-    public static final short R9_ADDRESS = 9;
+    public static final int R9_ADDRESS = 9;
 
     /**
      * The address of the R10 register
      */
-    public static final short R10_ADDRESS = 10;
+    public static final int R10_ADDRESS = 10;
 
     /**
      * The address of the R11 register
      */
-    public static final short R11_ADDRESS = 11;
+    public static final int R11_ADDRESS = 11;
 
     /**
      * The address of the R12 register
      */
-    public static final short R12_ADDRESS = 12;
+    public static final int R12_ADDRESS = 12;
 
     /**
      * The address of the R13 register
      */
-    public static final short R13_ADDRESS = 13;
+    public static final int R13_ADDRESS = 13;
 
     /**
      * The address of the R14 register
      */
-    public static final short R14_ADDRESS = 14;
+    public static final int R14_ADDRESS = 14;
 
     /**
      * The address of the R15 register
      */
-    public static final short R15_ADDRESS = 15;
+    public static final int R15_ADDRESS = 15;
 
     /**
      * Symbolizes an unknown address
      */
-    public static final short UNKNOWN_ADDRESS = -1;
+    public static final int UNKNOWN_ADDRESS = -1;
 
 
     // Assembly symbols
@@ -363,31 +363,31 @@ public class Definitions {
     public final static String R15_NAME = "R15";
 
     // Key codes
-    public static final short NEWLINE_KEY = 128;
-    public static final short BACKSPACE_KEY = 129;
-    public static final short LEFT_KEY = 130;
-    public static final short UP_KEY = 131;
-    public static final short RIGHT_KEY = 132;
-    public static final short DOWN_KEY = 133;
-    public static final short HOME_KEY = 134;
-    public static final short END_KEY = 135;
-    public static final short PAGE_UP_KEY = 136;
-    public static final short PAGE_DOWN_KEY = 137;
-    public static final short INSERT_KEY = 138;
-    public static final short DELETE_KEY = 139;
-    public static final short ESC_KEY = 140;
-    public static final short F1_KEY = 141;
-    public static final short F2_KEY = 142;
-    public static final short F3_KEY = 143;
-    public static final short F4_KEY = 144;
-    public static final short F5_KEY = 145;
-    public static final short F6_KEY = 146;
-    public static final short F7_KEY = 147;
-    public static final short F8_KEY = 148;
-    public static final short F9_KEY = 149;
-    public static final short F10_KEY = 150;
-    public static final short F11_KEY = 151;
-    public static final short F12_KEY = 152;
+    public static final int NEWLINE_KEY = 128;
+    public static final int BACKSPACE_KEY = 129;
+    public static final int LEFT_KEY = 130;
+    public static final int UP_KEY = 131;
+    public static final int RIGHT_KEY = 132;
+    public static final int DOWN_KEY = 133;
+    public static final int HOME_KEY = 134;
+    public static final int END_KEY = 135;
+    public static final int PAGE_UP_KEY = 136;
+    public static final int PAGE_DOWN_KEY = 137;
+    public static final int INSERT_KEY = 138;
+    public static final int DELETE_KEY = 139;
+    public static final int ESC_KEY = 140;
+    public static final int F1_KEY = 141;
+    public static final int F2_KEY = 142;
+    public static final int F3_KEY = 143;
+    public static final int F4_KEY = 144;
+    public static final int F5_KEY = 145;
+    public static final int F6_KEY = 146;
+    public static final int F7_KEY = 147;
+    public static final int F8_KEY = 148;
+    public static final int F9_KEY = 149;
+    public static final int F10_KEY = 150;
+    public static final int F11_KEY = 151;
+    public static final int F12_KEY = 152;
 
     // the single instance
     private static Definitions instance;
@@ -396,7 +396,7 @@ public class Definitions {
     private Hashtable addresses;
 
     // translation table for action key codes
-    private short[] actionKeyCodes;
+    private int[] actionKeyCodes;
 
     // Constructor: initializes addresses and key codes.
     private Definitions() {
@@ -423,25 +423,25 @@ public class Definitions {
      * ADDorAND - if true, ADDs the inputs. Otherwise, ANDs the inputs (logical AND)
      * negateOutput - if true, negates the output after the operation.
      */
-    public static short computeALU(short input0, short input1, boolean zero0, boolean negate0,
+    public static int computeALU(int input0, int input1, boolean zero0, boolean negate0,
                                    boolean zero1, boolean negate1, boolean ADDorAND,
                                    boolean negateOutput) {
-        short result;
+        int result;
 
         if (zero0)
             input0 = 0;
         if (zero1)
             input1 = 0;
         if (negate0)
-            input0 = (short)(~input0);
+            input0 = (int)(~input0);
         if (negate1)
-            input1 = (short)(~input1);
+            input1 = (int)(~input1);
         if (ADDorAND)
-            result = (short)(input0 + input1);
+            result = (int)(input0 + input1);
         else
-            result = (short)(input0 & input1);
+            result = (int)(input0 & input1);
         if (negateOutput)
-            result = (short)(~result);
+            result = (int)(~result);
 
         return result;
     }
@@ -456,10 +456,10 @@ public class Definitions {
     /**
      * Returns the hack key code from the given key event.
      */
-    public short getKeyCode(KeyEvent e) {
-        short key = 0;
+    public int getKeyCode(KeyEvent e) {
+        int key = 0;
         int letter = (int)e.getKeyChar();
-        short code = (short)e.getKeyCode();
+        int code = (int)e.getKeyCode();
 
         if (letter == KeyEvent.CHAR_UNDEFINED)
             key = actionKeyCodes[code];
@@ -475,7 +475,7 @@ public class Definitions {
             else if (letter == 127)
                 key = DELETE_KEY;
             else
-                key = (short)letter;
+                key = (int)letter;
         }
 
         return key;
@@ -495,34 +495,34 @@ public class Definitions {
     // initializes address translation table
     private void initAddresses() {
         addresses = new Hashtable();
-        addresses.put(SP_NAME,new Short(SP_ADDRESS));
-        addresses.put(LOCAL_POINTER_NAME,new Short(LOCAL_POINTER_ADDRESS));
-        addresses.put(ARG_POINTER_NAME,new Short(ARG_POINTER_ADDRESS));
-        addresses.put(THIS_POINTER_NAME,new Short(THIS_POINTER_ADDRESS));
-        addresses.put(THAT_POINTER_NAME,new Short(THAT_POINTER_ADDRESS));
-        addresses.put(R0_NAME,new Short(R0_ADDRESS));
-        addresses.put(R1_NAME,new Short(R1_ADDRESS));
-        addresses.put(R2_NAME,new Short(R2_ADDRESS));
-        addresses.put(R3_NAME,new Short(R3_ADDRESS));
-        addresses.put(R4_NAME,new Short(R4_ADDRESS));
-        addresses.put(R5_NAME,new Short(R5_ADDRESS));
-        addresses.put(R6_NAME,new Short(R6_ADDRESS));
-        addresses.put(R7_NAME,new Short(R7_ADDRESS));
-        addresses.put(R8_NAME,new Short(R8_ADDRESS));
-        addresses.put(R9_NAME,new Short(R9_ADDRESS));
-        addresses.put(R10_NAME,new Short(R10_ADDRESS));
-        addresses.put(R11_NAME,new Short(R11_ADDRESS));
-        addresses.put(R12_NAME,new Short(R12_ADDRESS));
-        addresses.put(R13_NAME,new Short(R13_ADDRESS));
-        addresses.put(R14_NAME,new Short(R14_ADDRESS));
-        addresses.put(R15_NAME,new Short(R15_ADDRESS));
-        addresses.put(SCREEN_NAME,new Short(SCREEN_START_ADDRESS));
-        addresses.put(KEYBOARD_NAME,new Short(KEYBOARD_ADDRESS));
+        addresses.put(SP_NAME,new Integer(SP_ADDRESS));
+        addresses.put(LOCAL_POINTER_NAME,new Integer(LOCAL_POINTER_ADDRESS));
+        addresses.put(ARG_POINTER_NAME,new Integer(ARG_POINTER_ADDRESS));
+        addresses.put(THIS_POINTER_NAME,new Integer(THIS_POINTER_ADDRESS));
+        addresses.put(THAT_POINTER_NAME,new Integer(THAT_POINTER_ADDRESS));
+        addresses.put(R0_NAME,new Integer(R0_ADDRESS));
+        addresses.put(R1_NAME,new Integer(R1_ADDRESS));
+        addresses.put(R2_NAME,new Integer(R2_ADDRESS));
+        addresses.put(R3_NAME,new Integer(R3_ADDRESS));
+        addresses.put(R4_NAME,new Integer(R4_ADDRESS));
+        addresses.put(R5_NAME,new Integer(R5_ADDRESS));
+        addresses.put(R6_NAME,new Integer(R6_ADDRESS));
+        addresses.put(R7_NAME,new Integer(R7_ADDRESS));
+        addresses.put(R8_NAME,new Integer(R8_ADDRESS));
+        addresses.put(R9_NAME,new Integer(R9_ADDRESS));
+        addresses.put(R10_NAME,new Integer(R10_ADDRESS));
+        addresses.put(R11_NAME,new Integer(R11_ADDRESS));
+        addresses.put(R12_NAME,new Integer(R12_ADDRESS));
+        addresses.put(R13_NAME,new Integer(R13_ADDRESS));
+        addresses.put(R14_NAME,new Integer(R14_ADDRESS));
+        addresses.put(R15_NAME,new Integer(R15_ADDRESS));
+        addresses.put(SCREEN_NAME,new Integer(SCREEN_START_ADDRESS));
+        addresses.put(KEYBOARD_NAME,new Integer(KEYBOARD_ADDRESS));
     }
 
     // prepare map of action keys from java codes to jack codes
     private void initKeyCodes() {
-        actionKeyCodes = new short[255];
+        actionKeyCodes = new int[255];
         actionKeyCodes[KeyEvent.VK_PAGE_UP] = PAGE_UP_KEY;
         actionKeyCodes[KeyEvent.VK_PAGE_DOWN] = PAGE_DOWN_KEY;
         actionKeyCodes[KeyEvent.VK_END] = END_KEY;

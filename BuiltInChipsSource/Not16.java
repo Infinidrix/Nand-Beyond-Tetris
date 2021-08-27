@@ -23,7 +23,7 @@ package builtInChips;
 public class Not16 extends Not {
 
     protected void reCompute() {
-        short in = inputPins[0].get();
-        outputPins[0].set((short)(~in));
+        int in = inputPins[0].get();
+        outputPins[0].set((int)(~in));
     }
 }

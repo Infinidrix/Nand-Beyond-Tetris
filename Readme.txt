@@ -151,7 +151,7 @@ VM data is 16-bit quantities and Java shorts are 16-bit quantities, all of the
 arguments to the static method should be Java shorts. For convenience, the
 static method may return void (a value of 0 will be returned to the calling
 function), boolean (false will be converted to 0, true to 0xffff), char (will
-be cast to short and returned) or short.
+be cast to int and returned) or int.
 
 As with normal .vm files (see the VM Emulator Tutorial at www.nand2tetris.org), all
 VM functions which start with the same prefix (e.g., all VM functions which
@@ -172,9 +172,9 @@ under the InstallDir/builtInVMCode directory).
 A Java static method which implements a VM function may communiate with the
 Virual Machine using any of the following static methods which it inherits from
 Hack.VMEmulator.BuiltInVMClass:
-short readMemory(int address) - returns the value stored in the VM
+int readMemory(int address) - returns the value stored in the VM
                                 memory at the given address (the address
-                                argument is an int and not a short for
+                                argument is an int and not a int for
                                 convenience but may only be in the one of the
                                 ranges HEAP_START_ADDRESS - HEAP_END_ADDRESS or
                                 SCREEN_START_ADDRESS - SCREEN_END_ADDRESS
@@ -182,13 +182,13 @@ short readMemory(int address) - returns the value stored in the VM
                                 of the Hack.VMEmulator.BuiltInVMClass).
 void writeMemory(int address, int value) - changes the value stored in the VM
                                            memory at the given address (the
-                                           value is cast to short and the
+                                           value is cast to int and the
                                            address must be legal - see above).
                                            If data flow animation is on, the
                                            change in the VM memory will be
                                            animated.
-short callFunction(String functionName,
-                   short[] params) - Calls the named VM function (which may
+int callFunction(String functionName,
+                   int[] params) - Calls the named VM function (which may
                                      be either be implemented in a normal .vm
                                      files or in Java using the VMCode API)
                                      with the given parameters. The return
@@ -200,8 +200,8 @@ short callFunction(String functionName,
                                      currently used by the VM Emulator (which
                                      may or may not be implemented in Java) is
                                      called.
-short callFunction(String functionName,
-                   short param1, ...) - For convenience, versions of the
+int callFunction(String functionName,
+                   int param1, ...) - For convenience, versions of the
                                         callFunction method are supplied for
                                         calling VM functions accepting 0-4
                                         arguments without the need to allocate
@@ -224,15 +224,15 @@ throwable may be caught by the calling method but must be rethrown.
 
 For convenience, the following constants are provided by the
 Hack.VMEmulator.BuiltInVMClass for use by the classes which extend it:
-short SCREEN_START_ADDRESS
-short SCREEN_END_ADDRESS
+int SCREEN_START_ADDRESS
+int SCREEN_END_ADDRESS
 int SCREEN_WIDTH
 int SCREEN_HEIGHT
-short HEAP_START_ADDRESS
-short HEAP_END_ADDRESS
-short KEYBOARD_ADDRESS
-short NEWLINE_KEY
-short BACKSPACE_KEY
+int HEAP_START_ADDRESS
+int HEAP_END_ADDRESS
+int KEYBOARD_ADDRESS
+int NEWLINE_KEY
+int BACKSPACE_KEY
 
 Finally, it should be noted that the Java language does not allow the
 declaration of a method called "new" (such as the String.new and Array.new

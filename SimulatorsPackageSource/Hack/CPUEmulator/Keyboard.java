@@ -57,7 +57,7 @@ public class Keyboard extends ComputerPart implements KeyListener {
      * Activated when a key is pressed.
      */
     public void keyPressed(KeyEvent e) {
-        short key = Definitions.getInstance().getKeyCode(e);
+        int key = Definitions.getInstance().getKeyCode(e);
         if (key > 0) {
             ram.setValueAt(Definitions.KEYBOARD_ADDRESS, key, true);
             if (hasGUI)
@@ -69,7 +69,7 @@ public class Keyboard extends ComputerPart implements KeyListener {
      * Activated when a key is released.
      */
     public void keyReleased(KeyEvent e) {
-        ram.setValueAt(Definitions.KEYBOARD_ADDRESS, (short)0, true);
+        ram.setValueAt(Definitions.KEYBOARD_ADDRESS, (int)0, true);
         gui.clearKey();
     }
 

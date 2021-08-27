@@ -25,12 +25,12 @@ import Hack.VirtualMachine.*;
 public class VMEmulatorInstruction extends HVMInstruction {
 
     // The index of the instruction in its containing function.
-    private short indexInFunction;
+    private int indexInFunction;
 
     /**
      * Constructs a new instruction with two arguments and the index in function.
      */
-    public VMEmulatorInstruction(byte opCode, short arg0, short arg1, short indexInFunction) {
+    public VMEmulatorInstruction(byte opCode, int arg0, int arg1, int indexInFunction) {
         super(opCode, arg0, arg1);
         this.indexInFunction = indexInFunction;
     }
@@ -38,7 +38,7 @@ public class VMEmulatorInstruction extends HVMInstruction {
     /**
      * Constructs a new instruction with one argument and the index in function.
      */
-    public VMEmulatorInstruction(byte opCode, short arg0, short indexInFunction) {
+    public VMEmulatorInstruction(byte opCode, int arg0, int indexInFunction) {
         super(opCode, arg0);
         this.indexInFunction = indexInFunction;
     }
@@ -46,7 +46,7 @@ public class VMEmulatorInstruction extends HVMInstruction {
     /**
      * Constructs a new instruction with no arguments and the index in function.
      */
-    public VMEmulatorInstruction(byte opCode, short indexInFunction) {
+    public VMEmulatorInstruction(byte opCode, int indexInFunction) {
         super(opCode);
         this.indexInFunction = indexInFunction;
     }
@@ -55,7 +55,7 @@ public class VMEmulatorInstruction extends HVMInstruction {
      * Returns the index of this instruction in its containing function.
      * A negative value represents no index.
      */
-    public short getIndexInFunction() {
+    public int getIndexInFunction() {
         return indexInFunction;
     }
 }

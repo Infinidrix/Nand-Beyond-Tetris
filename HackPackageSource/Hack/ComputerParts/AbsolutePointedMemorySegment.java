@@ -36,15 +36,15 @@ public class AbsolutePointedMemorySegment extends PointedMemorySegment {
      * the legal values range.
      */
     public AbsolutePointedMemorySegment(Memory mainMemory, PointedMemorySegmentGUI gui,
-                                 short minValue, short maxValue) {
+                                 int minValue, int maxValue) {
         super(mainMemory, gui, minValue, maxValue);
     }
 
-    public void setValueAt(int index, short value, boolean quiet) {
+    public void setValueAt(int index, int value, boolean quiet) {
         super.setValueAt(index - startAddress, value, quiet);
     }
 
-    public short getValueAt(int index) {
+    public int getValueAt(int index) {
         return mainMemory.getValueAt(index);
     }
 

@@ -41,22 +41,22 @@ public class Format {
     public static final int BIN_FORMAT = HackController.BINARY_FORMAT;
 
     /**
-     * Translates a given string to a short according to the current format.
+     * Translates a given string to a int according to the current format.
      * The format can be decimal, hexadecimal or binary.
      */
-    public static short translateValueToShort(String data, int dataFormat) throws NumberFormatException {
-        short result = 0;
+    public static int translateValueToInt(String data, int dataFormat) throws NumberFormatException {
+        int result = 0;
         switch (dataFormat) {
             case DEC_FORMAT:
-                result = Short.parseShort(data);
+                result = Integer.parseInt(data);
                 break;
 
             case HEX_FORMAT:
-                result = (short)Conversions.hexToInt(data);
+                result = (int)Conversions.hexToInt(data);
                 break;
 
             case BIN_FORMAT:
-                result = (short)Conversions.binaryToInt(data);
+                result = (int)Conversions.binaryToInt(data);
                 break;
         }
 
@@ -64,10 +64,10 @@ public class Format {
     }
 
     /**
-     * Translates a given short to a string according to the current format.
+     * Translates a given int to a string according to the current format.
      * The format can be decimal, hexadecimal or binary.
      */
-    public static String translateValueToString(short value, int dataFormat) {
+    public static String translateValueToString(int value, int dataFormat) {
         String result = null;
 
         switch (dataFormat) {
@@ -76,7 +76,7 @@ public class Format {
                 break;
 
             case HEX_FORMAT:
-                result = Conversions.decimalToHex(value,4);
+                result = Conversions.decimalToHex(value,8);
                 break;
 
             case BIN_FORMAT:

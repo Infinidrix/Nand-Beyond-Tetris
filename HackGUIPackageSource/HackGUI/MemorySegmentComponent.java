@@ -79,7 +79,7 @@ public class MemorySegmentComponent extends JPanel
     protected boolean isEnabled = true;
 
     // The null value of this component
-    protected short nullValue;
+    protected int nullValue;
 
     // A boolean field specifying if the null value should be activated or not.
     protected boolean hideNullValue;
@@ -115,7 +115,7 @@ public class MemorySegmentComponent extends JPanel
     /**
      * Sets the null value of this component.
      */
-    public void setNullValue (short value, boolean hideNullValue) {
+    public void setNullValue (int value, boolean hideNullValue) {
         nullValue = value;
         this.hideNullValue = hideNullValue;
     }
@@ -189,7 +189,7 @@ public class MemorySegmentComponent extends JPanel
      * a MemoryEvent (with the changed address and value) and sending it using the
      * memoryChanged method to all the listeners.
      */
-    public void notifyListeners(int address, short value) {
+    public void notifyListeners(int address, int value) {
         ComputerPartEvent event = new ComputerPartEvent(this,address,value);
         for (int i=0;i<listeners.size();i++) {
            ((ComputerPartEventListener)listeners.elementAt(i)).valueChanged(event);
@@ -232,7 +232,7 @@ public class MemorySegmentComponent extends JPanel
      * Sets the starting address with the given address. This should display the relevant
      * memory segment (the data should be taken from the main memory gui).
      */
-    public void setValueAt(int index, short value) {
+    public void setValueAt(int index, int value) {
             Rectangle r = segmentTable.getCellRect(index, 0, true);
             segmentTable.scrollRectToVisible(r);
             repaint();
@@ -259,7 +259,7 @@ public class MemorySegmentComponent extends JPanel
      * Returns the value at the given index in its string representation.
      */
     public String getValueAsString(int index) {
-        return Format.translateValueToString(memory.getValueAsShort((short)(index + startAddress)),
+        return Format.translateValueToString(memory.getValueAsInt((int)(index + startAddress)),
                                              dataFormat);
     }
 
@@ -448,7 +448,7 @@ public class MemorySegmentComponent extends JPanel
 
     // Returns the string at the given location
     private String getStrAt(int index) {
-        short currentValue = memory.getValueAsShort((short)(index + startAddress));
+        int currentValue = memory.getValueAsInt((int)(index + startAddress));
         if (currentValue == nullValue && hideNullValue)
             return "";
         else
@@ -519,12 +519,12 @@ public class MemorySegmentComponent extends JPanel
             String data = ((String)value).trim();
             if (!getStrAt(row).equals(data)) {
                 try {
-                    short currentValue;
+                    int currentValue;
                     if(data.equals("") && hideNullValue)
                         currentValue = nullValue;
                     else
-                        currentValue = Format.translateValueToShort(data, memory.dataFormat);
-                    notifyListeners((short)row,currentValue);
+                        currentValue = Format.translateValueToInt(data, memory.dataFormat);
+                    notifyListeners((int)row,currentValue);
                 }
                 catch(NumberFormatException nfe) {
                     notifyErrorListeners("Illegal value");

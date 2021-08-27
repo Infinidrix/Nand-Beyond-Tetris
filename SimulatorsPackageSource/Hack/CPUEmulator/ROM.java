@@ -72,7 +72,7 @@ public class ROM extends PointedMemory implements ProgramEventListener
      * Loads the given program file (HACK or ASM) into the ROM.
      */
     public synchronized void loadProgram(String fileName) throws ProgramException {
-        short[] program = null;
+        int[] program = null;
 
         if (displayChanges)
             ((ROMGUI)gui).showMessage("Loading...");
@@ -122,7 +122,7 @@ public class ROM extends PointedMemory implements ProgramEventListener
      * Called when the contents of the memory are changed through the memory gui.
      */
     public void valueChanged(ComputerPartEvent event) {
-        short newValue = event.getValue();
+        int newValue = event.getValue();
         int newAddress = event.getIndex();
         clearErrorListeners();
         try {

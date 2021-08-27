@@ -25,7 +25,7 @@ import Hack.Utilities.*;
 public class SubNode extends Node {
 
     // The mask which filters out the non-relevant part of the sub-node
-    private short mask;
+    private int mask;
 
     // The amount of bits to shift right the masked value
     private byte shiftRight;
@@ -41,20 +41,20 @@ public class SubNode extends Node {
     /**
      * Returns the value of this sub-node.
      */
-    public short get() {
-        return Shifter.unsignedShiftRight((short)(value & mask), shiftRight);
+    public int get() {
+        return Shifter.unsignedShiftRight((int)(value & mask), shiftRight);
     }
 
     /**
      * Returns a mask according to the given low & high bit indice.
      */
-    public static short getMask(byte low, byte high) {
-        short mask = 0;
+    public static int getMask(byte low, byte high) {
+        int mask = 0;
 
-        short bitHolder = Shifter.powersOf2[low];
+        int bitHolder = Shifter.powersOf2[low];
         for (byte i = low; i <= high; i++) {
             mask |= bitHolder;
-            bitHolder = (short)(bitHolder << 1);
+            bitHolder = (int)(bitHolder << 1);
         }
 
         return mask;

@@ -26,7 +26,7 @@ import Hack.Gates.BuiltInGate;
 public class Or8Way extends BuiltInGate {
 
     protected void reCompute() {
-        short in = inputPins[0].get();
-        outputPins[0].set((short)(in == 0 ? 0 : 1));
+        int in = inputPins[0].get();
+        outputPins[0].set((int)(in == 0 ? 0 : 1));
     }
 }

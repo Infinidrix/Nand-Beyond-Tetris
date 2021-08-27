@@ -40,12 +40,12 @@ public class Keyboard extends JackOSClass {
 		return c;
 	}
 
-	public static short readLine(short message)
+	public static int readLine(int message)
 			throws TerminateVMProgramThrowable {
 		return javaStringToJackStringUsingVM(readLineToJavaString(message));
 	}
 
-	public static short readInt(short message)
+	public static int readInt(int message)
 			throws TerminateVMProgramThrowable {
 		return javaStringToInt(readLineToJavaString(message));
 	}
@@ -64,7 +64,7 @@ public class Keyboard extends JackOSClass {
 		return saved;
 	}
 
-	private static java.lang.String readLineToJavaString(short message)
+	private static java.lang.String readLineToJavaString(int message)
 			throws TerminateVMProgramThrowable {
 		callFunction("Output.printString", message);
 		StringBuffer s = new StringBuffer();

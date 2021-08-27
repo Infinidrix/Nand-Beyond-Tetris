@@ -29,7 +29,7 @@ import SimulatorsGUI.*;
 public class Keyboard extends BuiltInGateWithGUI implements KeyListener {
 
     // The currently pressed key.
-    private short key;
+    private int key;
 
     // The gui.
     private KeyboardComponent gui;
@@ -79,7 +79,7 @@ public class Keyboard extends BuiltInGateWithGUI implements KeyListener {
      */
     public void keyTyped(KeyEvent e) {}
 
-    public short getValueAt(int index) throws GateException {
+    public int getValueAt(int index) throws GateException {
         checkIndex(index);
         return key;
     }
@@ -90,7 +90,7 @@ public class Keyboard extends BuiltInGateWithGUI implements KeyListener {
             throw new GateException("Keyboard has no index. Use ARegister[]");
     }
 
-    public void setValueAt(int index, short value) throws GateException {
+    public void setValueAt(int index, int value) throws GateException {
         throw new GateException("Keyboard is read only");
     }
 }

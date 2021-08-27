@@ -162,7 +162,7 @@ public class PartPins extends ValueComputerPart {
         return gui;
     }
 
-    public short getValueAt(int index) {
+    public int getValueAt(int index) {
         return ((PartPinInfo)partPins.elementAt(index)).value;
     }
 
@@ -171,10 +171,10 @@ public class PartPins extends ValueComputerPart {
             gui.setContents(partPins);
     }
 
-    public void setValueAt(int index, short value, boolean quiet) {
+    public void setValueAt(int index, int value, boolean quiet) {
         if (getValueAt(index) != value)
             super.setValueAt(index, value, quiet);
     }
 
-    public void doSetValueAt(int index, short value) {}
+    public void doSetValueAt(int index, int value) {}
 }

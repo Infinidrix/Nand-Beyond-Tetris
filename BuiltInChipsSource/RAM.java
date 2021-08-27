@@ -34,7 +34,7 @@ import java.awt.*;
 public abstract class RAM extends BuiltInGateWithGUI implements ComputerPartEventListener {
 
     // The memory array.
-    protected short[] values;
+    protected int[] values;
 
     // The gui of the memory.
     protected PointedMemoryComponent memoryGUI;
@@ -43,7 +43,7 @@ public abstract class RAM extends BuiltInGateWithGUI implements ComputerPartEven
      * Constructs a new RAM of the given size.
      */
     public RAM(int size) {
-        values = new short[size];
+        values = new int[size];
 
         if (GatesManager.getInstance().isChipsGUIEnabled()) {
             memoryGUI = new PointedMemoryComponent();
@@ -56,9 +56,9 @@ public abstract class RAM extends BuiltInGateWithGUI implements ComputerPartEven
     }
 
     protected void clockUp() {
-        short in = inputPins[0].get();
-        short load = inputPins[1].get();
-        short address = inputPins[2].get();
+        int in = inputPins[0].get();
+        int load = inputPins[1].get();
+        int address = inputPins[2].get();
         if (load == 1) {
             values[address] = in;
             if (memoryGUI != null)
@@ -67,7 +67,7 @@ public abstract class RAM extends BuiltInGateWithGUI implements ComputerPartEven
     }
 
     protected void reCompute() {
-        short address = inputPins[2].get();
+        int address = inputPins[2].get();
         outputPins[0].set(values[address]);
         if (memoryGUI != null)
            memoryGUI.setPointer(address);
@@ -85,14 +85,14 @@ public abstract class RAM extends BuiltInGateWithGUI implements ComputerPartEven
      * Called when the contents of the memory are changed through the memory gui.
      */
     public void valueChanged(ComputerPartEvent event) {
-        short newValue = event.getValue();
+        int newValue = event.getValue();
         int newAddress = event.getIndex();
         clearErrorListeners();
         updateValue(newAddress, newValue);
     }
 
     // updates the given value
-    private void updateValue(int address, short value) {
+    private void updateValue(int address, int value) {
         values[address] = value;
         if (memoryGUI != null)
             memoryGUI.setValueAt(address, value);
@@ -103,7 +103,7 @@ public abstract class RAM extends BuiltInGateWithGUI implements ComputerPartEven
     public void guiGainedFocus() {
     }
 
-    public short getValueAt(int index) throws GateException {
+    public int getValueAt(int index) throws GateException {
         checkIndex(index);
         return values[index];
     }
@@ -114,7 +114,7 @@ public abstract class RAM extends BuiltInGateWithGUI implements ComputerPartEven
             throw new GateException("Illegal index");
     }
 
-    public void setValueAt(int index, short value) throws GateException {
+    public void setValueAt(int index, int value) throws GateException {
         checkIndex(index);
         updateValue(index, value);
     }

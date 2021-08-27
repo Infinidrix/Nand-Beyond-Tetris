@@ -27,15 +27,15 @@ import Hack.Gates.BuiltInGate;
 public class DMux8Way extends BuiltInGate {
 
     protected void reCompute() {
-        short in = inputPins[0].get();
-        short sel = inputPins[1].get();
-        outputPins[0].set((short)(sel == 0 ? in : 0));
-        outputPins[1].set((short)(sel == 1 ? in : 0));
-        outputPins[2].set((short)(sel == 2 ? in : 0));
-        outputPins[3].set((short)(sel == 3 ? in : 0));
-        outputPins[4].set((short)(sel == 4 ? in : 0));
-        outputPins[5].set((short)(sel == 5 ? in : 0));
-        outputPins[6].set((short)(sel == 6 ? in : 0));
-        outputPins[7].set((short)(sel == 7 ? in : 0));
+        int in = inputPins[0].get();
+        int sel = inputPins[1].get();
+        outputPins[0].set((int)(sel == 0 ? in : 0));
+        outputPins[1].set((int)(sel == 1 ? in : 0));
+        outputPins[2].set((int)(sel == 2 ? in : 0));
+        outputPins[3].set((int)(sel == 3 ? in : 0));
+        outputPins[4].set((int)(sel == 4 ? in : 0));
+        outputPins[5].set((int)(sel == 5 ? in : 0));
+        outputPins[6].set((int)(sel == 6 ? in : 0));
+        outputPins[7].set((int)(sel == 7 ? in : 0));
     }
 }

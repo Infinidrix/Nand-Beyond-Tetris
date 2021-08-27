@@ -64,7 +64,7 @@ public class Pins extends InteractiveValueComputerPart {
         pins = new PinInfo[nodes.length];
         for (int i = 0; i < pins.length; i++) {
             pins[i] = gateClass.getPinInfo(type, i);
-            pins[i].value = (short)nodes[i].get();
+            pins[i].value = (int)nodes[i].get();
 
             nodes[i].addListener(new NodePinsAdapter(this, i));
         }
@@ -84,18 +84,18 @@ public class Pins extends InteractiveValueComputerPart {
         return gui;
     }
 
-    public void doSetValueAt(int index, short value) {
+    public void doSetValueAt(int index, int value) {
         nodes[index].set(value);
     }
 
-    public short getValueAt(int index) {
-        return (short)nodes[index].get();
+    public int getValueAt(int index) {
+        return (int)nodes[index].get();
     }
 
     public void refreshGUI() {
         if (displayChanges) {
             for (int i = 0; i < pins.length; i++)
-                pins[i].value = (short)nodes[i].get();
+                pins[i].value = (int)nodes[i].get();
             gui.setContents(pins);
         }
     }
@@ -103,7 +103,7 @@ public class Pins extends InteractiveValueComputerPart {
     public void reset() {
         gui.reset();
         for (int i = 0; i < nodes.length; i++)
-            nodes[i].set((short)0);
+            nodes[i].set((int)0);
         refreshGUI();
     }
 
@@ -118,7 +118,7 @@ public class Pins extends InteractiveValueComputerPart {
      * Returns true if the width of the given value is less or equal to the width
      * of the pin at the given index.
      */
-    public boolean isLegalWidth(int pinIndex, short value) {
+    public boolean isLegalWidth(int pinIndex, int value) {
         int maxWidth = pins[pinIndex].width;
         int width = value > 0 ? (int)(Math.log(value) / Math.log(2)) + 1 : 1;
         return (width <= maxWidth);
@@ -130,12 +130,12 @@ public class Pins extends InteractiveValueComputerPart {
     public void valueChanged(ComputerPartEvent event) {
         clearErrorListeners();
         int index = event.getIndex();
-        short value = event.getValue();
+        int value = event.getValue();
         if (isLegalWidth(index, value))
             setValueAt(index, value, true);
         else {
             notifyErrorListeners("Value doesn't match the pin's width");
-            quietUpdateGUI(index, (short)nodes[event.getIndex()].get());
+            quietUpdateGUI(index, (int)nodes[event.getIndex()].get());
         }
     }
 }

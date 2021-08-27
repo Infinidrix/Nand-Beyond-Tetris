@@ -32,7 +32,7 @@ public interface ValueComputerPartGUI extends ComputerPartGUI {
     /**
      * Sets the element at the given index with the given value.
      */
-    public void setValueAt(int index, short value);
+    public void setValueAt(int index, int value);
 
     /**
      * Returns the value at the given index in its string representation.
@@ -69,5 +69,5 @@ public interface ValueComputerPartGUI extends ComputerPartGUI {
      * If hideNullValue is true, values which are equal to the null value will be
      * hidden.
      */
-    public void setNullValue(short value, boolean hideNullValue);
+    public void setNullValue(int value, boolean hideNullValue);
 }

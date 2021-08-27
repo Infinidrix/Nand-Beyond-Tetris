@@ -33,7 +33,7 @@ public class Conversions {
                                             1073741824,-2147483648};
 
     // A helper array of powers of 16
-    private static final int[] powersOf16 = {1,16,256,4096,65536,1048576,16777216,268435456};
+    private static final long[] powersOf16 = {1,16,256,4096,65536,1048576,16777216,268435456,4294967296L, 68719476736L, 1099511627776L, 17592186044416L};
 
     /**
      * If the given string starts with %X, %B or %D translates it to a normal decimal form.
@@ -73,7 +73,7 @@ public class Conversions {
         for (int i = value.length() - 1, mask = 1; i >= 0; i--, mask = mask << 1) {
             char bit = value.charAt(i);
             if (bit == '1')
-                result = (short)(result | mask);
+                result = (int)(result | mask);
             else if (bit != '0')
                 throw new NumberFormatException();
         }
@@ -138,8 +138,8 @@ public class Conversions {
      * preceeding zeros if the result contains less digits than the given amount of digits.
      */
     public static String decimalToHex(int value, int numOfDigits) {
-        value = value & (powersOf16[numOfDigits] - 1);
-        String result = Integer.toHexString(value);
+        long longValue = value & (powersOf16[numOfDigits] - 1);
+        String result = Integer.toHexString((int) longValue);
         if (result.length() < numOfDigits)
             result = ZEROS.substring(0, numOfDigits - result.length()) + result;
         return result;

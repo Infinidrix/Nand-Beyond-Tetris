@@ -28,36 +28,36 @@ public class Math extends JackOSClass {
 
 	public static void init() { }
 
-	public static short abs(short x) {
-		return (x<0)?(short)-x:x;
+	public static int abs(int x) {
+		return (x<0)?(int)-x:x;
 	}
 
-	public static short multiply(short x, short y) {
-		return (short)(x*y);
+	public static int multiply(int x, int y) {
+		return (int)(x*y);
 	}
 	
-	public static short divide(short x, short y)
+	public static int divide(int x, int y)
 			throws TerminateVMProgramThrowable 	{
 		if (y == 0) {
 			callFunction("Sys.error", MATH_DIVIDE_ZERO);
 		}
-		return (short)(x/y);
+		return (int)(x/y);
 	}
 	
-	public static short min(short x, short y) {
+	public static int min(int x, int y) {
 		return (x>y)?y:x;
 	}
 	
-	public static short max(short x, short y) {
+	public static int max(int x, int y) {
 		return (x>y)?x:y;
 	}
 	
-	public static short sqrt(short x)
+	public static int sqrt(int x)
 			throws TerminateVMProgramThrowable {
 		if (x < 0) {
 			callFunction("Sys.error", MATH_SQRT_NEGATIVE);
 		}
-		return (short)java.lang.Math.sqrt(x);
+		return (int)java.lang.Math.sqrt(x);
 	}
 
 }

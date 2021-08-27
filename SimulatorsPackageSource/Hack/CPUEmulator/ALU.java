@@ -30,10 +30,10 @@ public class ALU extends ValueComputerPart {
     private static final int COMMAND_FLASH_TIME = 500;
 
     // The inputs of the ALU
-    private short input0, input1;
+    private int input0, input1;
 
     // The output of the ALU
-    private short output;
+    private int output;
 
     // The dscription of the command
     private String commandDescription;
@@ -119,7 +119,7 @@ public class ALU extends ValueComputerPart {
             gui.hideBodyFlash();
         }
 
-        short result = Definitions.computeALU(input0, input1, zero0, negate0, zero1,
+        int result = Definitions.computeALU(input0, input1, zero0, negate0, zero1,
                                               negate1, ADDorAND, negateOutput);
 
         setValueAt(2, result, false);
@@ -128,26 +128,26 @@ public class ALU extends ValueComputerPart {
     /**
      * Sets the first input of the ALU with the given value.
      */
-    public void setInput0(short value) {
+    public void setInput0(int value) {
         setValueAt(0, value, false);
     }
 
     /**
      * Sets the second input of the ALU with the given value.
      */
-    public void setInput1(short value) {
+    public void setInput1(int value) {
         setValueAt(1, value, false);
     }
 
     /**
      * Returns the output of the ALU.
      */
-    public short getOutput() {
+    public int getOutput() {
         return getValueAt(2);
     }
 
-    public short getValueAt(int index) {
-        short result = 0;
+    public int getValueAt(int index) {
+        int result = 0;
 
         switch (index) {
             case 0: result = input0; break;
@@ -158,7 +158,7 @@ public class ALU extends ValueComputerPart {
         return result;
     }
 
-    public void doSetValueAt(int index, short value) {
+    public void doSetValueAt(int index, int value) {
         switch (index) {
             case 0: input0 = value; break;
             case 1: input1 = value; break;

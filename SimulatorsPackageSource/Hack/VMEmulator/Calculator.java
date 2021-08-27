@@ -121,10 +121,10 @@ public class Calculator extends ValueComputerPart {
     private char[] operators;
 
     // The inputs
-    private short input0, input1;
+    private int input0, input1;
 
     // The output
-    private short output;
+    private int output;
 
     /**
      * Constructs a new calculator with the given GUI.
@@ -151,27 +151,27 @@ public class Calculator extends ValueComputerPart {
      * Assumes a legal operator.
      */
     public void compute(int operator) {
-        short result = 0;
+        int result = 0;
 
         switch (operator) {
             case ADD:
-                result = (short)(input0 + input1); break;
+                result = (int)(input0 + input1); break;
             case SUBTRACT:
-                result = (short)(input0 - input1); break;
+                result = (int)(input0 - input1); break;
             case NEGATE:
-                result = (short)(-input1); break;
+                result = (int)(-input1); break;
             case AND:
-                result = (short)(input0 & input1); break;
+                result = (int)(input0 & input1); break;
             case OR:
-                result = (short)(input0 | input1); break;
+                result = (int)(input0 | input1); break;
             case NOT:
-                result = (short)(~input1); break;
+                result = (int)(~input1); break;
             case EQUAL:
-                result = (short)(input0 == input1 ? -1 : 0); break;
+                result = (int)(input0 == input1 ? -1 : 0); break;
             case GREATER_THAN:
-                result = (short)(input0 > input1 ? -1 : 0); break;
+                result = (int)(input0 > input1 ? -1 : 0); break;
             case LESS_THAN:
-                result = (short)(input0 < input1 ? -1 : 0); break;
+                result = (int)(input0 < input1 ? -1 : 0); break;
         }
 
         setValueAt(2, result, true);
@@ -181,8 +181,8 @@ public class Calculator extends ValueComputerPart {
         return gui;
     }
 
-    public short getValueAt(int index) {
-        short result = 0;
+    public int getValueAt(int index) {
+        int result = 0;
 
         switch (index) {
             case 0: result = input0; break;
@@ -193,7 +193,7 @@ public class Calculator extends ValueComputerPart {
         return result;
    }
 
-    public void doSetValueAt(int index, short value) {
+    public void doSetValueAt(int index, int value) {
         switch (index) {
             case 0: input0 = value; break;
             case 1: input1 = value; break;

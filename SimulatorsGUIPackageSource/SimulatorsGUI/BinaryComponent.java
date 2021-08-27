@@ -131,7 +131,7 @@ public class BinaryComponent extends JPanel implements MouseListener, KeyListene
     /**
      * Sets the value of this component.
      */
-    public void setValue (short value) {
+    public void setValue (int value) {
         valueStr = new StringBuffer(Conversions.decimalToBinary(value,16));
         for (int i=0; i<bits.length; i++) {
             bits[i].setText(String.valueOf(valueStr.charAt(i)));
@@ -141,8 +141,8 @@ public class BinaryComponent extends JPanel implements MouseListener, KeyListene
     /**
      * Returns the value of this component.
      */
-    public short getValue() {
-        return (short)Conversions.binaryToInt(valueStr.toString());
+    public int getValue() {
+        return (int)Conversions.binaryToInt(valueStr.toString());
     }
 
     // Updates the value of this component.

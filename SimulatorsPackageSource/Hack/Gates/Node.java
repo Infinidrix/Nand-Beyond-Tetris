@@ -23,7 +23,7 @@ package Hack.Gates;
 public class Node {
 
     // the value of the node
-    protected short value;
+    protected int value;
 
     // listeners list
     protected NodeSet listeners;
@@ -37,7 +37,7 @@ public class Node {
     /**
      * Constructs a new Node with the given initial value.
      */
-    public Node(short initialValue) {
+    public Node(int initialValue) {
         value = initialValue;
     }
 
@@ -62,7 +62,7 @@ public class Node {
     /**
      * Returns the value of this node.
      */
-    public short get() {
+    public int get() {
         return value;
     }
 
@@ -70,7 +70,7 @@ public class Node {
      * Sets the node's value with the given value.
      * Notifies the listeners on the change by calling their set() method.
      */
-    public void set(short value) {
+    public void set(int value) {
         if (this.value != value) {
             this.value = value;
 

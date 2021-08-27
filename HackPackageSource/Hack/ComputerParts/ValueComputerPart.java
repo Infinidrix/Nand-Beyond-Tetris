@@ -26,7 +26,7 @@ public abstract class ValueComputerPart extends ComputerPart {
     private static final int FLASH_TIME = 500;
 
     // used as default value (in reset)
-    protected short nullValue;
+    protected int nullValue;
 
     /**
      * Constructs a new ValueComputerPart
@@ -39,7 +39,7 @@ public abstract class ValueComputerPart extends ComputerPart {
     /**
      * Sets the element at the given index with the given value and updates the gui.
      */
-    public void setValueAt(int index, short value, boolean quiet) {
+    public void setValueAt(int index, int value, boolean quiet) {
         doSetValueAt(index, value);
         if (displayChanges) {
             if (quiet)
@@ -52,17 +52,17 @@ public abstract class ValueComputerPart extends ComputerPart {
     /**
      * Sets the element at the given index with the given value.
      */
-    public abstract void doSetValueAt(int index, short value);
+    public abstract void doSetValueAt(int index, int value);
 
     /**
      * Returns the element at the given index.
      */
-    public abstract short getValueAt(int index);
+    public abstract int getValueAt(int index);
 
     /**
      * Updates the GUI of this computer part at the given location with the given value
      */
-    public synchronized void updateGUI(int index, short value) {
+    public synchronized void updateGUI(int index, int value) {
         if (displayChanges) {
             ValueComputerPartGUI gui = (ValueComputerPartGUI)getGUI();
             gui.setValueAt(index, value);
@@ -83,7 +83,7 @@ public abstract class ValueComputerPart extends ComputerPart {
      * Updates the GUI of this computer part at the given location with the given value
      * quietly - no flashing will be done
      */
-    public void quietUpdateGUI(int index, short value) {
+    public void quietUpdateGUI(int index, int value) {
         if (displayChanges)
             ((ValueComputerPartGUI)getGUI()).setValueAt(index, value);
     }
@@ -109,7 +109,7 @@ public abstract class ValueComputerPart extends ComputerPart {
      * If hideNullValue is true, values which are equal to the null value will be
      * hidden.
      */
-    public void setNullValue(short value, boolean hideNullValue) {
+    public void setNullValue(int value, boolean hideNullValue) {
         nullValue = value;
 
         if (hasGUI) {

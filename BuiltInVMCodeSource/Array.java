@@ -26,14 +26,14 @@ import Hack.VMEmulator.TerminateVMProgramThrowable;
 
 public class Array extends JackOSClass {
 
-	public static short NEW(short size) throws TerminateVMProgramThrowable {
+	public static int NEW(int size) throws TerminateVMProgramThrowable {
 		if (size <= 0) {
 			callFunction("Sys.error", ARRAY_NEW_NONPOSITIVE_SIZE);
 		}
 		return callFunction("Memory.alloc", size);
 	}
 
-	public static void dispose(short arr) throws TerminateVMProgramThrowable {
+	public static void dispose(int arr) throws TerminateVMProgramThrowable {
 		callFunction("Memory.deAlloc", arr);
 		return;
 	}

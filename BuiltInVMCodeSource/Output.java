@@ -173,7 +173,7 @@ public class Output extends JackOSClass {
         }
     }
 
-    public static void moveCursor(short row, short col)
+    public static void moveCursor(int row, int col)
 			throws TerminateVMProgramThrowable  {
         if (row < 0 || row >= N_ROWS || col < 0 || col >= N_COLS) {
 			callFunction("Sys.error", OUTPUT_MOVECURSOR_ILLEGAL_POSITION);
@@ -184,7 +184,7 @@ public class Output extends JackOSClass {
         drawChar(' ');
     }
 
-    public static void printChar(short c) throws TerminateVMProgramThrowable {
+    public static void printChar(int c) throws TerminateVMProgramThrowable {
         if (c == NEWLINE_KEY) {
             println();
         } else if (c == BACKSPACE_KEY) {
@@ -205,18 +205,18 @@ public class Output extends JackOSClass {
 		}
     }
 
-    public static void printString(short s) throws TerminateVMProgramThrowable {
+    public static void printString(int s) throws TerminateVMProgramThrowable {
 		int l = callFunction("String.length", s);
 		for (int i=0; i<l; ++i) {
 			printChar(callFunction("String.charAt", s, i));
 		}
     }
 
-    public static void printInt(short i) throws TerminateVMProgramThrowable {
+    public static void printInt(int i) throws TerminateVMProgramThrowable {
         StringCharacterIterator iter = new StringCharacterIterator(""+i);
         for (iter.first(); iter.current() != CharacterIterator.DONE;
 			 iter.next()) {
-			printChar((short)iter.current());
+			printChar((int)iter.current());
 		}
     }
 

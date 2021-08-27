@@ -38,7 +38,7 @@ public interface InteractiveValueComputerPartGUI
      * a ComputerPartEvent (with the changed index and value) and sending it using the
      * valueChanged method to all the listeners.
      */
-    public void notifyListeners(int index, short value);
+    public void notifyListeners(int index, int value);
 
     /**
      * Notifies all the ComputerPartEventListeners that the gui gained focus by creating

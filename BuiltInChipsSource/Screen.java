@@ -31,13 +31,13 @@ public class Screen extends BuiltInGateWithGUI {
     private ScreenComponent gui;
 
     // The memory array
-    private short[] values;
+    private int[] values;
 
     /**
      * Constructs a new Screen.
      */
     public Screen() {
-        values = new short[Definitions.SCREEN_SIZE_IN_WORDS];
+        values = new int[Definitions.SCREEN_SIZE_IN_WORDS];
         if (GatesManager.getInstance().isChipsGUIEnabled()) {
             gui = new ScreenComponent();
             gui.setLocation(4,2);
@@ -45,9 +45,9 @@ public class Screen extends BuiltInGateWithGUI {
     }
 
     protected void clockUp() {
-        short in = inputPins[0].get(); // 16 bit input
-        short load = inputPins[1].get(); // load bit
-        short address = inputPins[2].get(); // 13 bit address
+        int in = inputPins[0].get(); // 16 bit input
+        int load = inputPins[1].get(); // load bit
+        int address = inputPins[2].get(); // 13 bit address
         if (load == 1) {
             values[address] = in;
             if (gui != null)
@@ -56,7 +56,7 @@ public class Screen extends BuiltInGateWithGUI {
     }
 
     protected void reCompute() {
-        short address = inputPins[2].get(); // 13 bit address
+        int address = inputPins[2].get(); // 13 bit address
         outputPins[0].set(values[address]);
     }
 
@@ -69,7 +69,7 @@ public class Screen extends BuiltInGateWithGUI {
     }
 
     // updates the given value
-    private void updateValue(int address, short value) {
+    private void updateValue(int address, int value) {
         values[address] = value;
         if (gui != null)
             gui.setValueAt(address, value);
@@ -77,7 +77,7 @@ public class Screen extends BuiltInGateWithGUI {
         evalParent();
     }
 
-    public short getValueAt(int index) throws GateException {
+    public int getValueAt(int index) throws GateException {
         checkIndex(index);
         return values[index];
     }
@@ -88,7 +88,7 @@ public class Screen extends BuiltInGateWithGUI {
             throw new GateException("Illegal index");
     }
 
-    public void setValueAt(int index, short value) throws GateException {
+    public void setValueAt(int index, int value) throws GateException {
         checkIndex(index);
         updateValue(index, value);
     }

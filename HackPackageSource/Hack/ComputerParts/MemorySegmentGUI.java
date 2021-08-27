@@ -42,7 +42,7 @@ public interface MemorySegmentGUI extends InteractiveValueComputerPartGUI {
      * a ComputerPartEvent (with the changed address and value) and sending it using the
      * memoryChanged method to all the listeners.
      */
-    public void notifyListeners(int address, short value);
+    public void notifyListeners(int address, int value);
 
     /**
      * Sets the start address with the given one.

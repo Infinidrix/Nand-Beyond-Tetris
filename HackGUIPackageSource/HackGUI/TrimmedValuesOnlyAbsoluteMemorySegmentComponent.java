@@ -50,7 +50,7 @@ public class TrimmedValuesOnlyAbsoluteMemorySegmentComponent extends AbsolutePoi
      * Sets the pointer with the given pointer address.
      */
     public synchronized void setPointer(int pointerAddress) {
-        this.pointerAddress = (short)pointerAddress;
+        this.pointerAddress = (int)pointerAddress;
         segmentTable.revalidate();
         try {
             wait(100);

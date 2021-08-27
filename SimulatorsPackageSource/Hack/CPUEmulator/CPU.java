@@ -213,7 +213,7 @@ public class CPU
 	 * address or jump when A is an illegal address).
      */
     public void executeInstruction() throws ProgramException {
-        short instruction = rom.getValueAt(PC.get());
+        int instruction = rom.getValueAt(PC.get());
         boolean pcChanged = false;
 
         if ((instruction & 0x8000) == 0)
@@ -231,15 +231,15 @@ public class CPU
 									   ": Illegal instruction");
 
         if (!pcChanged) {
-            short newPC = (short)(PC.get() + 1);
+            int newPC = (int)(PC.get() + 1);
             if (newPC < 0 || newPC >= Definitions.ROM_SIZE)
                 throw new ProgramException("At line " + PC.get() +
 										   ": Can't continue past last line");
             PC.setValueAt(0, newPC, true);
         }
-        short controlValue = CTR.getValueAt(0);
+        int controlValue = CTR.getValueAt(0);
         if ((controlValue & 0x1) > 0){
-            short timerValue = (short) (TIMER.getValueAt(0) - 1);
+            int timerValue = (int) (TIMER.getValueAt(0) - 1);
             if (timerValue == 0) {
                 PCS.setValueAt(0, PC.get(), true);
                 TIMER.setValueAt(0, RESET.getValueAt(0), true);
@@ -253,7 +253,7 @@ public class CPU
         time++;
     }
 
-    private void computeNewExp(short instruction) {
+    private void computeNewExp(int instruction) {
         int instructionSeg = (instruction & 0x0f00) >> 8;
         boolean z0 = (instructionSeg == 0 || instructionSeg == 3 || instructionSeg == 5 || instructionSeg == 4); //Destination properties
         // TODO: Doesn't work for NOR in this case: Current solution is to document it
@@ -283,7 +283,7 @@ public class CPU
         alu.compute();
     }
 
-    private void setNewDestination(short instruction) {
+    private void setNewDestination(int instruction) {
         int destIndex = (instruction & 0x000f);
         if (destIndex == 2){
             bus.send(alu, 2, M, A.get() + BASE.get());
@@ -297,7 +297,7 @@ public class CPU
     // The result will be at the alu's output.
     // Throws ProgramException if the calculation involves M and A contains
 	// an illegal address.
-    protected void computeExp(short instruction) throws ProgramException {
+    protected void computeExp(int instruction) throws ProgramException {
         boolean indirect = (instruction & 0x1000) > 0;
         boolean zd = (instruction & 0x0800) > 0;
         boolean nd = (instruction & 0x0400) > 0;
@@ -312,7 +312,7 @@ public class CPU
         }
 
         try {
-            alu.setCommand(assemblerTranslator.getExpByCode((short)(instruction & 0xffc0)),
+            alu.setCommand(assemblerTranslator.getExpByCode((int)(instruction & 0xffc0)),
                            zd, nd, zm, nm, f, no);
         } catch (AssemblerException ae) {}
 
@@ -339,7 +339,7 @@ public class CPU
 	// the given instruction
     // Throws ProgramException if destination contains M and A contains
 	// an illegal address.
-    protected void setDestination(short instruction) throws ProgramException {
+    protected void setDestination(int instruction) throws ProgramException {
         boolean destA = (instruction & 0x0020) > 0;
         boolean destD = (instruction & 0x0010) > 0;
         boolean destM = (instruction & 0x0008) > 0;
@@ -366,14 +366,14 @@ public class CPU
 	// If the program counter was changed, returns true, otherwise false.
     // Throws ProgramException if the program counter should be changed and A
 	// contains an illegal address.
-    protected boolean checkJump(short instruction) throws ProgramException {
+    protected boolean checkJump(int instruction) throws ProgramException {
         boolean jumpNegative = (instruction & 0x0004) > 0;
         boolean jumpEqual = (instruction & 0x0002) > 0;
         boolean jumpPositive = (instruction & 0x0001) > 0;
         boolean useStore = (instruction & 0x1fc0) == 0x1fc0;
         boolean changed = false;
 
-        short exp = alu.getValueAt(2);
+        int exp = alu.getValueAt(2);
 
         if ((exp < 0 && jumpNegative) ||
             (exp == 0 && jumpEqual) ||

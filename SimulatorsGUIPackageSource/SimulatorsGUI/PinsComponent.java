@@ -78,7 +78,7 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
     private boolean isEnabled = true;
 
     // The null value of this component
-    protected short nullValue;
+    protected int nullValue;
 
     // A boolean field specifying if the null value should be activated or not.
     protected boolean hideNullValue;
@@ -120,7 +120,7 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
     /**
      * Sets the null value of this component.
      */
-    public void setNullValue (short value, boolean hideNullValue) {
+    public void setNullValue (int value, boolean hideNullValue) {
         nullValue = value;
         this.hideNullValue = hideNullValue;
     }
@@ -197,7 +197,7 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
         listeners.removeElement(listener);
     }
 
-    public void notifyListeners(int index, short value) {
+    public void notifyListeners(int index, int value) {
         ComputerPartEvent event = new ComputerPartEvent(this, index, value);
         for (int i=0; i<listeners.size(); i++)
             ((ComputerPartEventListener)listeners.elementAt(i)).valueChanged(event);
@@ -217,7 +217,7 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
     public void pinValueChanged (PinValueEvent e) {
         pinsTable.setEnabled(true);
         if(e.getIsOk()) {
-            pins[lastSelectedRow].value = translateValueToShort(e.getValueStr());
+            pins[lastSelectedRow].value = translateValueToInt(e.getValueStr());
             valueStr[lastSelectedRow] = translateValueToString(pins[lastSelectedRow].value,
                                                                pins[lastSelectedRow].width);
         }
@@ -276,7 +276,7 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
     /**
      * Sets the element at the given index with the given value.
      */
-    public void setValueAt(int index, short value) {
+    public void setValueAt(int index, int value) {
         pins[index].value = value;
         valueStr[index] = translateValueToString(value, pins[index].width);
     }
@@ -395,16 +395,16 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
     }
 
     /**
-     * Translates a given string to a short according to the current format.
+     * Translates a given string to a int according to the current format.
      */
-    protected short translateValueToShort(String data) {
-        return Format.translateValueToShort(data,dataFormat);
+    protected int translateValueToInt(String data) {
+        return Format.translateValueToInt(data,dataFormat);
     }
 
     /**
-     * Translates a given short to a string according to the current format.
+     * Translates a given int to a string according to the current format.
      */
-    protected String translateValueToString(short value, int width) {
+    protected String translateValueToString(int value, int width) {
         String result = null;
 
         if(value == nullValue && hideNullValue)
@@ -540,9 +540,9 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
                     if(data.equals("") && hideNullValue)
                         pins[row].value = nullValue;
                     else
-                        pins[row].value = Format.translateValueToShort(data, dataFormat);
+                        pins[row].value = Format.translateValueToInt(data, dataFormat);
 
-                    notifyListeners((short)row,pins[row].value);
+                    notifyListeners((int)row,pins[row].value);
                 }
                 catch(NumberFormatException nfe) {
                     notifyErrorListeners("Illegal value");

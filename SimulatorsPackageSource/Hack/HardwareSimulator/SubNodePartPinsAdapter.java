@@ -41,7 +41,7 @@ public class SubNodePartPinsAdapter extends SubNode {
         this.index = index;
     }
 
-    public void set(short value) {
+    public void set(int value) {
         this.value = value;
         partPins.quietUpdateGUI(index, get());
     }

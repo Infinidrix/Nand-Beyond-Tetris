@@ -33,7 +33,7 @@ public class PointedMemory extends Memory {
      * Constructs a new PointedMemory of the given size with the given optional GUI and
      * the given legal values range.
      */
-    public PointedMemory(int size, PointedMemoryGUI gui, short minValue, short maxValue) {
+    public PointedMemory(int size, PointedMemoryGUI gui, int minValue, int maxValue) {
         super(size, gui, minValue, maxValue);
     }
 

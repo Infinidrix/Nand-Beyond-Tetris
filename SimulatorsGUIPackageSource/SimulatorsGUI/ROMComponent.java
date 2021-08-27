@@ -176,12 +176,12 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
     }
 
     /**
-     * Translates a given string to a short according to the current format.
+     * Translates a given string to a int according to the current format.
      */
-    protected short translateValueToShort(String data) throws TranslationException {
-        short result = 0;
+    protected int translateValueToInt(String data) throws TranslationException {
+        int result = 0;
         if(dataFormat != ASM_FORMAT)
-            result = super.translateValueToShort(data);
+            result = super.translateValueToInt(data);
         else {
             try {
                 result = translator.textToCode(data);
@@ -193,9 +193,9 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
     }
 
     /**
-     * Translates a given short to a string according to the current format.
+     * Translates a given int to a string according to the current format.
      */
-    protected String translateValueToString(short value) {
+    protected String translateValueToString(int value) {
         String result = null;
         if(dataFormat != ASM_FORMAT)
             result = super.translateValueToString(value);

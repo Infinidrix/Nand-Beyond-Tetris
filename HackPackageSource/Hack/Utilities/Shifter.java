@@ -23,20 +23,20 @@ package Hack.Utilities;
 public class Shifter {
 
     // A helper array of powers of two
-    public static final short[] powersOf2 = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,
+    public static final int[] powersOf2 = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,
                                              8192,16384,-32768};
     /**
      * Returns the given value shifted right (zero filled) by the given amount of bits.
      * (Shift bits is assumed to be <= 15).
      */
-    public static short unsignedShiftRight(short value, byte shiftBits) {
-        short result;
+    public static int unsignedShiftRight(int value, byte shiftBits) {
+        int result;
 
         if (value >= 0)
-            result = (short)(value >> shiftBits);
+            result = (int)(value >> shiftBits);
         else {
             value &= 0x7fff;
-            result = (short)(value >> shiftBits);
+            result = (int)(value >> shiftBits);
             result |= powersOf2[15 - shiftBits];
         }
 

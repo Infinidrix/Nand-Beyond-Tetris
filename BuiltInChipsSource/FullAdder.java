@@ -27,11 +27,11 @@ import Hack.Gates.BuiltInGate;
 public class FullAdder extends BuiltInGate {
 
     protected void reCompute() {
-        short a = inputPins[0].get();
-        short b = inputPins[1].get();
-        short c = inputPins[2].get();
-        short sum = (short)(a + b + c);
-        outputPins[0].set((short)(sum % 2));
-        outputPins[1].set((short)(sum / 2));
+        int a = inputPins[0].get();
+        int b = inputPins[1].get();
+        int c = inputPins[2].get();
+        int sum = (int)(a + b + c);
+        outputPins[0].set((int)(sum % 2));
+        outputPins[1].set((int)(sum / 2));
     }
 }

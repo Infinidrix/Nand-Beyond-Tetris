@@ -107,7 +107,7 @@ public class SearchMemoryWindow extends JFrame {
      */
     public void okButton_actionPerformed(ActionEvent e) {
         try {
-            int row = Format.translateValueToShort(rowNumber.getText(), Format.DEC_FORMAT);
+            int row = Format.translateValueToInt(rowNumber.getText(), Format.DEC_FORMAT);
             table.setRowSelectionInterval(row,row);
             Utilities.tableCenterScroll(tableContainer, table, row);
             setVisible(false);

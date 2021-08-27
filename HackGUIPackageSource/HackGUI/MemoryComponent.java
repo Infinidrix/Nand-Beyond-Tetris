@@ -59,8 +59,8 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     // The values of this memory in a string representation.
     protected String[] valuesStr;
 
-    // The values of this memory in a short representation.
-    protected short[] values;
+    // The values of this memory in a int representation.
+    protected int[] values;
 
     // The addresses of this memory.
     protected String[] addresses;
@@ -93,7 +93,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     protected boolean isEnabled = true;
 
     // The null value of this component
-    protected short nullValue;
+    protected int nullValue;
 
     // A boolean field specifying if the null value should be activated or not.
     protected boolean hideNullValue;
@@ -127,7 +127,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
         memoryTable.getColumnModel().getColumn(getValueColumnIndex()).setCellEditor(editor);
         memoryTable.setTableHeader(null);
 
-        values = new short[0];
+        values = new int[0];
         addresses = new String[0];
         valuesStr = new String[0];
         searchWindow = new SearchMemoryWindow(this, memoryTable);
@@ -138,7 +138,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     /**
      * Sets the null value of this component.
      */
-    public void setNullValue (short value, boolean hideNullValue) {
+    public void setNullValue (int value, boolean hideNullValue) {
         nullValue = value;
         this.hideNullValue = hideNullValue;
     }
@@ -200,7 +200,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
         listeners.removeElement(listener);
     }
 
-    public void notifyListeners(int address, short value) {
+    public void notifyListeners(int address, int value) {
         ComputerPartEvent event = new ComputerPartEvent(this,address,value);
         for (int i=0;i<listeners.size();i++) {
            ((ComputerPartEventListener)listeners.elementAt(i)).valueChanged(event);
@@ -288,14 +288,14 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
      * Sets the memory contents with the given values array. (assumes that the
      * length of the given array equals to the gui's size)
      */
-    public void setContents(short[] newValues) {
-        values = new short[newValues.length];
+    public void setContents(int[] newValues) {
+        values = new int[newValues.length];
         addresses = new String[newValues.length];
         valuesStr = new String[newValues.length];
 
         System.arraycopy(newValues, 0, values, 0, newValues.length);
         for(int i=0;i<values.length;i++) {
-            addresses[i] = Format.translateValueToString((short)i, Format.DEC_FORMAT);
+            addresses[i] = Format.translateValueToString((int)i, Format.DEC_FORMAT);
             valuesStr[i] = translateValueToString(values[i]);
         }
         memoryTable.revalidate();
@@ -306,7 +306,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     /**
      * Updates the values of the table memory.
      */
-    protected void updateTable(short value, int row) {
+    protected void updateTable(int value, int row) {
         values[row] = value;
         valuesStr[row] = translateValueToString(value);
     }
@@ -315,7 +315,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
      * Sets the contents of the memory in the given index with the given value.
      * (Assumes legal index - between 0 and getSize()-1).
      */
-    public void setValueAt(int index, short value) {
+    public void setValueAt(int index, int value) {
         updateTable(value,index);
         repaint();
         notifyRepaintListeners();
@@ -424,32 +424,32 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     /**
      * Returns the address string at a specific address.
      */
-    public String getAddressStr (short address) {
+    public String getAddressStr (int address) {
         return addresses[address];
     }
 
     /**
      * Returns the value (in a string representation) at a specific address.
      */
-    public String getValueStr (short address) {
+    public String getValueStr (int address) {
         return valuesStr[address];
     }
 
     /**
-     * Returns the value (in a short representation) at a specific address.
+     * Returns the value (in a int representation) at a specific address.
      */
-    public short getValueAsShort (short address) {
+    public int getValueAsInt (int address) {
         return values[address];
     }
 
     /**
-     * Translates a given string to a short according to the current format.
+     * Translates a given string to a int according to the current format.
      * Throws a TranslationException if can't be translated.
      */
-    protected short translateValueToShort(String data) throws TranslationException {
-        short result = 0;
+    protected int translateValueToInt(String data) throws TranslationException {
+        int result = 0;
         try {
-            result = Format.translateValueToShort(data,dataFormat);
+            result = Format.translateValueToInt(data,dataFormat);
         } catch (NumberFormatException nfe) {
             throw new TranslationException("Illegal value: " + data);
         }
@@ -458,9 +458,9 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     }
 
     /**
-     * Translates a given short to a string according to the current format.
+     * Translates a given int to a string according to the current format.
      */
-    protected String translateValueToString(short value) {
+    protected String translateValueToString(int value) {
         if(hideNullValue) {
             if(value == nullValue)
                 return "";
@@ -655,8 +655,8 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
                     if(data.equals("") && hideNullValue)
                         values[row] = nullValue;
                     else
-                        values[row] = translateValueToShort(data);
-                    notifyListeners((short)row,values[row]);
+                        values[row] = translateValueToInt(data);
+                    notifyListeners((int)row,values[row]);
                 } catch(TranslationException te) {
                     notifyErrorListeners(te.getMessage());
                     valuesStr[row] = translateValueToString(values[row]);

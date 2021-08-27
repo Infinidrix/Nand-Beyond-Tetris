@@ -103,9 +103,9 @@ public class PartPinsComponent extends PinsComponent implements PartPinsGUI {
         pinsTable.setEnabled(true);
         if(e.getIsOk()) {
             valuesStr[pinsTable.getSelectedRow()] = e.getValueStr();
-            partPins[pinsTable.getSelectedRow()].value = Format.translateValueToShort(e.getValueStr(), dataFormat);
+            partPins[pinsTable.getSelectedRow()].value = Format.translateValueToInt(e.getValueStr(), dataFormat);
         }
-        notifyListeners(pinsTable.getSelectedRow(), Format.translateValueToShort(e.getValueStr(), dataFormat));
+        notifyListeners(pinsTable.getSelectedRow(), Format.translateValueToInt(e.getValueStr(), dataFormat));
     }
 
     /**
@@ -143,7 +143,7 @@ public class PartPinsComponent extends PinsComponent implements PartPinsGUI {
     /**
      * Sets the element at the given index with the given value.
      */
-    public void setValueAt(int index, short value) {
+    public void setValueAt(int index, int value) {
         partPins[index].value = value;
         valuesStr[index] = Format.translateValueToString(value, dataFormat);
         repaint();
@@ -234,8 +234,8 @@ public class PartPinsComponent extends PinsComponent implements PartPinsGUI {
             String data = ((String)value).trim();
             try {
                 valuesStr[row] = data;
-                partPins[row].value = Format.translateValueToShort(data, dataFormat);
-                notifyListeners((short)row,partPins[row].value);
+                partPins[row].value = Format.translateValueToInt(data, dataFormat);
+                notifyListeners((int)row,partPins[row].value);
             }
             catch(NumberFormatException nfe) {
                 notifyErrorListeners("Illegal value");

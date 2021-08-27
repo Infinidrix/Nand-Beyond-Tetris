@@ -389,9 +389,9 @@ public class ProgramComponent extends JPanel implements VMProgramGUI {
 
             switch(col) {
                 case 0:
-                    short index = instructions[row].getIndexInFunction();
+                    int index = instructions[row].getIndexInFunction();
                     if (index >= 0)
-                        return new Short(index);
+                        return new Integer(index);
                     else
                         return "";
                 case 1:

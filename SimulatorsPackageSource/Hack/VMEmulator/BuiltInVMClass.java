@@ -30,15 +30,15 @@ public abstract class BuiltInVMClass {
 	private static Hashtable builtInFunctionsRunnerByThread = new Hashtable();
 
 	/* Some definitions regarding the memory. */
-    public static final short SCREEN_START_ADDRESS = Definitions.SCREEN_START_ADDRESS;
-    public static final short SCREEN_END_ADDRESS = Definitions.SCREEN_END_ADDRESS-1; // Definitions.SCREEN_END_ADDRESS is actually one past...
+    public static final int SCREEN_START_ADDRESS = Definitions.SCREEN_START_ADDRESS;
+    public static final int SCREEN_END_ADDRESS = Definitions.SCREEN_END_ADDRESS-1; // Definitions.SCREEN_END_ADDRESS is actually one past...
     public static final int SCREEN_WIDTH = Definitions.SCREEN_WIDTH;
     public static final int SCREEN_HEIGHT = Definitions.SCREEN_HEIGHT;
-    public static final short HEAP_START_ADDRESS=Definitions.HEAP_START_ADDRESS;
-    public static final short HEAP_END_ADDRESS = Definitions.HEAP_END_ADDRESS;
-	public static final short KEYBOARD_ADDRESS = Definitions.KEYBOARD_ADDRESS;
-	public static final short NEWLINE_KEY = Definitions.NEWLINE_KEY;
-	public static final short BACKSPACE_KEY = Definitions.BACKSPACE_KEY;
+    public static final int HEAP_START_ADDRESS=Definitions.HEAP_START_ADDRESS;
+    public static final int HEAP_END_ADDRESS = Definitions.HEAP_END_ADDRESS;
+	public static final int KEYBOARD_ADDRESS = Definitions.KEYBOARD_ADDRESS;
+	public static final int NEWLINE_KEY = Definitions.NEWLINE_KEY;
+	public static final int BACKSPACE_KEY = Definitions.BACKSPACE_KEY;
 
 	/* Methods */
 
@@ -50,17 +50,17 @@ public abstract class BuiltInVMClass {
 	 */
     protected static void writeMemory(int address, int value)
 			throws TerminateVMProgramThrowable {
-		((BuiltInFunctionsRunner)builtInFunctionsRunnerByThread.get(Thread.currentThread())).builtInFunctionRequestsMemoryWrite((short)address, (short)value);
+		((BuiltInFunctionsRunner)builtInFunctionsRunnerByThread.get(Thread.currentThread())).builtInFunctionRequestsMemoryWrite((int)address, (int)value);
 	}
 
 	/**
 	 * Reads a value from the VM memory.
 	 * The argument is an int so that literals may be passed to it
-	 * without conversion for convenience however it is truncated to a short.
+	 * without conversion for convenience however it is truncated to a int.
 	 */
-    protected static short readMemory(int address)
+    protected static int readMemory(int address)
 			throws TerminateVMProgramThrowable {
-		return ((BuiltInFunctionsRunner)builtInFunctionsRunnerByThread.get(Thread.currentThread())).builtInFunctionRequestsMemoryRead((short)address);
+		return ((BuiltInFunctionsRunner)builtInFunctionsRunnerByThread.get(Thread.currentThread())).builtInFunctionRequestsMemoryRead((int)address);
 	}
 
 	/**
@@ -71,47 +71,47 @@ public abstract class BuiltInVMClass {
 	 * characters may be passed to them. Note however that all their
 	 * arguments are truncated to shorts.
 	 */
-	protected static short callFunction(String functionName,
-		   								short[] params)
+	protected static int callFunction(String functionName,
+		   								int[] params)
 			throws TerminateVMProgramThrowable {
 		return ((BuiltInFunctionsRunner)builtInFunctionsRunnerByThread.get(Thread.currentThread())).builtInFunctionRequestsCall(functionName, params);
 	}
 
-	protected static short callFunction(String functionName)
+	protected static int callFunction(String functionName)
 			throws TerminateVMProgramThrowable {
-		return callFunction(functionName, new short[0]);
+		return callFunction(functionName, new int[0]);
 	}
 
-	protected static short callFunction(String functionName,
+	protected static int callFunction(String functionName,
 										int param)
 			throws TerminateVMProgramThrowable {
-		return callFunction(functionName, new short[]{(short)param});
+		return callFunction(functionName, new int[]{(int)param});
 	}
 
-	protected static short callFunction(String functionName,
+	protected static int callFunction(String functionName,
 										int param1, int param2)
 			throws TerminateVMProgramThrowable {
-		return callFunction(functionName, new short[]{(short)param1,
-													  (short)param2});
+		return callFunction(functionName, new int[]{(int)param1,
+													  (int)param2});
 	}
 
-	protected static short callFunction(String functionName,
+	protected static int callFunction(String functionName,
 										int param1, int param2,
 										int param3)
 			throws TerminateVMProgramThrowable {
-		return callFunction(functionName, new short[]{(short)param1,
-													  (short)param2,
-													  (short)param3});
+		return callFunction(functionName, new int[]{(int)param1,
+													  (int)param2,
+													  (int)param3});
 	}
 
-	protected static short callFunction(String functionName,
+	protected static int callFunction(String functionName,
 										int param1, int param2,
 										int param3, int param4)
 			throws TerminateVMProgramThrowable {
-		return callFunction(functionName, new short[]{(short)param1,
-													  (short)param2,
-													  (short)param3,
-													  (short)param4});
+		return callFunction(functionName, new int[]{(int)param1,
+													  (int)param2,
+													  (int)param3,
+													  (int)param4});
 	}
 
 	/**

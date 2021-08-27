@@ -52,13 +52,13 @@ public class ALUComponent extends JPanel implements ALUGUI{
     protected int dataFormat;
 
     // The value in location0
-    protected short location0Value;
+    protected int location0Value;
 
     // The value in location1
-    protected short location1Value;
+    protected int location1Value;
 
     // The value in location2
-    protected short location2Value;
+    protected int location2Value;
 
     // Creating the three text fields.
     protected JTextField location0 = new JTextField();
@@ -83,7 +83,7 @@ public class ALUComponent extends JPanel implements ALUGUI{
     private JLabel location2Lbl = new JLabel();
 
     // The null value of this ALU
-    protected short nullValue;
+    protected int nullValue;
 
     // a boolean field specifying if the null value should be activated or not.
     protected boolean hideNullValue;
@@ -100,15 +100,15 @@ public class ALUComponent extends JPanel implements ALUGUI{
     /**
      * Sets the null value.
      */
-    public void setNullValue (short value, boolean hideNullValue) {
+    public void setNullValue (int value, boolean hideNullValue) {
         nullValue = value;
         this.hideNullValue = hideNullValue;
     }
 
     /**
-     * Translates a given short to a string according to the current format.
+     * Translates a given int to a string according to the current format.
      */
-    protected String translateValueToString(short value) {
+    protected String translateValueToString(int value) {
         if(hideNullValue) {
             if(value == nullValue)
                 return "";
@@ -265,7 +265,7 @@ public class ALUComponent extends JPanel implements ALUGUI{
     /**
      * Sets the element at the given index with the given value.
      */
-    public void setValueAt(int index, short value) {
+    public void setValueAt(int index, int value) {
 
         String data = Format.translateValueToString(value,dataFormat);
         switch(index) {

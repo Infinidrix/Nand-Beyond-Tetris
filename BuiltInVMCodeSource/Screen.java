@@ -49,11 +49,11 @@ public class Screen extends JackOSClass {
 		writeMemory(address, value);
     }
 
-    public static void setColor(short color) {
+    public static void setColor(int color) {
 		black = (color!=0);
     }
 
-    public static void drawPixel(short x, short y)
+    public static void drawPixel(int x, int y)
 			throws TerminateVMProgramThrowable {
 		if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT) {
 			callFunction("Sys.error", SCREEN_DRAWPIXEL_ILLEGAL_COORDS);
@@ -70,7 +70,7 @@ public class Screen extends JackOSClass {
         }
     }
 
-    public static void drawLine(short x1, short y1, short x2, short y2)
+    public static void drawLine(int x1, int y1, int x2, int y2)
 			throws TerminateVMProgramThrowable {
 		if (x1 < 0 || x1 >= SCREEN_WIDTH || y1 < 0 || y1 >= SCREEN_HEIGHT ||
 			x2 < 0 || x2 >= SCREEN_WIDTH || y2 < 0 || y2 >= SCREEN_HEIGHT) {
@@ -82,7 +82,7 @@ public class Screen extends JackOSClass {
 		if (dy < 0) dy = -dy;
         boolean loopOverY = (dx < dy);
         if ((loopOverY && (y2 < y1)) || ((!loopOverY) && (x2 < x1))) {
-            short tmp = x1;
+            int tmp = x1;
             x1 = x2;
             x2 = tmp;
             tmp = y1;
@@ -125,7 +125,7 @@ public class Screen extends JackOSClass {
         }
     }
 
-    public static void drawRectangle(short x1, short y1, short x2, short y2)
+    public static void drawRectangle(int x1, int y1, int x2, int y2)
 			throws TerminateVMProgramThrowable {
         if (x1 > x2 || y1 > y2 || x1 <0 || x2 >= SCREEN_WIDTH ||
 			y1 < 0 || y2 >= SCREEN_HEIGHT) {
@@ -181,7 +181,7 @@ public class Screen extends JackOSClass {
 		}
     }
 
-    public static void drawCircle(short x, short y, short radius)
+    public static void drawCircle(int x, int y, int radius)
 			throws TerminateVMProgramThrowable {
         if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT) {
 			callFunction("Sys.error", SCREEN_DRAWCIRCLE_ILLEGAL_CENTER);

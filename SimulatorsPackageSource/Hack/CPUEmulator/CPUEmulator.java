@@ -26,11 +26,11 @@ import Hack.Utilities.*;
  * A CPU Emulator. Emulates machine code (In HACK format).
  *
  * Recognizes the following variables:
- * A - the address register (short)
- * D - the data register (short)
- * PC - the program counter (short)
- * RAM[i] - the contents of the RAM at location i (short)
- * ROM[i] - the contents of the ROM at location i (short)
+ * A - the address register (int)
+ * D - the data register (int)
+ * PC - the program counter (int)
+ * RAM[i] - the contents of the RAM at location i (int)
+ * ROM[i] - the contents of the ROM at location i (int)
  * time - the time that passed since the program started running (long) - READ ONLY
  *
  * Recognizes the following commands:
@@ -212,11 +212,11 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         else if (varName.equals(VAR_TIME))
             return String.valueOf(cpu.getTime());
         else if (varName.startsWith(VAR_RAM + "[")) {
-            short index = getRamIndex(varName);
+            int index = getRamIndex(varName);
             return String.valueOf(cpu.getRAM().getValueAt(index));
         }
         else if (varName.startsWith(VAR_ROM + "[")) {
-            short index = getRomIndex(varName);
+            int index = getRomIndex(varName);
             return String.valueOf(cpu.getROM().getValueAt(index));
         }
         else
@@ -236,31 +236,31 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
             if (varName.equals(VAR_A)) {
                 numValue = Integer.parseInt(value);
                 check_ram_address(varName, numValue);
-                cpu.getA().store((short)numValue);
+                cpu.getA().store((int)numValue);
             }
             else if (varName.equals(VAR_D)) {
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.getD().store((short)numValue);
+                cpu.getD().store((int)numValue);
             }
             else if (varName.equals(VAR_PC)) {
                 numValue = Integer.parseInt(value);
                 check_rom_address(varName, numValue);
-                cpu.getPC().store((short)numValue);
+                cpu.getPC().store((int)numValue);
             }
             else if (varName.equals(VAR_TIME))
                 throw new VariableException("Read Only variable", varName);
             else if (varName.startsWith(VAR_RAM + "[")) {
-                short index = getRamIndex(varName);
+                int index = getRamIndex(varName);
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.getRAM().setValueAt(index, (short)numValue, false);
+                cpu.getRAM().setValueAt(index, (int)numValue, false);
             }
             else if (varName.startsWith(VAR_ROM + "[")) {
-                short index = getRomIndex(varName);
+                int index = getRomIndex(varName);
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.getROM().setValueAt(index, (short)numValue, false);
+                cpu.getROM().setValueAt(index, (int)numValue, false);
             }
             else
                 throw new VariableException("Unknown variable", varName);
@@ -465,7 +465,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
     // receives a variable name of the form xxx[i] and returns the numeric
     // value of i, which is an address in the RAM.
     // Throws VariableException if i is not a legal address in the RAM.
-    private static short getRamIndex(String varName) throws VariableException {
+    private static int getRamIndex(String varName) throws VariableException {
         if (varName.indexOf("]") == -1)
             throw new VariableException("Missing ']'", varName);
 
@@ -474,13 +474,13 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         if (index < 0 || index >= Definitions.RAM_SIZE)
             throw new VariableException("Illegal variable index", varName);
 
-        return (short)index;
+        return (int)index;
     }
 
     // receives a variable name of the form xxx[i] and returns the numeric
     // value of i, which is an address in the ROM.
     // Throws VariableException if i is not a legal address in the ROM.
-    private static short getRomIndex(String varName) throws VariableException {
+    private static int getRomIndex(String varName) throws VariableException {
         if (varName.indexOf("]") == -1)
             throw new VariableException("Missing ']'", varName);
 
@@ -489,7 +489,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         if (index < 0 || index >= Definitions.ROM_SIZE)
             throw new VariableException("Illegal variable index", varName);
 
-        return (short)index;
+        return (int)index;
     }
 
     // Checks that the given value is a legal 16-bit value
