@@ -29,11 +29,11 @@ public class Math extends JackOSClass {
 	public static void init() { }
 
 	public static int abs(int x) {
-		return (x<0)?(int)-x:x;
+		return (x<0)? -x :x;
 	}
 
 	public static int multiply(int x, int y) {
-		return (int)(x*y);
+		return x*y;
 	}
 	
 	public static int divide(int x, int y)
@@ -41,7 +41,7 @@ public class Math extends JackOSClass {
 		if (y == 0) {
 			callFunction("Sys.error", MATH_DIVIDE_ZERO);
 		}
-		return (int)(x/y);
+		return x/y;
 	}
 	
 	public static int min(int x, int y) {

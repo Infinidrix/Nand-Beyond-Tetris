@@ -29,26 +29,26 @@ import java.util.*;
 public class BreakpointVariablesWindow extends JFrame {
 
     // Creating labels.
-    private JLabel nameLbl = new JLabel();
-    private JLabel valueLbl = new JLabel();
+    private final JLabel nameLbl = new JLabel();
+    private final JLabel valueLbl = new JLabel();
 
     // Creating text fields.
-    private JTextField nameTxt = new JTextField();
-    private JTextField valueTxt = new JTextField();
+    private final JTextField nameTxt = new JTextField();
+    private final JTextField valueTxt = new JTextField();
 
     // Creating the combo box of variables.
-    private JComboBox nameCombo = new JComboBox();
+    private final JComboBox nameCombo = new JComboBox();
 
     // Creating the ok and cancel buttons.
-    private JButton okButton = new JButton();
-    private JButton cancelButton = new JButton();
+    private final JButton okButton = new JButton();
+    private final JButton cancelButton = new JButton();
 
     // Creating ok and cancel icons.
-    private ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
-    private ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
+    private final ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
+    private final ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
 
     // A vector conatining the listeners to this component.
-    private Vector listeners;
+    private final Vector listeners;
 
     // The breakpoint which is being added or changed.
     private Breakpoint breakpoint;

@@ -27,6 +27,6 @@ public class Nand extends BuiltInGate {
     protected void reCompute() {
         int a = inputPins[0].get();
         int b = inputPins[1].get();
-        outputPins[0].set((int)(0x1 - (a & b)));
+        outputPins[0].set(0x1 - (a & b));
     }
 }

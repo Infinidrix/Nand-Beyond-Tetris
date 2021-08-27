@@ -32,26 +32,26 @@ import java.io.*;
 public class TextFileComponent extends JPanel implements TextFileGUI {
 
     // A vector containing the listeners to this component.
-    private Vector listeners;
-    private Vector rowsVector;
+    private final Vector listeners;
+    private final Vector rowsVector;
 
     // The model of the table
-    private TextFileTableModel model = new TextFileTableModel();
+    private final TextFileTableModel model = new TextFileTableModel();
 
     // The table.
-    private JTable textFileTable;
+    private final JTable textFileTable;
 
     // The scroll pane on which the table is placed.
     private JScrollPane scrollPane;
 
     // The label with the name of this component
-    private JLabel nameLbl = new JLabel();
+    private final JLabel nameLbl = new JLabel();
 
     // A set of indices of highlighted rows.
-    private Set highlightedLines;
+    private final Set highlightedLines;
 
     // A set of indices of emphasized rows.
-    private Set emphasizedLines;
+    private final Set emphasizedLines;
 
     // Indicates whether this component is enabled.
     private boolean isEnabled;

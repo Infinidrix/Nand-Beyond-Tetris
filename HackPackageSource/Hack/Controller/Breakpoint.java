@@ -23,10 +23,10 @@ package Hack.Controller;
 public class Breakpoint {
 
     // The variable name
-    private String varName;
+    private final String varName;
 
     // The desired value
-    private String value;
+    private final String value;
 
     // The status of the breakpoint
     private boolean reached;

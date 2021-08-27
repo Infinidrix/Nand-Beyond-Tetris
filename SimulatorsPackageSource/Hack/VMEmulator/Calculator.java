@@ -115,10 +115,10 @@ public class Calculator extends ValueComputerPart {
     public static final char LESS_THAN_SYMBOL = '<';
 
     // The gui of the calculator
-    private CalculatorGUI gui;
+    private final CalculatorGUI gui;
 
     // The operators array
-    private char[] operators;
+    private final char[] operators;
 
     // The inputs
     private int input0, input1;
@@ -155,23 +155,23 @@ public class Calculator extends ValueComputerPart {
 
         switch (operator) {
             case ADD:
-                result = (int)(input0 + input1); break;
+                result = input0 + input1; break;
             case SUBTRACT:
-                result = (int)(input0 - input1); break;
+                result = input0 - input1; break;
             case NEGATE:
-                result = (int)(-input1); break;
+                result = -input1; break;
             case AND:
-                result = (int)(input0 & input1); break;
+                result = input0 & input1; break;
             case OR:
-                result = (int)(input0 | input1); break;
+                result = input0 | input1; break;
             case NOT:
-                result = (int)(~input1); break;
+                result = ~input1; break;
             case EQUAL:
-                result = (int)(input0 == input1 ? -1 : 0); break;
+                result = input0 == input1 ? -1 : 0; break;
             case GREATER_THAN:
-                result = (int)(input0 > input1 ? -1 : 0); break;
+                result = input0 > input1 ? -1 : 0; break;
             case LESS_THAN:
-                result = (int)(input0 < input1 ? -1 : 0); break;
+                result = input0 < input1 ? -1 : 0; break;
         }
 
         setValueAt(2, result, true);

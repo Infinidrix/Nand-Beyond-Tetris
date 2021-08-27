@@ -27,12 +27,12 @@ public abstract class Gate {
     /**
      * The special "true" node.
      */
-    public static final Node TRUE_NODE = new Node((int)-1);
+    public static final Node TRUE_NODE = new Node(-1);
 
     /**
      * The special "false" node.
      */
-    public static final Node FALSE_NODE = new Node((int)0);
+    public static final Node FALSE_NODE = new Node(0);
 
     /**
      * The special "clock" node.

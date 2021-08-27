@@ -66,21 +66,21 @@ public class ALUComponent extends JPanel implements ALUGUI{
     protected JTextField location2 = new JTextField();
 
     // the command of this ALU.
-    private JTextField commandLbl = new JTextField();
+    private final JTextField commandLbl = new JTextField();
 
     // The initial ALU color.
     private Color aluColor = new Color(107,194,46);
 
     // The label with the string "ALU".
-     private JLabel nameLbl = new JLabel();
+     private final JLabel nameLbl = new JLabel();
 
     // The border of the alu's command.
     private Border commandBorder;
 
     // creating the labels of the inputs and outputs.
-    private JLabel location0Lbl = new JLabel();
-    private JLabel location1Lbl = new JLabel();
-    private JLabel location2Lbl = new JLabel();
+    private final JLabel location0Lbl = new JLabel();
+    private final JLabel location1Lbl = new JLabel();
+    private final JLabel location2Lbl = new JLabel();
 
     // The null value of this ALU
     protected int nullValue;
@@ -300,8 +300,8 @@ public class ALUComponent extends JPanel implements ALUGUI{
         g2.setPaint(Color.black);
 
         // fill and stroke GeneralPath
-        int x4Points[] = {START_ALU_X, FINISH_ALU_X, FINISH_ALU_X, START_ALU_X};
-        int y4Points[] = {23, 56, 83, 116};
+        int[] x4Points = {START_ALU_X, FINISH_ALU_X, FINISH_ALU_X, START_ALU_X};
+        int[] y4Points = {23, 56, 83, 116};
 
         GeneralPath filledPolygon = new GeneralPath(GeneralPath.WIND_EVEN_ODD,x4Points.length);
         filledPolygon.moveTo(x4Points[0],y4Points[0]);
@@ -309,7 +309,7 @@ public class ALUComponent extends JPanel implements ALUGUI{
         for (int index = 1; index < x4Points.length; index++) 	{
             filledPolygon.lineTo(x4Points[index], y4Points[index]);
 
-        };
+        }
         filledPolygon.closePath();
         g2.setPaint(aluColor);
         g2.fill(filledPolygon);

@@ -79,9 +79,9 @@ public class ALU extends BuiltInGateWithGUI {
         int function = (zx << 11) | (nx << 10) | (zy << 9) | (ny << 8) | (f << 7) | (no << 6);
 
         try {
-            String command = assemblerTranslator.getExpByCode((int)(function | 0xf000));
+            String command = assemblerTranslator.getExpByCode(function | 0xf000);
             if (command.equals(""))
-                command = assemblerTranslator.getExpByCode((int)(function | 0xe000));
+                command = assemblerTranslator.getExpByCode(function | 0xe000);
             if (gui != null)
                 gui.setCommand(command);
         } catch (AssemblerException ae) {}
@@ -90,8 +90,8 @@ public class ALU extends BuiltInGateWithGUI {
                                               f == 1, no == 1);
 
         outputPins[0].set(result); // out
-        outputPins[1].set((int)(result == 0 ? 1 : 0)); // zr
-        outputPins[2].set((int)(result < 0 ? 1 : 0));  // ng
+        outputPins[1].set(result == 0 ? 1 : 0); // zr
+        outputPins[2].set(result < 0 ? 1 : 0);  // ng
 
         if (gui != null)
             gui.setValueAt(2, result);

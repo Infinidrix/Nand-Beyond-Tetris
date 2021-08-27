@@ -26,6 +26,6 @@ public class Inc16 extends BuiltInGate {
 
     protected void reCompute() {
         int in = inputPins[0].get();
-        outputPins[0].set((int)(in + 1));
+        outputPins[0].set(in + 1);
     }
 }

@@ -28,10 +28,10 @@ import java.io.*;
 public abstract class HackSimulator implements ProgramEventListener, ComputerPartErrorEventListener
 {
     // The vector of listeners
-    private Vector listeners;
+    private final Vector listeners;
 
     // The vector of program listeners
-    private Vector programListeners;
+    private final Vector programListeners;
 
     // The current working dir
     protected File workingDir;

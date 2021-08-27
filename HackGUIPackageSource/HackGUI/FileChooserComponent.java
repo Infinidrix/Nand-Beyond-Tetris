@@ -31,26 +31,26 @@ import java.util.*;
 public class FileChooserComponent extends JPanel {
 
     // The label of this component.
-    private JLabel fileTypeName = new JLabel();
+    private final JLabel fileTypeName = new JLabel();
 
     // The text field.
     protected JTextField fileName = new JTextField();
 
     // The browse button.
-    private JButton browseButton = new JButton();
+    private final JButton browseButton = new JButton();
 
     // The file chooser component.
-    private JFileChooser fc = new JFileChooser();
-    private JFrame fileChooserFrame = new JFrame();
+    private final JFileChooser fc = new JFileChooser();
+    private final JFrame fileChooserFrame = new JFrame();
 
     // The name of the current file.
     protected String currentFileName = "";
 
     // Creating the browse icon.
-    private ImageIcon load = new ImageIcon(Utilities.imagesDir + "open.gif");
+    private final ImageIcon load = new ImageIcon(Utilities.imagesDir + "open.gif");
 
     // The vector of listeners the this component.
-    private Vector listeners;
+    private final Vector listeners;
 
     /**
      * Constructs a new FileChooserComponent.

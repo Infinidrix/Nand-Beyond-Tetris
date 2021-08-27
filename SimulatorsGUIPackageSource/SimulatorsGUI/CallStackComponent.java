@@ -37,16 +37,16 @@ public class CallStackComponent extends JPanel implements CallStackGUI {
     private Vector methodNames;
 
     // The table representing this callStack.
-    private JTable callStackTable;
+    private final JTable callStackTable;
 
     // The model of the table;
-    private CallStackTableModel model;
+    private final CallStackTableModel model;
 
     // The containing scroll panel
     private JScrollPane scrollPane;
 
     // The name label
-    private JLabel nameLbl = new JLabel();
+    private final JLabel nameLbl = new JLabel();
 
     /**
      * Constructs a new CallStackComponent.

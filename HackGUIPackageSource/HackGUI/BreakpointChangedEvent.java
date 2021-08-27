@@ -27,7 +27,7 @@ import Hack.Controller.Breakpoint;
 public class BreakpointChangedEvent extends EventObject {
 
     // The breakpoint
-    private Breakpoint breakpoint;
+    private final Breakpoint breakpoint;
 
     /**
      * Constructs a new BreakpointChangedEvent with the given source and the changed breakpoint.

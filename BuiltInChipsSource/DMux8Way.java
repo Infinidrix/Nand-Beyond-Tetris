@@ -29,13 +29,13 @@ public class DMux8Way extends BuiltInGate {
     protected void reCompute() {
         int in = inputPins[0].get();
         int sel = inputPins[1].get();
-        outputPins[0].set((int)(sel == 0 ? in : 0));
-        outputPins[1].set((int)(sel == 1 ? in : 0));
-        outputPins[2].set((int)(sel == 2 ? in : 0));
-        outputPins[3].set((int)(sel == 3 ? in : 0));
-        outputPins[4].set((int)(sel == 4 ? in : 0));
-        outputPins[5].set((int)(sel == 5 ? in : 0));
-        outputPins[6].set((int)(sel == 6 ? in : 0));
-        outputPins[7].set((int)(sel == 7 ? in : 0));
+        outputPins[0].set(sel == 0 ? in : 0);
+        outputPins[1].set(sel == 1 ? in : 0);
+        outputPins[2].set(sel == 2 ? in : 0);
+        outputPins[3].set(sel == 3 ? in : 0);
+        outputPins[4].set(sel == 4 ? in : 0);
+        outputPins[5].set(sel == 5 ? in : 0);
+        outputPins[6].set(sel == 6 ? in : 0);
+        outputPins[7].set(sel == 7 ? in : 0);
     }
 }

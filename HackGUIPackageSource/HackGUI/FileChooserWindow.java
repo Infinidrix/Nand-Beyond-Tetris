@@ -30,18 +30,18 @@ import javax.swing.filechooser.FileFilter;
 public class FileChooserWindow extends JFrame implements EnterPressedListener {
 
     // Creating the file chooser component.
-    private ViewableFileChooserComponent fileChooser;
+    private final ViewableFileChooserComponent fileChooser;
 
     // Creating the ok and cancel buttons.
-    private JButton okButton = new JButton();
-    private JButton cancelButton = new JButton();
+    private final JButton okButton = new JButton();
+    private final JButton cancelButton = new JButton();
 
     // Creating the icons.
-    private ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
-    private ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
+    private final ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
+    private final ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
 
     // the listeners to this component.
-    private Vector listeners;
+    private final Vector listeners;
 
     /**
      * Constructs a new FilesChooserWindow.

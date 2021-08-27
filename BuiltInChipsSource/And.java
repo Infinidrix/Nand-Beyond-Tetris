@@ -27,7 +27,7 @@ public class And extends BuiltInGate {
     protected void reCompute() {
         int a = inputPins[0].get();
         int b = inputPins[1].get();
-        outputPins[0].set((int)(a & b));
+        outputPins[0].set(a & b);
     }
 
 }

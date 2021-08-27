@@ -39,22 +39,22 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     public int dataFormat;
 
     // A vector containing the listeners to this object.
-    private Vector listeners;
+    private final Vector listeners;
 
     // A vector containing the clear listeners to this object.
-    private Vector clearListeners;
+    private final Vector clearListeners;
 
     // A vector containing the error listeners to this object.
-    private Vector errorEventListeners;
+    private final Vector errorEventListeners;
 
     // A vector containing the repaint listeners to this object.
-    private Vector changeListeners;
+    private final Vector changeListeners;
 
     // The table representing the memory.
     protected JTable memoryTable;
 
     // The model of the table.
-    private MemoryTableModel tableModel = new MemoryTableModel();
+    private final MemoryTableModel tableModel = new MemoryTableModel();
 
     // The values of this memory in a string representation.
     protected String[] valuesStr;
@@ -68,11 +68,11 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     // Creating buttons and icons.
     protected MouseOverJButton  searchButton = new MouseOverJButton();
     protected MouseOverJButton clearButton = new MouseOverJButton();
-    private ImageIcon searchIcon = new ImageIcon(Utilities.imagesDir + "find.gif");
-    private ImageIcon clearIcon = new ImageIcon(Utilities.imagesDir + "smallnew.gif");
+    private final ImageIcon searchIcon = new ImageIcon(Utilities.imagesDir + "find.gif");
+    private final ImageIcon clearIcon = new ImageIcon(Utilities.imagesDir + "smallnew.gif");
 
     // The window of searching a specific location in memory.
-    private SearchMemoryWindow searchWindow;
+    private final SearchMemoryWindow searchWindow;
 
     // The scrollpane on which the table is placed.
     protected JScrollPane scrollPane;
@@ -295,7 +295,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
 
         System.arraycopy(newValues, 0, values, 0, newValues.length);
         for(int i=0;i<values.length;i++) {
-            addresses[i] = Format.translateValueToString((int)i, Format.DEC_FORMAT);
+            addresses[i] = Format.translateValueToString(i, Format.DEC_FORMAT);
             valuesStr[i] = translateValueToString(values[i]);
         }
         memoryTable.revalidate();
@@ -636,10 +636,8 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
          * otherwise.
          */
         public boolean isCellEditable(int row, int col) {
-            boolean result = false;
-            if(isEnabled && col == 1 &&
-                (endEnabling == -1 || (row>= startEnabling && row <= endEnabling)))
-                result = true;
+            boolean result = isEnabled && col == 1 &&
+                    (endEnabling == -1 || (row >= startEnabling && row <= endEnabling));
 
             return result;
         }
@@ -656,7 +654,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
                         values[row] = nullValue;
                     else
                         values[row] = translateValueToInt(data);
-                    notifyListeners((int)row,values[row]);
+                    notifyListeners(row,values[row]);
                 } catch(TranslationException te) {
                     notifyErrorListeners(te.getMessage());
                     valuesStr[row] = translateValueToString(values[row]);

@@ -27,10 +27,10 @@ import Hack.Gates.*;
 public class Pins extends InteractiveValueComputerPart {
 
     // The gui of the Pins
-    private PinsGUI gui;
+    private final PinsGUI gui;
 
     // The type of this pin (out of the type constants in GateClass)
-    private byte type;
+    private final byte type;
 
     // The nodes array
     private Node[] nodes;
@@ -64,7 +64,7 @@ public class Pins extends InteractiveValueComputerPart {
         pins = new PinInfo[nodes.length];
         for (int i = 0; i < pins.length; i++) {
             pins[i] = gateClass.getPinInfo(type, i);
-            pins[i].value = (int)nodes[i].get();
+            pins[i].value = nodes[i].get();
 
             nodes[i].addListener(new NodePinsAdapter(this, i));
         }
@@ -89,13 +89,13 @@ public class Pins extends InteractiveValueComputerPart {
     }
 
     public int getValueAt(int index) {
-        return (int)nodes[index].get();
+        return nodes[index].get();
     }
 
     public void refreshGUI() {
         if (displayChanges) {
             for (int i = 0; i < pins.length; i++)
-                pins[i].value = (int)nodes[i].get();
+                pins[i].value = nodes[i].get();
             gui.setContents(pins);
         }
     }
@@ -103,7 +103,7 @@ public class Pins extends InteractiveValueComputerPart {
     public void reset() {
         gui.reset();
         for (int i = 0; i < nodes.length; i++)
-            nodes[i].set((int)0);
+            nodes[i].set(0);
         refreshGUI();
     }
 
@@ -135,7 +135,7 @@ public class Pins extends InteractiveValueComputerPart {
             setValueAt(index, value, true);
         else {
             notifyErrorListeners("Value doesn't match the pin's width");
-            quietUpdateGUI(index, (int)nodes[event.getIndex()].get());
+            quietUpdateGUI(index, nodes[event.getIndex()].get());
         }
     }
 }

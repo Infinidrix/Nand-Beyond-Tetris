@@ -30,21 +30,21 @@ import Hack.VirtualMachine.*;
 public class SearchProgramWindow extends JFrame {
 
     // creating the label of this window
-    private JLabel instructionLbl = new JLabel();
+    private final JLabel instructionLbl = new JLabel();
 
     // creating the text field of this window.
-    private JTextField instruction = new JTextField();
+    private final JTextField instruction = new JTextField();
 
     // creating ok and cancel buttons.
-    private JButton okButton = new JButton();
-    private JButton cancelButton = new JButton();
+    private final JButton okButton = new JButton();
+    private final JButton cancelButton = new JButton();
 
     // creating ok and cancel icons.
-    private ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
-    private ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
+    private final ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
+    private final ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
 
     // The table of this component.
-    private JTable table;
+    private final JTable table;
 
     // an array containing the HVMInstructions.
     private HVMInstruction[] instructions;

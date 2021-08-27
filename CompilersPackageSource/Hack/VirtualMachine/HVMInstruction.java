@@ -25,7 +25,7 @@ package Hack.VirtualMachine;
 public class HVMInstruction {
 
     // the operation code
-    private byte opCode;
+    private final byte opCode;
 
     // the operation arguments
     private int arg0;
@@ -35,7 +35,7 @@ public class HVMInstruction {
     private String stringArg;
 
     // The number of arguments
-    private int numberOfArgs;
+    private final int numberOfArgs;
 
     /**
      * Constructs a new instruction with two arguments.

@@ -33,7 +33,7 @@ public class Output extends JackOSClass {
 
     static int wordInLine, address;
     static boolean firstInWord;
-	static int map[][];
+	static int[][] map;
 
 	public static void init() {
         firstInWord = true;
@@ -216,7 +216,7 @@ public class Output extends JackOSClass {
         StringCharacterIterator iter = new StringCharacterIterator(""+i);
         for (iter.first(); iter.current() != CharacterIterator.DONE;
 			 iter.next()) {
-			printChar((int)iter.current());
+			printChar(iter.current());
 		}
     }
 

@@ -25,7 +25,7 @@ import Hack.VirtualMachine.*;
 public class VMEmulatorInstruction extends HVMInstruction {
 
     // The index of the instruction in its containing function.
-    private int indexInFunction;
+    private final int indexInFunction;
 
     /**
      * Constructs a new instruction with two arguments and the index in function.

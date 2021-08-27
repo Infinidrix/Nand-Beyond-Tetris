@@ -52,11 +52,11 @@ public class Format {
                 break;
 
             case HEX_FORMAT:
-                result = (int)Conversions.hexToInt(data);
+                result = Conversions.hexToInt(data);
                 break;
 
             case BIN_FORMAT:
-                result = (int)Conversions.binaryToInt(data);
+                result = Conversions.binaryToInt(data);
                 break;
         }
 

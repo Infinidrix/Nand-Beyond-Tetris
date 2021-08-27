@@ -73,7 +73,7 @@ public class Conversions {
         for (int i = value.length() - 1, mask = 1; i >= 0; i--, mask = mask << 1) {
             char bit = value.charAt(i);
             if (bit == '1')
-                result = (int)(result | mask);
+                result = result | mask;
             else if (bit != '0')
                 throw new NumberFormatException();
         }

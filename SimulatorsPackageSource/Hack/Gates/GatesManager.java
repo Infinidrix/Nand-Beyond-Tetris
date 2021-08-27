@@ -41,7 +41,7 @@ public class GatesManager {
     private GateErrorEventListener errorHandler;
 
     // The list of built in chips with gui
-    private Vector chips;
+    private final Vector chips;
 
     // When true, BuiltIn chips with gui should create and update their gui.
     // otherwise, their gui shouldn't be created.

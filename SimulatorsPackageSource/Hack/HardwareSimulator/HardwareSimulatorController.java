@@ -92,7 +92,7 @@ public class HardwareSimulatorController extends HackController {
 
     class LoadChipTask implements Runnable {
 
-        private String chipName;
+        private final String chipName;
 
         public LoadChipTask(String chipName) {
             this.chipName = chipName;

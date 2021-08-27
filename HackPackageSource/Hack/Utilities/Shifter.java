@@ -33,10 +33,10 @@ public class Shifter {
         int result;
 
         if (value >= 0)
-            result = (int)(value >> shiftBits);
+            result = value >> shiftBits;
         else {
             value &= 0x7fff;
-            result = (int)(value >> shiftBits);
+            result = value >> shiftBits;
             result |= powersOf2[15 - shiftBits];
         }
 

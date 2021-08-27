@@ -433,15 +433,15 @@ public class Definitions {
         if (zero1)
             input1 = 0;
         if (negate0)
-            input0 = (int)(~input0);
+            input0 = ~input0;
         if (negate1)
-            input1 = (int)(~input1);
+            input1 = ~input1;
         if (ADDorAND)
-            result = (int)(input0 + input1);
+            result = input0 + input1;
         else
-            result = (int)(input0 & input1);
+            result = input0 & input1;
         if (negateOutput)
-            result = (int)(~result);
+            result = ~result;
 
         return result;
     }
@@ -458,8 +458,8 @@ public class Definitions {
      */
     public int getKeyCode(KeyEvent e) {
         int key = 0;
-        int letter = (int)e.getKeyChar();
-        int code = (int)e.getKeyCode();
+        int letter = e.getKeyChar();
+        int code = e.getKeyCode();
 
         if (letter == KeyEvent.CHAR_UNDEFINED)
             key = actionKeyCodes[code];
@@ -475,7 +475,7 @@ public class Definitions {
             else if (letter == 127)
                 key = DELETE_KEY;
             else
-                key = (int)letter;
+                key = letter;
         }
 
         return key;
@@ -485,9 +485,9 @@ public class Definitions {
      * Returns the key name from the given key event.
      */
     public String getKeyName(KeyEvent e) {
-        String modifiers = e.getKeyModifiersText(e.getModifiers());
+        String modifiers = KeyEvent.getKeyModifiersText(e.getModifiers());
         String result = modifiers + (modifiers.length() > 0 ? "+" : "")
-                        + e.getKeyText(e.getKeyCode());
+                        + KeyEvent.getKeyText(e.getKeyCode());
 
         return result;
     }

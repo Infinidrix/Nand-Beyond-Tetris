@@ -38,12 +38,12 @@ public class ROM extends PointedMemory implements ProgramEventListener
     /**
      * Hexadecimal numeric format
      */
-    public static final int HEXA_FORMAT = HackController.HEXA_FORMAT;;
+    public static final int HEXA_FORMAT = HackController.HEXA_FORMAT;
 
     /**
      * Binary numeric format
      */
-    public static final int BINARY_FORMAT = HackController.BINARY_FORMAT;;
+    public static final int BINARY_FORMAT = HackController.BINARY_FORMAT;
 
     /**
      * Assembler format
@@ -51,7 +51,7 @@ public class ROM extends PointedMemory implements ProgramEventListener
     public static final int ASM_FORMAT = 4;
 
     // listeners to program changes
-    private Vector listeners;
+    private final Vector listeners;
 
     /**
      * Constructs a new ROM with the given ROM GUI.
@@ -62,7 +62,7 @@ public class ROM extends PointedMemory implements ProgramEventListener
         listeners = new Vector();
 
         if (hasGUI) {
-          gui.addProgramListener( (ProgramEventListener)this);
+          gui.addProgramListener(this);
           gui.setNumericFormat(ASM_FORMAT); // enable assembler
 //          gui.setNumericFormat(BINARY_FORMAT); // disable assembler
         }
@@ -136,7 +136,7 @@ public class ROM extends PointedMemory implements ProgramEventListener
 
     class ROMLoadProgramTask implements Runnable {
 
-        private String programName;
+        private final String programName;
 
         public ROMLoadProgramTask(String programName) {
             this.programName = programName;

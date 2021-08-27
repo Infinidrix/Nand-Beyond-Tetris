@@ -26,13 +26,13 @@ import java.util.EventObject;
 public class FilesTypeEvent extends EventObject {
 
     // The name of the first file
-    private String firstFileName;
+    private final String firstFileName;
 
     // The name of the second file
-    private String secondFileName;
+    private final String secondFileName;
 
     // The name of the third file
-    private String thirdFileName;
+    private final String thirdFileName;
 
     /**
      * Constructs a new FilesTypeEvent with the given source and the three names of files.

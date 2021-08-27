@@ -35,11 +35,7 @@ public class ScriptFileFilter extends FileFilter {
 
         String extension = getExtension(f);
         if (extension != null) {
-            if (extension.equals("tst") )
-                    return true;
-            else {
-                return false;
-            }
+            return extension.equals("tst");
         }
 
         return false;

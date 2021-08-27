@@ -63,12 +63,12 @@ public class Memory extends JackOSClass {
 			writeMemory(segmentAddress+1, segmentAddress+size+2);
 		}
 		writeMemory(segmentAddress, 0);
-		return (int)(segmentAddress+2);
+		return segmentAddress+2;
     }
 
     public static void deAlloc(int arr)
 			throws TerminateVMProgramThrowable {
-		int segmentAddress = (int)(arr-2);
+		int segmentAddress = arr-2;
 		int segmentCapacity = readMemory(segmentAddress);
 		int nextSegmentAddress = readMemory(segmentAddress+1);
 		int nextCapacity;

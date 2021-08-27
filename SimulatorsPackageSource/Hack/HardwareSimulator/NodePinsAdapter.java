@@ -26,10 +26,10 @@ import Hack.Gates.*;
 public class NodePinsAdapter extends Node {
 
     // The pins that contain the node.
-    private Pins pins;
+    private final Pins pins;
 
     // The index of the node in the Pins.
-    private int index;
+    private final int index;
 
     /**
      * Constructs a new NodePinsAdapter with the given Pins and index.

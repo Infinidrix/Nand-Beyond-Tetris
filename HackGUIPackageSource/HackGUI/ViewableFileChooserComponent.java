@@ -28,10 +28,10 @@ import java.awt.*;
 public class ViewableFileChooserComponent extends FileChooserComponent {
 
     // A check box used for showing the file's content.
-    private JCheckBox viewCheckBox = new JCheckBox();
+    private final JCheckBox viewCheckBox = new JCheckBox();
 
     // The content window
-    private FileContentWindow window;
+    private final FileContentWindow window;
 
     // The file to be showed in the window.
     private File contentFile;

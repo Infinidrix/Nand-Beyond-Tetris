@@ -27,6 +27,6 @@ public class Or8Way extends BuiltInGate {
 
     protected void reCompute() {
         int in = inputPins[0].get();
-        outputPins[0].set((int)(in == 0 ? 0 : 1));
+        outputPins[0].set(in == 0 ? 0 : 1);
     }
 }

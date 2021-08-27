@@ -28,25 +28,25 @@ public interface ScreenGUI extends ComputerPartGUI {
      * Updates the screen at the given index with the given value
      * (Assumes legal index)
      */
-    public void setValueAt(int index, int value);
+    void setValueAt(int index, int value);
 
     /**
      * Updates the screen's contents with the given values array.
      */
-    public void setContents(int[] values);
+    void setContents(int[] values);
 
     /**
      * Refreshes the screen
      */
-    public void refresh();
+    void refresh();
 
     /**
      * Starts animating the screen display
      */
-    public void startAnimation();
+    void startAnimation();
 
     /**
      * Stops animating the screen display
      */
-    public void stopAnimation();
+    void stopAnimation();
 }

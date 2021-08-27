@@ -65,7 +65,7 @@ public class VMEmulator extends HackSimulator
     private static final String COMMAND_SETVAR = "set";
 
     // The CPU
-    private CPU cpu;
+    private final CPU cpu;
 
     // The gui of the emulator
     private VMEmulatorGUI gui;
@@ -74,7 +74,7 @@ public class VMEmulator extends HackSimulator
     private String[] vars;
 
     // The keyboard
-    private Keyboard keyboard;
+    private final Keyboard keyboard;
 
     // The current animation mode
     private int animationMode;
@@ -309,8 +309,8 @@ public class VMEmulator extends HackSimulator
         else if (varName.equals(VAR_CURRENT_FUNCTION))
             return cpu.getCallStack().getTopFunction();
         else if (varName.equals(VAR_LINE))
-            return String.valueOf(cpu.getCallStack().getTopFunction() + "." +
-                                  cpu.getCurrentInstruction().getIndexInFunction());
+            return cpu.getCallStack().getTopFunction() + "." +
+                    cpu.getCurrentInstruction().getIndexInFunction();
         else if (varName.startsWith(VAR_LOCAL + "[")) {
             int index = getRamIndex(varName);
             return String.valueOf(cpu.getSegmentAt(HVMInstructionSet.LOCAL_SEGMENT_CODE, index));
@@ -351,35 +351,35 @@ public class VMEmulator extends HackSimulator
             if (varName.equals(VAR_LOCAL)) {
                 numValue = Integer.parseInt(value);
                 check_address(varName, numValue);
-                cpu.getRAM().setValueAt(Definitions.LOCAL_POINTER_ADDRESS, (int)numValue, false);
+                cpu.getRAM().setValueAt(Definitions.LOCAL_POINTER_ADDRESS, numValue, false);
                 if (gui != null)
                     gui.getLocalSegment().setEnabledRange(numValue, Definitions.STACK_END_ADDRESS, true);
             }
             else if (varName.equals(VAR_ARGUMENT)) {
                 numValue = Integer.parseInt(value);
                 check_address(varName, numValue);
-                cpu.getRAM().setValueAt(Definitions.ARG_POINTER_ADDRESS, (int)numValue, false);
+                cpu.getRAM().setValueAt(Definitions.ARG_POINTER_ADDRESS, numValue, false);
                 if (gui != null)
                     gui.getArgSegment().setEnabledRange(numValue, Definitions.STACK_END_ADDRESS, true);
             }
             else if (varName.equals(VAR_THIS)) {
                 numValue = Integer.parseInt(value);
                 check_address(varName, numValue);
-                cpu.getRAM().setValueAt(Definitions.THIS_POINTER_ADDRESS, (int)numValue, false);
+                cpu.getRAM().setValueAt(Definitions.THIS_POINTER_ADDRESS, numValue, false);
                 if (gui != null)
                     gui.getThisSegment().setEnabledRange(numValue, Definitions.HEAP_END_ADDRESS, true);
             }
             else if (varName.equals(VAR_THAT)) {
                 numValue = Integer.parseInt(value);
                 check_address(varName, numValue);
-                cpu.getRAM().setValueAt(Definitions.THAT_POINTER_ADDRESS, (int)numValue, false);
+                cpu.getRAM().setValueAt(Definitions.THAT_POINTER_ADDRESS, numValue, false);
                 if (gui != null)
                     gui.getThatSegment().setEnabledRange(numValue, Definitions.SCREEN_END_ADDRESS, true);
             }
             else if (varName.equals(VAR_SP)) {
                 numValue = Integer.parseInt(value);
                 check_address(varName, numValue);
-                cpu.setSP((int)numValue);
+                cpu.setSP(numValue);
             }
             else if (varName.equals(VAR_CURRENT_FUNCTION))
                 throw new VariableException("Read Only variable", varName);
@@ -388,43 +388,43 @@ public class VMEmulator extends HackSimulator
                 if (numValue >= cpu.getProgram().getSize())
                     throw new VariableException("Line " + value + "is not within the program range",
                                                 varName);
-                cpu.getProgram().setPC((int)numValue);
+                cpu.getProgram().setPC(numValue);
             }
             else if (varName.startsWith(VAR_LOCAL + "[")) {
                 int index = getRamIndex(varName);
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.setSegmentAt(HVMInstructionSet.LOCAL_SEGMENT_CODE, index, (int)numValue);
+                cpu.setSegmentAt(HVMInstructionSet.LOCAL_SEGMENT_CODE, index, numValue);
             }
             else if (varName.startsWith(VAR_ARGUMENT + "[")) {
                 int index = getRamIndex(varName);
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.setSegmentAt(HVMInstructionSet.ARG_SEGMENT_CODE, index, (int)numValue);
+                cpu.setSegmentAt(HVMInstructionSet.ARG_SEGMENT_CODE, index, numValue);
             }
             else if (varName.startsWith(VAR_THIS + "[")) {
                 int index = getRamIndex(varName);
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.setSegmentAt(HVMInstructionSet.THIS_SEGMENT_CODE, index, (int)numValue);
+                cpu.setSegmentAt(HVMInstructionSet.THIS_SEGMENT_CODE, index, numValue);
             }
             else if (varName.startsWith(VAR_THAT + "[")) {
                 int index = getRamIndex(varName);
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.setSegmentAt(HVMInstructionSet.THAT_SEGMENT_CODE, index, (int)numValue);
+                cpu.setSegmentAt(HVMInstructionSet.THAT_SEGMENT_CODE, index, numValue);
             }
             else if (varName.startsWith(VAR_TEMP + "[")) {
                 int index = getRamIndex(varName);
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.setSegmentAt(HVMInstructionSet.TEMP_SEGMENT_CODE, index, (int)numValue);
+                cpu.setSegmentAt(HVMInstructionSet.TEMP_SEGMENT_CODE, index, numValue);
             }
             else if (varName.startsWith(VAR_RAM + "[")) {
                 int index = getRamIndex(varName);
                 numValue = Integer.parseInt(value);
                 check_address(varName, index);
-                cpu.getRAM().setValueAt(index, (int)numValue, false);
+                cpu.getRAM().setValueAt(index, numValue, false);
             }
             else
                 throw new VariableException("Unknown variable", varName);
@@ -656,7 +656,7 @@ public class VMEmulator extends HackSimulator
         if (index < 0 || index >= Definitions.RAM_SIZE)
             throw new VariableException("Illegal variable index", varName);
 
-        return (int)index;
+        return index;
     }
 
     // Checks that the given value is a legal 16-bit value

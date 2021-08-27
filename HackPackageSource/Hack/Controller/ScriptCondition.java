@@ -57,10 +57,11 @@ public class ScriptCondition {
 
 
     // The condition arguments (may be variable names or constants).
-    private String arg0, arg1;
+    private final String arg0;
+    private final String arg1;
 
     // The comparison operator code.
-    private byte comparisonOperator;
+    private final byte comparisonOperator;
 
     /**
      * Constructs a new ScriptCondition with the given ScriptTokenizer, placed on the

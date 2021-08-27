@@ -31,20 +31,20 @@ import java.io.*;
 public class ControllerFileChooser extends JFrame {
 
     // Creating the file chooser components
-    private FileChooserComponent outputFileChooser = new FileChooserComponent();
-    private FileChooserComponent comparisonFileChooser = new FileChooserComponent();
-    private FileChooserComponent scriptFileChooser = new FileChooserComponent();
+    private final FileChooserComponent outputFileChooser = new FileChooserComponent();
+    private final FileChooserComponent comparisonFileChooser = new FileChooserComponent();
+    private final FileChooserComponent scriptFileChooser = new FileChooserComponent();
 
     // Creating the ok and cancel buttons.
-    private JButton okButton = new JButton();
-    private JButton cancelButton = new JButton();
+    private final JButton okButton = new JButton();
+    private final JButton cancelButton = new JButton();
 
     // Creating icons.
-    private ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
-    private ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
+    private final ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
+    private final ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
 
     // the listeners to this component.
-    private Vector listeners;
+    private final Vector listeners;
 
     /**
      * Constructs a new FilesChooserWindow.

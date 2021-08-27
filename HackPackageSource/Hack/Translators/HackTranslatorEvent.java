@@ -68,10 +68,10 @@ public class HackTranslatorEvent extends EventObject {
     public static final byte SOURCE_LOAD = 7;
 
     // the action code
-    private byte action;
+    private final byte action;
 
     // the supplied data
-    private Object data;
+    private final Object data;
 
     /**
      * Constructs a new HackTranslatorEvent with given source, the action code and the supplied data.

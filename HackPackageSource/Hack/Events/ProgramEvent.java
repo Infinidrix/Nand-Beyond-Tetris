@@ -43,10 +43,10 @@ public class ProgramEvent extends EventObject {
     public static final byte CLEAR = 3;
 
     // The program's file name.
-    private String programFileName;
+    private final String programFileName;
 
     // The type of the event.
-    private byte eventType;
+    private final byte eventType;
 
     /**
      * Constructs a new ProgramEvent with the given source, event type and the new program

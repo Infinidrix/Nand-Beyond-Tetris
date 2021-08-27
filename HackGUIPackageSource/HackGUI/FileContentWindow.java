@@ -27,7 +27,7 @@ import javax.swing.*;
 public class FileContentWindow extends JFrame {
 
     // The text area on which the content of the file is shown.
-    private JTextArea fileContent = new JTextArea();
+    private final JTextArea fileContent = new JTextArea();
 
     // A reader used for reading the file.
     private BufferedReader reader;

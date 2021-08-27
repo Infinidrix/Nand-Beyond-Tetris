@@ -553,7 +553,7 @@ public class HackController
 
     // Executes the controller's output-file command.
     private void doOutputFileCommand(Command command) throws ControllerException {
-        currentOutputName = currentScriptFile.getParent() + "/" + (String)command.getArg();
+        currentOutputName = currentScriptFile.getParent() + "/" + command.getArg();
         resetOutputFile();
         if (gui != null)
             gui.setOutputFile(currentOutputName);
@@ -561,7 +561,7 @@ public class HackController
 
     // Executes the controller's compare-to command.
     private void doCompareToCommand(Command command) throws ControllerException {
-        currentComparisonName = currentScriptFile.getParent() + "/" + (String)command.getArg();
+        currentComparisonName = currentScriptFile.getParent() + "/" + command.getArg();
         resetComparisonFile();
         if (gui != null)
             gui.setComparisonFile(currentComparisonName);
@@ -579,7 +579,7 @@ public class HackController
             int space = varList[i].padL + varList[i].padR + varList[i].len;
             String varName = varList[i].varName.length() > space ?
                              varList[i].varName.substring(0, space) : varList[i].varName;
-            int leftSpace = (int)((space - varName.length()) / 2);
+            int leftSpace = (space - varName.length()) / 2;
             int rightSpace = space - leftSpace - varName.length();
 
             line.append(SPACES.substring(0, leftSpace) + varName +

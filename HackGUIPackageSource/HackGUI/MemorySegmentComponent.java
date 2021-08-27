@@ -58,10 +58,10 @@ public class MemorySegmentComponent extends JPanel
     protected Vector highlightIndex;
 
     // The listeners of this component.
-    private Vector listeners;
+    private final Vector listeners;
 
     // The error listeners of this component.
-    private Vector errorEventListeners;
+    private final Vector errorEventListeners;
 
     // The index of the flashed row.
     protected int flashIndex = -1;
@@ -70,7 +70,7 @@ public class MemorySegmentComponent extends JPanel
     protected Point topLevelLocation;
 
     // The layout of this component.
-    private BorderLayout borderLayout = new BorderLayout();
+    private final BorderLayout borderLayout = new BorderLayout();
 
     // The top level component.
     private Component topLevelComponent;
@@ -259,7 +259,7 @@ public class MemorySegmentComponent extends JPanel
      * Returns the value at the given index in its string representation.
      */
     public String getValueAsString(int index) {
-        return Format.translateValueToString(memory.getValueAsInt((int)(index + startAddress)),
+        return Format.translateValueToString(memory.getValueAsInt(index + startAddress),
                                              dataFormat);
     }
 
@@ -448,7 +448,7 @@ public class MemorySegmentComponent extends JPanel
 
     // Returns the string at the given location
     private String getStrAt(int index) {
-        int currentValue = memory.getValueAsInt((int)(index + startAddress));
+        int currentValue = memory.getValueAsInt(index + startAddress);
         if (currentValue == nullValue && hideNullValue)
             return "";
         else
@@ -504,10 +504,8 @@ public class MemorySegmentComponent extends JPanel
          * otherwise.
          */
         public boolean isCellEditable(int row, int col) {
-            boolean result = false;
-            if(isEnabled && col == 1 &&
-                (endEnabling == -1 || (row + startAddress >= startEnabling && row + startAddress <= endEnabling)))
-                result = true;
+            boolean result = isEnabled && col == 1 &&
+                    (endEnabling == -1 || (row + startAddress >= startEnabling && row + startAddress <= endEnabling));
 
             return result;
         }
@@ -524,7 +522,7 @@ public class MemorySegmentComponent extends JPanel
                         currentValue = nullValue;
                     else
                         currentValue = Format.translateValueToInt(data, memory.dataFormat);
-                    notifyListeners((int)row,currentValue);
+                    notifyListeners(row,currentValue);
                 }
                 catch(NumberFormatException nfe) {
                     notifyErrorListeners("Illegal value");

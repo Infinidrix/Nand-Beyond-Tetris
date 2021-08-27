@@ -39,55 +39,55 @@ public class HackAssemblerTranslator {
     /**
      * Indicates an assembly line with no operation
      */
-    public static final int NOP = (int)0x8000;
+    public static final int NOP = 0x8000;
 
     // exp constants
-    private static final Integer ZERO         = new Integer((int)0xea80);
-    private static final Integer ONE          = new Integer((int)0xefc0);
-    private static final Integer MINUS_ONE    = new Integer((int)0xee80);
-    private static final Integer EXP_D        = new Integer((int)0xe300);
-    private static final Integer NOT_D        = new Integer((int)0xe340);
-    private static final Integer EXP_M        = new Integer((int)0xfc00);
-    private static final Integer EXP_A        = new Integer((int)0xec00);
-    private static final Integer NOT_M        = new Integer((int)0xfc40);
-    private static final Integer NOT_A        = new Integer((int)0xec40);
-    private static final Integer MINUS_D      = new Integer((int)0xe3c0);
-    private static final Integer MINUS_M      = new Integer((int)0xfcc0);
-    private static final Integer MINUS_A      = new Integer((int)0xecc0);
-    private static final Integer D_PLUS_ONE   = new Integer((int)0xe7c0);
-    private static final Integer M_PLUS_ONE   = new Integer((int)0xfdc0);
-    private static final Integer A_PLUS_ONE   = new Integer((int)0xedc0);
-    private static final Integer D_MINUS_ONE  = new Integer((int)0xe380);
-    private static final Integer M_MINUS_ONE  = new Integer((int)0xfc80);
-    private static final Integer A_MINUS_ONE  = new Integer((int)0xec80);
-    private static final Integer D_PLUS_M     = new Integer((int)0xf080);
-    private static final Integer D_PLUS_A     = new Integer((int)0xe080);
-    private static final Integer D_MINUS_M    = new Integer((int)0xf4c0);
-    private static final Integer D_MINUS_A    = new Integer((int)0xe4c0);
-    private static final Integer M_MINUS_D    = new Integer((int)0xf1c0);
-    private static final Integer A_MINUS_D    = new Integer((int)0xe1c0);
-    private static final Integer D_AND_M      = new Integer((int)0xf000);
-    private static final Integer D_AND_A      = new Integer((int)0xe000);
-    private static final Integer D_OR_M       = new Integer((int)0xf540);
-    private static final Integer D_OR_A       = new Integer((int)0xe540);
+    private static final Integer ZERO         = new Integer(0xea80);
+    private static final Integer ONE          = new Integer(0xefc0);
+    private static final Integer MINUS_ONE    = new Integer(0xee80);
+    private static final Integer EXP_D        = new Integer(0xe300);
+    private static final Integer NOT_D        = new Integer(0xe340);
+    private static final Integer EXP_M        = new Integer(0xfc00);
+    private static final Integer EXP_A        = new Integer(0xec00);
+    private static final Integer NOT_M        = new Integer(0xfc40);
+    private static final Integer NOT_A        = new Integer(0xec40);
+    private static final Integer MINUS_D      = new Integer(0xe3c0);
+    private static final Integer MINUS_M      = new Integer(0xfcc0);
+    private static final Integer MINUS_A      = new Integer(0xecc0);
+    private static final Integer D_PLUS_ONE   = new Integer(0xe7c0);
+    private static final Integer M_PLUS_ONE   = new Integer(0xfdc0);
+    private static final Integer A_PLUS_ONE   = new Integer(0xedc0);
+    private static final Integer D_MINUS_ONE  = new Integer(0xe380);
+    private static final Integer M_MINUS_ONE  = new Integer(0xfc80);
+    private static final Integer A_MINUS_ONE  = new Integer(0xec80);
+    private static final Integer D_PLUS_M     = new Integer(0xf080);
+    private static final Integer D_PLUS_A     = new Integer(0xe080);
+    private static final Integer D_MINUS_M    = new Integer(0xf4c0);
+    private static final Integer D_MINUS_A    = new Integer(0xe4c0);
+    private static final Integer M_MINUS_D    = new Integer(0xf1c0);
+    private static final Integer A_MINUS_D    = new Integer(0xe1c0);
+    private static final Integer D_AND_M      = new Integer(0xf000);
+    private static final Integer D_AND_A      = new Integer(0xe000);
+    private static final Integer D_OR_M       = new Integer(0xf540);
+    private static final Integer D_OR_A       = new Integer(0xe540);
 
     // dest constants
-    private static final Integer A   = new Integer((int)0x20);
-    private static final Integer M   = new Integer((int)0x8);
-    private static final Integer D   = new Integer((int)0x10);
-    private static final Integer AM  = new Integer((int)0x28);
-    private static final Integer AD  = new Integer((int)0x30);
-    private static final Integer MD  = new Integer((int)0x18);
-    private static final Integer AMD = new Integer((int)0x38);
+    private static final Integer A   = new Integer(0x20);
+    private static final Integer M   = new Integer(0x8);
+    private static final Integer D   = new Integer(0x10);
+    private static final Integer AM  = new Integer(0x28);
+    private static final Integer AD  = new Integer(0x30);
+    private static final Integer MD  = new Integer(0x18);
+    private static final Integer AMD = new Integer(0x38);
 
     // jmp constants
-    private static final Integer JMP              = new Integer((int)0x7);
-    private static final Integer JMP_LESS_THEN    = new Integer((int)0x4);
-    private static final Integer JMP_EQUAL        = new Integer((int)0x2);
-    private static final Integer JMP_GREATER_THEN  = new Integer((int)0x1);
-    private static final Integer JMP_NOT_EQUAL    = new Integer((int)0x5);
-    private static final Integer JMP_LESS_EQUAL   = new Integer((int)0x6);
-    private static final Integer JMP_GREATER_EQUAL = new Integer((int)0x3);
+    private static final Integer JMP              = new Integer(0x7);
+    private static final Integer JMP_LESS_THEN    = new Integer(0x4);
+    private static final Integer JMP_EQUAL        = new Integer(0x2);
+    private static final Integer JMP_GREATER_THEN  = new Integer(0x1);
+    private static final Integer JMP_NOT_EQUAL    = new Integer(0x5);
+    private static final Integer JMP_LESS_EQUAL   = new Integer(0x6);
+    private static final Integer JMP_GREATER_EQUAL = new Integer(0x3);
 
     private static final String[] symbols = new String[] {"_", "-", "|", "!", "--", "++", "", "", "+", "&"};
     private static final String[] registers = new String[] { "A", "D", "M", "P", "C", "B", "I", "T", "R" };
@@ -118,13 +118,13 @@ public class HackAssemblerTranslator {
     private void initNewInst() {
         symbolLoc= new HashMap<>();
         for (int loc = 0; loc < symbols.length; loc++) {
-            symbolLoc.put(symbols[loc], (int) loc);
+            symbolLoc.put(symbols[loc], loc);
         }
 
         registerLoc= new HashMap<>();
         for (int loc = 0; loc < registers.length; loc++) {
-            registerLoc.put(registers[loc], (int) loc);
-            registerLoc.put(registers[loc].toLowerCase(Locale.ROOT), (int) loc);
+            registerLoc.put(registers[loc], loc);
+            registerLoc.put(registers[loc].toLowerCase(Locale.ROOT), loc);
         }
     }
 
@@ -223,7 +223,7 @@ public class HackAssemblerTranslator {
                     throw new AssemblerException("A numeric value is expected");
                 }
             } else if (input.isToken("jmp")){
-                code = (int) 0xffc7;
+                code = 0xffc7;
             }
             else if (input.isToken("=")){
                 int dest = 0, src = 0, exp = 0, type = 0xa, i = 0;
@@ -248,7 +248,7 @@ public class HackAssemblerTranslator {
                     throw new AssemblerException("Instruction longer than expected");
                 }
                 input.ensureEnd();
-                code = (int) (type << 12 | exp << 8 | src << 4 | dest);
+                code = type << 12 | exp << 8 | src << 4 | dest;
             }
             else { // compute-store-jump command
 
@@ -291,7 +291,7 @@ public class HackAssemblerTranslator {
                     input.ensureEnd();
                 }
 
-                code = (int)(destCode + expCode + jmpCode);
+                code = destCode + expCode + jmpCode;
             }
 
         } catch (IOException ioe) {
@@ -316,9 +316,9 @@ public class HackAssemblerTranslator {
                 command.append('@');
                 command.append(code);
             } else if ((code & 0xf000) == 0xa000){
-                int src = (int) ((code & 0x00f0) >> 4);
-                int dest = (int) (code & 0x000f);
-                int symb = (int) ((code & 0x0f00) >> 8);
+                int src = (code & 0x00f0) >> 4;
+                int dest = code & 0x000f;
+                int symb = (code & 0x0f00) >> 8;
 
                 command.append("=");
                 command.append(registers[dest]);
@@ -327,9 +327,9 @@ public class HackAssemblerTranslator {
 
             }
             else {
-                int exp = (int)(code & 0xffc0);
-                int dest = (int)(code & 0x0038);
-                int jmp = (int)(code & 0x0007);
+                int exp = code & 0xffc0;
+                int dest = code & 0x0038;
+                int jmp = code & 0x0007;
 
                 String expText = getExpByCode(exp);
                 if (!expText.equals("")) {
@@ -383,7 +383,7 @@ public class HackAssemblerTranslator {
                         throw new AssemblerException("Program too large");
 
                     try {
-                        value = (int)Conversions.binaryToInt(line);
+                        value = Conversions.binaryToInt(line);
                     } catch (NumberFormatException nfe) {
                         throw new AssemblerException("Illegal character");
                     }

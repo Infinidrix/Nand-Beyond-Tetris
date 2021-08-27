@@ -27,8 +27,8 @@ import java.awt.*;
 public class GatesPanel implements GatesPanelGUI {
 
     // two panels with different layouts.
-    private JPanel nullLayoutGatesPanel;
-    private JPanel flowLayoutGatesPanel;
+    private final JPanel nullLayoutGatesPanel;
+    private final JPanel flowLayoutGatesPanel;
 
     // true if the current layout is flow layout.
     private boolean flowLayout = false;

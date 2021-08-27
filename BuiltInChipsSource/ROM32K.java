@@ -75,7 +75,7 @@ public class ROM32K extends BuiltInGateWithGUI
     protected void loadProgram(String fileName) throws AssemblerException {
         int[] program = HackAssemblerTranslator.loadProgram(fileName,
                                                               Definitions.ROM_SIZE,
-                                                              (int)0);
+                0);
 
         if (gui != null) {
             if (fileName.endsWith(".hack"))
@@ -162,7 +162,7 @@ public class ROM32K extends BuiltInGateWithGUI
      * Subclasses may override this method to implement commands.
      */
     public void doCommand(String[] command) throws GateException {
-        if (command[0].toUpperCase().equalsIgnoreCase("LOAD")) {
+        if (command[0].equalsIgnoreCase("LOAD")) {
             if (command.length != 2)
                 throw new GateException("Illegal number of arguments");
 

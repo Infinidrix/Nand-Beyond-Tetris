@@ -33,34 +33,34 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
     private static final int EMULATOR_HEIGHT = 611;
 
     // Creating the RegisterComponents a, d and pc.
-    private RegisterComponent a;
-    private RegisterComponent d;
-    private RegisterComponent pcs;
-    private RegisterComponent ctr;
-    private RegisterComponent base;
-    private RegisterComponent inth;
-    private RegisterComponent temp;
-    private RegisterComponent reset;
-    private RegisterComponent timer;
-    private RegisterComponent pc;
+    private final RegisterComponent a;
+    private final RegisterComponent d;
+    private final RegisterComponent pcs;
+    private final RegisterComponent ctr;
+    private final RegisterComponent base;
+    private final RegisterComponent inth;
+    private final RegisterComponent temp;
+    private final RegisterComponent reset;
+    private final RegisterComponent timer;
+    private final RegisterComponent pc;
 
     // The screen of the CPUEmulator.
-    private ScreenComponent screen;
+    private final ScreenComponent screen;
 
     // The keyboard of the CPUEmulator.
-    private KeyboardComponent keyboard;
+    private final KeyboardComponent keyboard;
 
     // The memory of the CPUEmulator.
-    private PointedMemoryComponent ram;
+    private final PointedMemoryComponent ram;
 
     // The ROM of the CPUEmulator.
-    private ROMComponent rom;
+    private final ROMComponent rom;
 
     // The ALU of the CPUEmulator.
-    private ALUComponent alu;
+    private final ALUComponent alu;
 
     // The bus of the CPUEmulator.
-    private BusComponent bus;
+    private final BusComponent bus;
 
 
     /**

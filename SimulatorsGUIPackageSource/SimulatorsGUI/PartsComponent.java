@@ -35,7 +35,7 @@ public class PartsComponent extends JPanel implements PartsGUI {
     private final static String COMPOSITE_GATE  = "Composite";
 
     // The table containing the parts data
-    private JTable partsTable;
+    private final JTable partsTable;
 
     // The array of gates
     private Gate[] parts;
@@ -44,10 +44,10 @@ public class PartsComponent extends JPanel implements PartsGUI {
     private JScrollPane scrollPane;
 
     // The model of this table.
-    private PartsTableModel model;
+    private final PartsTableModel model;
 
     // The name of this component.
-    private JLabel nameLbl = new JLabel();
+    private final JLabel nameLbl = new JLabel();
 
     /**
      * Constructs a new PartsComponent.

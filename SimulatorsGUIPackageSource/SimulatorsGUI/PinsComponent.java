@@ -51,10 +51,10 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
     protected int dataFormat;
 
     // A vector containing the listeners to this object.
-    private Vector listeners;
+    private final Vector listeners;
 
     // A vector containing the error listeners to this object.
-    private Vector errorEventListeners;
+    private final Vector errorEventListeners;
 
     // The scroll pane on which the table is placed.
     protected JScrollPane scrollPane;
@@ -69,10 +69,10 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
     protected Point topLevelLocation;
 
     // The renderer of the table containing the pins list.
-    private PinsTableCellRenderer renderer = new PinsTableCellRenderer();
+    private final PinsTableCellRenderer renderer = new PinsTableCellRenderer();
 
     // The name of this pins component.
-    private JLabel nameLbl = new JLabel();
+    private final JLabel nameLbl = new JLabel();
 
     // a boolean field specifying if the user can enter values into the table.
     private boolean isEnabled = true;
@@ -412,7 +412,7 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
         else {
             result = Format.translateValueToString(value, dataFormat);
             if(dataFormat == Format.BIN_FORMAT)
-                result = result.substring(result.length()-width,result.length());
+                result = result.substring(result.length()-width);
         }
 
         return result;
@@ -520,11 +520,8 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
          * otherwise.
          */
         public boolean isCellEditable(int row, int col){
-            if (isEnabled && col == 1 && dataFormat != Format.BIN_FORMAT &&
-                (endEnabling == -1 || (row>= startEnabling && row <= endEnabling)))
-                return true;
-            else
-                return false;
+            return isEnabled && col == 1 && dataFormat != Format.BIN_FORMAT &&
+                    (endEnabling == -1 || (row >= startEnabling && row <= endEnabling));
         }
 
         /**
@@ -542,7 +539,7 @@ public class PinsComponent extends JPanel implements PinsGUI, MouseListener, Pin
                     else
                         pins[row].value = Format.translateValueToInt(data, dataFormat);
 
-                    notifyListeners((int)row,pins[row].value);
+                    notifyListeners(row,pins[row].value);
                 }
                 catch(NumberFormatException nfe) {
                     notifyErrorListeners("Illegal value");

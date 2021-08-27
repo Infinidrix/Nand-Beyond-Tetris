@@ -26,10 +26,10 @@ import java.util.*;
 public class CallStack extends ComputerPart {
 
     // the vector of function names.
-    private Vector names;
+    private final Vector names;
 
     // the stack gui
-    private CallStackGUI gui;
+    private final CallStackGUI gui;
 
     /**
      * Constructs a new call stack with the given GUI (optional).

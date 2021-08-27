@@ -44,16 +44,16 @@ public class BusComponent extends JPanel implements ActionListener, BusGUI {
     protected JTextField txtField;
 
     // The timer for the animation.
-    private Timer timer;
+    private final Timer timer;
 
     // The border of the text field.
     protected Border txtBorder;
 
     // the delay between each movement as a function of the current speed
-    private int[] delays;
+    private final int[] delays;
 
     // the length of each movement as a function of the current speed
-    private double[] stepLengths;
+    private final double[] stepLengths;
 
     private int counter = 0;
 
@@ -82,7 +82,7 @@ public class BusComponent extends JPanel implements ActionListener, BusGUI {
         stepLengths = new double[range];
         delays = new int[range];
         for (int i = 0; i < range; i++) {
-            stepLengths[i] = function[i] * (double)(MAX_STEP_LENGTH - MIN_STEP_LENGTH) + MIN_STEP_LENGTH;
+            stepLengths[i] = function[i] * (MAX_STEP_LENGTH - MIN_STEP_LENGTH) + MIN_STEP_LENGTH;
             delays[i] = (int)(MAX_MS - function[i] * (double)(MAX_MS - MIN_MS));
         }
 
@@ -123,7 +123,7 @@ public class BusComponent extends JPanel implements ActionListener, BusGUI {
         int absX = Math.abs(totalX);
         int absY = Math.abs(totalY);
 
-        dy = (double)(currentStepLength * absY) / (double)(absX + absY);
+        dy = (currentStepLength * absY) / (double)(absX + absY);
         dx = currentStepLength - dy;
         counter = (int)((double)absX / dx);
         if (totalX < 0)

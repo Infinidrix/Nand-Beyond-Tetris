@@ -48,18 +48,19 @@ public class BuiltInFunctionsRunner implements Runnable {
 		Method functionObject;
 		Object[] params;
 		int returnValue;
-	};
-	private BuiltInToProgramRequest builtInToProgram;
-	private ProgramToBuiltInRequest programToBuiltIn;
+	}
+
+	private final BuiltInToProgramRequest builtInToProgram;
+	private final ProgramToBuiltInRequest programToBuiltIn;
 
 	// The thread that runs the built-in code
-	private Thread thread;
+	private final Thread thread;
 
 	// The CPU that communicates with this class
-	private CPU cpu;
+	private final CPU cpu;
 
 	// The built-in dir
-	private File builtInDir;
+	private final File builtInDir;
 	
 	/********************** Code common to both threads *****/
 
@@ -133,7 +134,7 @@ public class BuiltInFunctionsRunner implements Runnable {
             throw new ProgramException("Illegal function name: " + functionName);
 		}
         String className = functionName.substring(0, dotLocation);
-		String methodName = functionName.substring(dotLocation+1, functionName.length());
+		String methodName = functionName.substring(dotLocation+1);
 		if (methodName.equals("new")) {
 			// new is a reserved Java word - therefore Jack functions named
 			// new are implemented by Java functions named NEW.
@@ -277,10 +278,10 @@ public class BuiltInFunctionsRunner implements Runnable {
 				if (returnType == int.class) {
 					builtInToProgram.returnValue = ((Integer)returnValue).shortValue();
 				} else if (returnType == char.class) {
-					builtInToProgram.returnValue = (int)((Character)returnValue).charValue();
+					builtInToProgram.returnValue = ((Character)returnValue).charValue();
 				} else if (returnType == boolean.class) {
 					if (((Boolean)returnValue).booleanValue()) {
-						builtInToProgram.returnValue = (int)-1;
+						builtInToProgram.returnValue = -1;
 					} else {
 						builtInToProgram.returnValue = 0;
 					}

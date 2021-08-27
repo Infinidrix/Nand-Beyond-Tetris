@@ -28,12 +28,12 @@ import java.awt.*;
 public class GateInfoComponent extends JPanel implements GateInfoGUI {
 
     // creating labels
-    private JLabel chipNameLbl;
-    private JLabel timeLbl;
+    private final JLabel chipNameLbl;
+    private final JLabel timeLbl;
 
     // creating text fields
-    private JTextField chipNameTxt;
-    private JTextField timeTxt;
+    private final JTextField chipNameTxt;
+    private final JTextField timeTxt;
 
     // true if the clock is currently up
     private boolean clockUp;
@@ -75,7 +75,7 @@ public class GateInfoComponent extends JPanel implements GateInfoGUI {
 
     public void setTime (int time) {
          if (clockUp)
-            timeTxt.setText(String.valueOf(time) + "+");
+            timeTxt.setText(time + "+");
         else
             timeTxt.setText(String.valueOf(time));
     }

@@ -35,34 +35,34 @@ public class VMEmulatorComponent extends HackSimulatorComponent implements VMEmu
     private static final int HEIGHT = 611;
 
     // The keyboard of the VMEmulator component.
-    private KeyboardComponent keyboard;
+    private final KeyboardComponent keyboard;
 
     // The screen of the VMEmulator component.
-    private ScreenComponent screen;
+    private final ScreenComponent screen;
 
     // The call stack of the VMEmulator component.
-    private CallStackComponent callStack;
+    private final CallStackComponent callStack;
 
     // The program of the VMEmulator component.
-    private ProgramComponent program;
+    private final ProgramComponent program;
 
     // The ram of the VMEmulator component.
-    private LabeledMemoryComponent ram;
+    private final LabeledMemoryComponent ram;
 
     // The stack of the VMEmulator component.
-    private AbsolutePointedMemorySegmentComponent stack;
+    private final AbsolutePointedMemorySegmentComponent stack;
 
     // The memory segments of the VMEmulator component.
-    private MemorySegmentsComponent segments;
+    private final MemorySegmentsComponent segments;
 
     // The bus of the VMEmulator component.
-    private BusComponent bus;
+    private final BusComponent bus;
 
     // The calculator of this emulator.
-    private StackCalculator calculator;
+    private final StackCalculator calculator;
 
     // The working stack of the VMEmulator component.
-    private TrimmedValuesOnlyAbsoluteMemorySegmentComponent workingStack;
+    private final TrimmedValuesOnlyAbsoluteMemorySegmentComponent workingStack;
 
 
     /**

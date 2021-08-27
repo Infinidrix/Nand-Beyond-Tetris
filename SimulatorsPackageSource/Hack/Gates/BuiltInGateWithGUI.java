@@ -31,7 +31,7 @@ import java.util.*;
 public abstract class BuiltInGateWithGUI extends BuiltInGate
  implements ErrorEventListener {
 
-    private Vector errorListeners;
+    private final Vector errorListeners;
 
     // The gate parent of this gate. re-evaluates when a change is done through the gui.
     protected Gate parent;

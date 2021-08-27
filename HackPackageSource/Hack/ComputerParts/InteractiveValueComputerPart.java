@@ -27,7 +27,7 @@ public abstract class InteractiveValueComputerPart extends ValueComputerPart
  implements ComputerPartEventListener, ErrorEventListener {
 
     // Error listeners of hi computer prt
-    private Vector errorListeners;
+    private final Vector errorListeners;
 
     // The excepted range of numbers
     private final int minValue;

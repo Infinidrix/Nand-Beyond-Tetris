@@ -28,24 +28,24 @@ import java.awt.event.*;
 public class SearchMemoryWindow extends JFrame {
 
     // Creating the label in this window.
-    private JLabel instructionLbl = new JLabel();
+    private final JLabel instructionLbl = new JLabel();
 
     // Creating the text field in this window.
-    private JTextField rowNumber = new JTextField();
+    private final JTextField rowNumber = new JTextField();
 
     // Creating buttons.
-    private JButton okButton = new JButton();
-    private JButton cancelButton = new JButton();
+    private final JButton okButton = new JButton();
+    private final JButton cancelButton = new JButton();
 
     // Creating icons
-    private ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
-    private ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
+    private final ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
+    private final ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
 
     // The table to search in.
-    private JTable table;
+    private final JTable table;
 
     // The container panel of the table
-    private JPanel tableContainer;
+    private final JPanel tableContainer;
 
     /**
      * Constructs a new SearchWindow.

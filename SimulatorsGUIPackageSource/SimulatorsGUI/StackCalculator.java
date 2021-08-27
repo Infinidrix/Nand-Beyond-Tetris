@@ -29,10 +29,10 @@ import java.awt.geom.*;
 public class StackCalculator extends JPanel implements CalculatorGUI {
 
     // The input, command and output textfields.
-    private JTextField firstInput = new JTextField();
-    private JTextField command = new JTextField();
-    private JTextField secondInput = new JTextField();
-    private JTextField output = new JTextField();
+    private final JTextField firstInput = new JTextField();
+    private final JTextField command = new JTextField();
+    private final JTextField secondInput = new JTextField();
+    private final JTextField output = new JTextField();
 
     //wide and regular strokes for the painting.
     private final static BasicStroke wideStroke = new BasicStroke(3.0f);

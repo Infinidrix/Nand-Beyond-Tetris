@@ -24,7 +24,7 @@ package Hack.Gates;
 public class DirtyGateAdapter extends Node {
 
     // the gate which is affected by this node.
-    private Gate affectedGate;
+    private final Gate affectedGate;
 
     /**
      * Constructs a new DirtyGateAdapter with the given affected gate.

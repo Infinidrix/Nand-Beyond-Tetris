@@ -34,16 +34,16 @@ import Hack.VirtualMachine.*;
 public class ProgramComponent extends JPanel implements VMProgramGUI {
 
     // A vector containing the listeners to this object.
-    private Vector listeners;
+    private final Vector listeners;
 
     // A vector containing the error listeners to this object.
-    private Vector errorEventListeners;
+    private final Vector errorEventListeners;
 
     // The table representing this program
     protected JTable programTable;
 
     // The model of the table;
-    private ProgramTableModel model;
+    private final ProgramTableModel model;
 
     // The HVMInstructions of this program.
     protected VMEmulatorInstruction[] instructions;
@@ -52,41 +52,41 @@ public class ProgramComponent extends JPanel implements VMProgramGUI {
     protected MouseOverJButton browseButton = new MouseOverJButton();
 
     // Creating the icon of the button.
-    private ImageIcon browseIcon = new ImageIcon(Utilities.imagesDir + "open2.gif");
+    private final ImageIcon browseIcon = new ImageIcon(Utilities.imagesDir + "open2.gif");
 
     // The file chooser window.
     //private FileChooserWindow fileChooser = new FileChooserWindow(null);
-    private JFileChooser fileChooser = new JFileChooser();
+    private final JFileChooser fileChooser = new JFileChooser();
 
     // The current instruction index (yellow background).
     private int instructionIndex;
 
     // The text field with the message (for example "Loading...").
-    private JTextField messageTxt = new JTextField();
+    private final JTextField messageTxt = new JTextField();
 
     // The cell renderer of this table.
-    private ColoredTableCellRenderer coloredRenderer = new ColoredTableCellRenderer();
+    private final ColoredTableCellRenderer coloredRenderer = new ColoredTableCellRenderer();
 
     // Creating the search button.
-    private MouseOverJButton searchButton = new MouseOverJButton();
+    private final MouseOverJButton searchButton = new MouseOverJButton();
 
     // Creating the icon for the search button.
-    private ImageIcon searchIcon = new ImageIcon(Utilities.imagesDir + "find.gif");
+    private final ImageIcon searchIcon = new ImageIcon(Utilities.imagesDir + "find.gif");
 
     // The window of searching a specific location in memory.
-    private SearchProgramWindow searchWindow;
+    private final SearchProgramWindow searchWindow;
 
     // The scroll pane on which the table is placed.
     private JScrollPane scrollPane;
 
     // The name of this component ("Program :").
-    private JLabel nameLbl = new JLabel();
+    private final JLabel nameLbl = new JLabel();
 
     // Creating the clear button.
     protected MouseOverJButton clearButton = new MouseOverJButton();
 
     // Creating the icon for the clear button.
-    private ImageIcon clearIcon = new ImageIcon(Utilities.imagesDir + "smallnew.gif");
+    private final ImageIcon clearIcon = new ImageIcon(Utilities.imagesDir + "smallnew.gif");
 
     /**
      * Constructs a new ProgramComponent.

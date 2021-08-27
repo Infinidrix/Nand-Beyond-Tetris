@@ -31,10 +31,10 @@ public class RAM extends PointedMemory
     private static final int[] emptyScreen = new int[Definitions.SCREEN_SIZE_IN_WORDS];
 
     // The gui of the screen
-    private ScreenGUI screen;
+    private final ScreenGUI screen;
 
     // memory segments mapping
-    private MemorySegment[][] segments;
+    private final MemorySegment[][] segments;
 
     /**
      * Constructs a new RAM with the given optional GUI components:
@@ -62,7 +62,7 @@ public class RAM extends PointedMemory
         // if screen area changed, update its GUI
         if (screen != null && address >= Definitions.SCREEN_START_ADDRESS
              && address < Definitions.SCREEN_START_ADDRESS + Definitions.SCREEN_SIZE_IN_WORDS)
-            screen.setValueAt((int)(address - Definitions.SCREEN_START_ADDRESS), value);
+            screen.setValueAt(address - Definitions.SCREEN_START_ADDRESS, value);
 
         // if a memory segment pointer changed, update its GUI
         if (segments != null && segments[address] != null) {

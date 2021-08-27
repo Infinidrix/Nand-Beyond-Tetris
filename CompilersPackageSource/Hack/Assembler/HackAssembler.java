@@ -127,7 +127,7 @@ public class HackAssembler extends HackTranslator {
 						throw new HackTranslatorException("Error in file "+comparisonFileName+": Line "+i+" does not contain exactly "+Definitions.BITS_PER_WORD+" characters");
 					}
 					try {
-						comparisonProgram[i] = (int)Conversions.binaryToInt(comp.getLineAt(i));
+						comparisonProgram[i] = Conversions.binaryToInt(comp.getLineAt(i));
 					} catch (NumberFormatException nfe) {
 						throw new HackTranslatorException("Error in file "+comparisonFileName+": Line "+i+" does not contain only 1/0 characters");
 					}
@@ -191,7 +191,7 @@ public class HackAssembler extends HackTranslator {
             super.successfulCompilation();
         else {
             if (gui != null)
-                ((HackAssemblerGUI)gui).displayMessage("File compilation & comparison succeeded", false);
+                gui.displayMessage("File compilation & comparison succeeded", false);
         }
     }
 

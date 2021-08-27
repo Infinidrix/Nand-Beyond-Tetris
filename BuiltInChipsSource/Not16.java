@@ -24,6 +24,6 @@ public class Not16 extends Not {
 
     protected void reCompute() {
         int in = inputPins[0].get();
-        outputPins[0].set((int)(~in));
+        outputPins[0].set(~in);
     }
 }

@@ -30,19 +30,19 @@ import java.io.*;
 public class ChipLoaderFileChooser extends JFrame {
 
     // creating the file chooser components.
-    private FileChooserComponent workingDir = new FileChooserComponent();
-    private FileChooserComponent builtInDir = new FileChooserComponent();
+    private final FileChooserComponent workingDir = new FileChooserComponent();
+    private final FileChooserComponent builtInDir = new FileChooserComponent();
 
     // creating the ok and cancel icons.
-    private ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
-    private ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
+    private final ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok.gif");
+    private final ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "cancel.gif");
 
     // creating the ok and cancel buttons.
-    private JButton okButton = new JButton();
-    private JButton cancelButton = new JButton();
+    private final JButton okButton = new JButton();
+    private final JButton cancelButton = new JButton();
 
     // the vector containing the listeners to this component.
-    private Vector listeners;
+    private final Vector listeners;
 
     /**
      * Constructs a new ChipLoaderFileChooser.

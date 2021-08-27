@@ -38,16 +38,16 @@ public class Script {
     public static final int MAX_OUTPUT_LIST_ARGUMENTS = 20;
 
     // The list of commands
-    private Vector commands;
+    private final Vector commands;
 
     // The list of script line numbers that match the corresponding command
-    private Vector lineNumbers;
+    private final Vector lineNumbers;
 
     // The file name of the script
-    private String scriptName;
+    private final String scriptName;
 
     // The input stream tokenizer of the script file
-    private ScriptTokenizer input;
+    private final ScriptTokenizer input;
 
     /**
      * Constructs a new script according to the given script file.

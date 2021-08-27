@@ -27,7 +27,7 @@ import Hack.Utilities.Definitions;
  * should be static.
  */
 public abstract class BuiltInVMClass {
-	private static Hashtable builtInFunctionsRunnerByThread = new Hashtable();
+	private static final Hashtable builtInFunctionsRunnerByThread = new Hashtable();
 
 	/* Some definitions regarding the memory. */
     public static final int SCREEN_START_ADDRESS = Definitions.SCREEN_START_ADDRESS;
@@ -50,7 +50,7 @@ public abstract class BuiltInVMClass {
 	 */
     protected static void writeMemory(int address, int value)
 			throws TerminateVMProgramThrowable {
-		((BuiltInFunctionsRunner)builtInFunctionsRunnerByThread.get(Thread.currentThread())).builtInFunctionRequestsMemoryWrite((int)address, (int)value);
+		((BuiltInFunctionsRunner)builtInFunctionsRunnerByThread.get(Thread.currentThread())).builtInFunctionRequestsMemoryWrite(address, value);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public abstract class BuiltInVMClass {
 	 */
     protected static int readMemory(int address)
 			throws TerminateVMProgramThrowable {
-		return ((BuiltInFunctionsRunner)builtInFunctionsRunnerByThread.get(Thread.currentThread())).builtInFunctionRequestsMemoryRead((int)address);
+		return ((BuiltInFunctionsRunner)builtInFunctionsRunnerByThread.get(Thread.currentThread())).builtInFunctionRequestsMemoryRead(address);
 	}
 
 	/**
@@ -85,33 +85,33 @@ public abstract class BuiltInVMClass {
 	protected static int callFunction(String functionName,
 										int param)
 			throws TerminateVMProgramThrowable {
-		return callFunction(functionName, new int[]{(int)param});
+		return callFunction(functionName, new int[]{param});
 	}
 
 	protected static int callFunction(String functionName,
 										int param1, int param2)
 			throws TerminateVMProgramThrowable {
-		return callFunction(functionName, new int[]{(int)param1,
-													  (int)param2});
+		return callFunction(functionName, new int[]{param1,
+				param2});
 	}
 
 	protected static int callFunction(String functionName,
 										int param1, int param2,
 										int param3)
 			throws TerminateVMProgramThrowable {
-		return callFunction(functionName, new int[]{(int)param1,
-													  (int)param2,
-													  (int)param3});
+		return callFunction(functionName, new int[]{param1,
+				param2,
+				param3});
 	}
 
 	protected static int callFunction(String functionName,
 										int param1, int param2,
 										int param3, int param4)
 			throws TerminateVMProgramThrowable {
-		return callFunction(functionName, new int[]{(int)param1,
-													  (int)param2,
-													  (int)param3,
-													  (int)param4});
+		return callFunction(functionName, new int[]{param1,
+				param2,
+				param3,
+				param4});
 	}
 
 	/**

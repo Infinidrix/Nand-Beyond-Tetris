@@ -26,7 +26,7 @@ import java.io.*;
 public class HackFileFilter implements FilenameFilter {
 
     // the accepted extension
-    private String extension;
+    private final String extension;
 
     /**
      * Constucts a new HackFileFilter with the given extension

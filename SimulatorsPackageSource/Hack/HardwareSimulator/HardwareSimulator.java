@@ -132,7 +132,7 @@ public class HardwareSimulator extends HackSimulator
 
     // Initializes the hardware simulator
     private void init() {
-        Gate.CLOCK_NODE.set((int)1);
+        Gate.CLOCK_NODE.set(1);
         clockUp = false;
         time = 0;
         GatesManager.getInstance().setErrorHandler(this);
@@ -156,7 +156,7 @@ public class HardwareSimulator extends HackSimulator
             throw new VariableException("cannot get var's value since no gate is currently loaded", varName);
 
         if (varName.equals(VAR_TIME))
-            result = String.valueOf(time) + (clockUp ? "+" : " ");
+            result = time + (clockUp ? "+" : " ");
         else {
             Node node = gate.getNode(varName);
             if (node != null)
@@ -446,7 +446,7 @@ public class HardwareSimulator extends HackSimulator
             gate.eval();
 
         time = 0;
-        Gate.CLOCK_NODE.set((int)1);
+        Gate.CLOCK_NODE.set(1);
         clockUp = false;
     }
 
@@ -734,7 +734,7 @@ public class HardwareSimulator extends HackSimulator
 
     // Performs tick on the current gate
     private void performTick() {
-        Gate.CLOCK_NODE.set((int)0);
+        Gate.CLOCK_NODE.set(0);
         gate.tick();
         clockUp = true;
 
@@ -749,7 +749,7 @@ public class HardwareSimulator extends HackSimulator
 
     // Performs tick on the current gate
     private void performTock() {
-        Gate.CLOCK_NODE.set((int)1);
+        Gate.CLOCK_NODE.set(1);
         gate.tock();
         clockUp = false;
         time++;
@@ -781,7 +781,7 @@ public class HardwareSimulator extends HackSimulator
         if (index < 0)
             throw new VariableException("Illegal variable index", varName);
 
-        return (int)index;
+        return index;
     }
 
     // Returns the given pin name including its sub bus specification.

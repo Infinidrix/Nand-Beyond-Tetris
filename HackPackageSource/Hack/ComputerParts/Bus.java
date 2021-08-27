@@ -23,7 +23,7 @@ package Hack.ComputerParts;
 public class Bus extends ComputerPart {
 
     // The gui of the bus.
-    private BusGUI gui;
+    private final BusGUI gui;
 
     /**
      * Constructs a new bus with its given (optional) GUI.

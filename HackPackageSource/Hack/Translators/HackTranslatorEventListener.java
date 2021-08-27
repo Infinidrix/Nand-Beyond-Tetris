@@ -27,5 +27,5 @@ public interface HackTranslatorEventListener {
      * The given event contains the source object, the performed action's code
      * and the action's supplied data object.
      */
-    public void actionPerformed(HackTranslatorEvent event);
+    void actionPerformed(HackTranslatorEvent event);
 }

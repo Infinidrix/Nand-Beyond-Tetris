@@ -26,10 +26,10 @@ import Hack.Gates.*;
 public class SubNodePartPinsAdapter extends SubNode {
 
     // The PartPins that contain the node.
-    private PartPins partPins;
+    private final PartPins partPins;
 
     // The index of the node in the PartPins.
-    private int index;
+    private final int index;
 
     /**
      * Constructs a new SubNodePartPinsAdapter with the sub bus specification,

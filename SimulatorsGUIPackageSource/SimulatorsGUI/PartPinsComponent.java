@@ -36,13 +36,13 @@ public class PartPinsComponent extends PinsComponent implements PartPinsGUI {
     private String[] valuesStr;
 
     // The renderer of the pins table.
-    private PartPinsTableCellRenderer renderer = new PartPinsTableCellRenderer();
+    private final PartPinsTableCellRenderer renderer = new PartPinsTableCellRenderer();
 
     // a boolean field specifying if the user can enter values into the table.
     private boolean isEnabled = true;
 
     // The part name
-    private JLabel partNameLbl = new JLabel();
+    private final JLabel partNameLbl = new JLabel();
 
     /**
      * Constructs a new PartPinsComponent.
@@ -235,7 +235,7 @@ public class PartPinsComponent extends PinsComponent implements PartPinsGUI {
             try {
                 valuesStr[row] = data;
                 partPins[row].value = Format.translateValueToInt(data, dataFormat);
-                notifyListeners((int)row,partPins[row].value);
+                notifyListeners(row,partPins[row].value);
             }
             catch(NumberFormatException nfe) {
                 notifyErrorListeners("Illegal value");

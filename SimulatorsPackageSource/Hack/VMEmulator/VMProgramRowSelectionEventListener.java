@@ -26,5 +26,5 @@ public interface VMProgramRowSelectionEventListener {
      * Called when a new row is selected in the VMProgram.
      * The event contains the source object and the selected row instruction and index.
      */
-    public void rowSelected(VMProgramRowSelectionEvent event);
+    void rowSelected(VMProgramRowSelectionEvent event);
 }

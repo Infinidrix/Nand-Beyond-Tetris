@@ -109,9 +109,9 @@ class JackOSClass extends BuiltInVMClass {
 			value = value*10 + (c-'0');
 		}
 		if (neg) {
-			return (int)-value;
+			return -value;
 		} else {
-			return (int)value;
+			return value;
 		}
 	}
 }

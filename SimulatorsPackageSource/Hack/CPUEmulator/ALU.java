@@ -39,7 +39,7 @@ public class ALU extends ValueComputerPart {
     private String commandDescription;
 
     // The gui of the ALU
-    private ALUGUI gui;
+    private final ALUGUI gui;
 
     // if true, zeros input0 before operation
     private boolean zero0;

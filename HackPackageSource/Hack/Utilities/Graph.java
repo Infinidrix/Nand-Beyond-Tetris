@@ -28,7 +28,7 @@ import java.util.*;
 public class Graph {
 
     // The graph
-    private HashMap graph;
+    private final HashMap graph;
 
     // true if the graph has a circle
     private boolean hasCircle;
@@ -56,7 +56,7 @@ public class Graph {
 
     // Checks whether the given object exists in the graph. If not, creates it.
     private void checkExistence(Object object) {
-        if (!graph.keySet().contains(object)) {
+        if (!graph.containsKey(object)) {
             HashSet edgeSet = new HashSet();
             graph.put(object, edgeSet);
         }

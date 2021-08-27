@@ -29,37 +29,37 @@ import HackGUI.*;
 public class MemorySegmentsComponent extends JPanel {
 
     // The spllit pane containing static and local.
-    private JSplitPane segmentsSplitPane1;
+    private final JSplitPane segmentsSplitPane1;
 
     // The split pane between arg and the previous split pane.
-    private JSplitPane segmentsSplitPane2;
+    private final JSplitPane segmentsSplitPane2;
 
     // The split pane between this and the previous split pane.
-    private JSplitPane segmentsSplitPane3;
+    private final JSplitPane segmentsSplitPane3;
 
     // The split pane between that and the previous split pane.
-    private JSplitPane segmentsSplitPane4;
+    private final JSplitPane segmentsSplitPane4;
 
     // The split pane between temp and the previous split pane.
-    private JSplitPane segmentsSplitPane5;
+    private final JSplitPane segmentsSplitPane5;
 
     // 'Static' memory segment
-    private MemorySegmentComponent staticSegment;
+    private final MemorySegmentComponent staticSegment;
 
     // 'Local' memory segment
-    private MemorySegmentComponent localSegment;
+    private final MemorySegmentComponent localSegment;
 
     // 'Arg' memory segment
-    private MemorySegmentComponent argSegment;
+    private final MemorySegmentComponent argSegment;
 
     // 'This' memory segment
-    private MemorySegmentComponent thisSegment;
+    private final MemorySegmentComponent thisSegment;
 
     // 'That' memory segment
-    private MemorySegmentComponent thatSegment;
+    private final MemorySegmentComponent thatSegment;
 
     // 'Temp' memory segment
-    private MemorySegmentComponent tempSegment;
+    private final MemorySegmentComponent tempSegment;
 
     /**
      * Constructs a new MemorySegmentsComponent.

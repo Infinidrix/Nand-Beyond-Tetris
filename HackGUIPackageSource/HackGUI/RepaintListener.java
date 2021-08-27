@@ -27,5 +27,5 @@ public interface RepaintListener {
      * Called when the object calles to its repaint() method.
      * There is no event in this case.
      */
-    public void repaintSegments();
+    void repaintSegments();
 }

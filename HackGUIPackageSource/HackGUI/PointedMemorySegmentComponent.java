@@ -49,7 +49,7 @@ public class PointedMemorySegmentComponent extends MemorySegmentComponent implem
      * Sets the pointer with the given pointer address (absolute address).
      */
     public void setPointer(int pointerAddress) {
-        this.pointerAddress = (int)pointerAddress;
+        this.pointerAddress = pointerAddress;
         scrollToPointer();
     }
 

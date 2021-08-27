@@ -34,13 +34,13 @@ public class TitledComboBox extends JPanel {
     private static final int COMBO_HEIGHT = 22;
 
     // The combo box
-    private JComboBox combo;
+    private final JComboBox combo;
 
     // The title
-    private JLabel title;
+    private final JLabel title;
 
     // The listeners to this combo box
-    private LinkedList listeners;
+    private final LinkedList listeners;
 
     /**
      * Constructs a new TitledComboBox.

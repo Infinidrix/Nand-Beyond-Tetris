@@ -120,7 +120,7 @@ public class Command {
 
 
     // the command code
-    private byte code;
+    private final byte code;
 
     // the command argument (may be an array)
     private Object arg;

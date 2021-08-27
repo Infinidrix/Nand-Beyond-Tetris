@@ -28,10 +28,10 @@ public class PartPins extends ValueComputerPart {
 
 
     // The gui
-    private PartPinsGUI gui;
+    private final PartPinsGUI gui;
 
     // The part pins.
-    private Vector partPins;
+    private final Vector partPins;
 
     // The current gate
     private Gate gate;
@@ -40,7 +40,7 @@ public class PartPins extends ValueComputerPart {
     private GateClass partGateClass;
 
     // mapping from the pins' nodes to their gui adapters.
-    private Hashtable nodes;
+    private final Hashtable nodes;
 
     /**
      * Constructs a new Part Pins with the given gui.

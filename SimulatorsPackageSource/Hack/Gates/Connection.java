@@ -59,22 +59,22 @@ public class Connection {
 
 
     // The type of connection (out of the above constants)
-    private byte type;
+    private final byte type;
 
     // The number of the gate's pin (input, internal or output, according to the type)
-    private int gatePinNumber;
+    private final int gatePinNumber;
 
     // The number of the gate's part
-    private int partNumber;
+    private final int partNumber;
 
     // The name of the part's pin
-    private String partPinName;
+    private final String partPinName;
 
     // The bit indice of the parts's sub node (index 0 is low bit and index 1 is high bit)
-    private byte[] partSubBus;
+    private final byte[] partSubBus;
 
     // The bit indice of the gate's sub node (index 0 is low bit and index 1 is high bit)
-    private byte[] gateSubBus;
+    private final byte[] gateSubBus;
 
     /**
      * Constructs a connection according to the given type and pin information.

@@ -32,32 +32,32 @@ public interface ROMGUI extends PointedMemoryGUI {
     /**
      * Registers the given ProgramEventListener as a listener to this GUI.
      */
-    public void addProgramListener(ProgramEventListener listener);
+    void addProgramListener(ProgramEventListener listener);
 
     /**
      * Un-registers the given ProgramEventListener from being a listener to this GUI.
      */
-    public void removeProgramListener(ProgramEventListener listener);
+    void removeProgramListener(ProgramEventListener listener);
 
     /**
      * Notifies all the ProgramEventListeners on a change in the ROM's program by creating
      * a ProgramEvent (with the new event type and program's file name) and sending it using the
      * programChanged method to all the listeners.
      */
-    public void notifyProgramListeners(byte eventType, String programFileName);
+    void notifyProgramListeners(byte eventType, String programFileName);
 
     /**
      * Sets the current program file name with the given name.
      */
-    public void setProgram(String programFileName);
+    void setProgram(String programFileName);
 
     /**
      * Displays the given message.
      */
-    public void showMessage(String message);
+    void showMessage(String message);
 
     /**
      * Hides the displayed message.
      */
-    public void hideMessage();
+    void hideMessage();
 }

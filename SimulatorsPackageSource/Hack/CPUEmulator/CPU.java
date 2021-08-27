@@ -231,7 +231,7 @@ public class CPU
 									   ": Illegal instruction");
 
         if (!pcChanged) {
-            int newPC = (int)(PC.get() + 1);
+            int newPC = PC.get() + 1;
             if (newPC < 0 || newPC >= Definitions.ROM_SIZE)
                 throw new ProgramException("At line " + PC.get() +
 										   ": Can't continue past last line");
@@ -239,7 +239,7 @@ public class CPU
         }
         int controlValue = CTR.getValueAt(0);
         if ((controlValue & 0x1) > 0){
-            int timerValue = (int) (TIMER.getValueAt(0) - 1);
+            int timerValue = TIMER.getValueAt(0) - 1;
             if (timerValue == 0) {
                 PCS.setValueAt(0, PC.get(), true);
                 TIMER.setValueAt(0, RESET.getValueAt(0), true);
@@ -312,7 +312,7 @@ public class CPU
         }
 
         try {
-            alu.setCommand(assemblerTranslator.getExpByCode((int)(instruction & 0xffc0)),
+            alu.setCommand(assemblerTranslator.getExpByCode(instruction & 0xffc0),
                            zd, nd, zm, nm, f, no);
         } catch (AssemblerException ae) {}
 

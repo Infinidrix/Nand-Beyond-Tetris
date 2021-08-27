@@ -25,7 +25,7 @@ import java.util.EventObject;
 public class ErrorEvent extends EventObject {
 
     // the error message
-    private String errorMessage;
+    private final String errorMessage;
 
     /**
      * Constructs a new ErrorEvent with the given source and error message.

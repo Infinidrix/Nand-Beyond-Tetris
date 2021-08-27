@@ -26,7 +26,7 @@ public class Not extends BuiltInGate {
 
     protected void reCompute() {
         int in = inputPins[0].get();
-        outputPins[0].set((int)(1 - in));
+        outputPins[0].set(1 - in);
     }
 
 }

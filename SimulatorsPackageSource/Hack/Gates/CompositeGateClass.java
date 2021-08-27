@@ -50,13 +50,13 @@ public class CompositeGateClass extends GateClass {
     protected Vector internalPinsInfo;
 
     // The list of contained GateClasses (parts)
-    private Vector partsList;
+    private final Vector partsList;
 
     // Array of indice of parts (taken from the parts vector), in a topological order.
-    private int[] partsOrder;
+    private final int[] partsOrder;
 
     // The set of connections between the gate and its parts
-    private ConnectionSet connections;
+    private final ConnectionSet connections;
 
     /**
      * Constructs a new CompositeGateClass with the given gate name and the HDLTokenizer input

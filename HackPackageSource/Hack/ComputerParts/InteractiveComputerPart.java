@@ -31,7 +31,7 @@ import java.util.*;
 public abstract class InteractiveComputerPart extends ComputerPart
  implements ErrorEventListener {
 
-    private Vector errorListeners;
+    private final Vector errorListeners;
 
     /**
      * Constructs a new interactive computer part.

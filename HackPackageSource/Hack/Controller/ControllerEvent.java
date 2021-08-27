@@ -177,10 +177,10 @@ public class ControllerEvent extends EventObject {
     public static final byte LOAD_PROGRAM = 27;
 
     // the action code
-    private byte action;
+    private final byte action;
 
     // the supplied data
-    private Object data;
+    private final Object data;
 
     /**
      * Constructs a new Controller event with given source, the action code and the supplied data.

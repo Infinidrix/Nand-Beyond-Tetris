@@ -30,8 +30,8 @@ public class FullAdder extends BuiltInGate {
         int a = inputPins[0].get();
         int b = inputPins[1].get();
         int c = inputPins[2].get();
-        int sum = (int)(a + b + c);
-        outputPins[0].set((int)(sum % 2));
-        outputPins[1].set((int)(sum / 2));
+        int sum = a + b + c;
+        outputPins[0].set(sum % 2);
+        outputPins[1].set(sum / 2);
     }
 }

@@ -31,39 +31,39 @@ import javax.swing.border.*;
 public class BinaryComponent extends JPanel implements MouseListener, KeyListener {
 
     // Creating the text fields.
-    private JTextField bit0 = new JTextField(1);
-    private JTextField bit1 = new JTextField(1);
-    private JTextField bit2 = new JTextField(1);
-    private JTextField bit3 = new JTextField(1);
-    private JTextField bit4 = new JTextField(1);
-    private JTextField bit5 = new JTextField(1);
-    private JTextField bit6 = new JTextField(1);
-    private JTextField bit7 = new JTextField(1);
-    private JTextField bit8 = new JTextField(1);
-    private JTextField bit9 = new JTextField(1);
-    private JTextField bit10 = new JTextField(1);
-    private JTextField bit11 = new JTextField(1);
-    private JTextField bit12 = new JTextField(1);
-    private JTextField bit13 = new JTextField(1);
-    private JTextField bit14 = new JTextField(1);
-    private JTextField bit15 = new JTextField(1);
+    private final JTextField bit0 = new JTextField(1);
+    private final JTextField bit1 = new JTextField(1);
+    private final JTextField bit2 = new JTextField(1);
+    private final JTextField bit3 = new JTextField(1);
+    private final JTextField bit4 = new JTextField(1);
+    private final JTextField bit5 = new JTextField(1);
+    private final JTextField bit6 = new JTextField(1);
+    private final JTextField bit7 = new JTextField(1);
+    private final JTextField bit8 = new JTextField(1);
+    private final JTextField bit9 = new JTextField(1);
+    private final JTextField bit10 = new JTextField(1);
+    private final JTextField bit11 = new JTextField(1);
+    private final JTextField bit12 = new JTextField(1);
+    private final JTextField bit13 = new JTextField(1);
+    private final JTextField bit14 = new JTextField(1);
+    private final JTextField bit15 = new JTextField(1);
 
     // An array containing all of the text fields.
-    private JTextField[] bits = new JTextField[16];
+    private final JTextField[] bits = new JTextField[16];
 
     // The value of this component in a String representation.
     private StringBuffer valueStr;
 
     // Creating buttons.
-    private JButton okButton = new JButton();
-    private JButton cancelButton = new JButton();
+    private final JButton okButton = new JButton();
+    private final JButton cancelButton = new JButton();
 
     // Creating icons.
-    private ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "smallok.gif");
-    private ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "smallcancel.gif");
+    private final ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "smallok.gif");
+    private final ImageIcon cancelIcon = new ImageIcon(Utilities.imagesDir + "smallcancel.gif");
 
     // A vector conatining the listeners to this component.
-    private Vector listeners;
+    private final Vector listeners;
 
     // A boolean value which is true if the user pressed the ok button and
     // false otherwise.
@@ -142,7 +142,7 @@ public class BinaryComponent extends JPanel implements MouseListener, KeyListene
      * Returns the value of this component.
      */
     public int getValue() {
-        return (int)Conversions.binaryToInt(valueStr.toString());
+        return Conversions.binaryToInt(valueStr.toString());
     }
 
     // Updates the value of this component.

@@ -36,7 +36,7 @@ import Hack.Assembler.*;
 public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
 
     // A vector containing the listeners to this object.
-    private Vector programEventListeners;
+    private final Vector programEventListeners;
 
     // The ASM format.
     private final static int ASM_FORMAT = ROM.ASM_FORMAT;
@@ -45,22 +45,22 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
     protected MouseOverJButton loadButton = new MouseOverJButton();
 
     // The icon on the load file button.
-    private ImageIcon loadIcon = new ImageIcon(Utilities.imagesDir + "open2.gif");
+    private final ImageIcon loadIcon = new ImageIcon(Utilities.imagesDir + "open2.gif");
 
     // The file filter of this component.
-    private FileFilter filter;
+    private final FileFilter filter;
 
     // The file chooser component.
-    private JFileChooser fileChooser;
+    private final JFileChooser fileChooser;
 
     // The hack assembler translator.
-    private HackAssemblerTranslator translator = HackAssemblerTranslator.getInstance();
+    private final HackAssemblerTranslator translator = HackAssemblerTranslator.getInstance();
 
     // The text field containing the message (for example "Loading...").
-    private JTextField messageTxt = new JTextField();
+    private final JTextField messageTxt = new JTextField();
 
     // The possible numeric formats.
-    private String[] format = {"Asm", "Dec", "Hex", "Bin"};
+    private final String[] format = {"Asm", "Dec", "Hex", "Bin"};
 
     // The combo box for choosing the numeric format.
     protected JComboBox romFormat = new JComboBox(format);

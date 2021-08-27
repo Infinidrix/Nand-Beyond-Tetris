@@ -35,35 +35,35 @@ public class CPU {
     private static final int METHOD_STACK = 2;
 
     // The program that will be executed
-    private VMProgram program;
+    private final VMProgram program;
 
     // The memory used by the CPU
-    private RAM ram;
+    private final RAM ram;
 
     // The call stack
-    private CallStack callStack;
+    private final CallStack callStack;
 
     // The calculator
-    private Calculator calculator;
+    private final Calculator calculator;
 
     // The bus.
-    private Bus bus;
+    private final Bus bus;
 
     // The memory segments
-    private AbsolutePointedMemorySegment stackSegment;
-    private TrimmedAbsoluteMemorySegment workingStackSegment;
-    private MemorySegment staticSegment;
-    private MemorySegment localSegment;
-    private MemorySegment argSegment;
-    private MemorySegment thisSegment;
-    private MemorySegment thatSegment;
-    private MemorySegment tempSegment;
+    private final AbsolutePointedMemorySegment stackSegment;
+    private final TrimmedAbsoluteMemorySegment workingStackSegment;
+    private final MemorySegment staticSegment;
+    private final MemorySegment localSegment;
+    private final MemorySegment argSegment;
+    private final MemorySegment thisSegment;
+    private final MemorySegment thatSegment;
+    private final MemorySegment tempSegment;
 
     // A mapping from memory segment codes to the MemorySegment objects (not including stack).
-    private MemorySegment[] segments;
+    private final MemorySegment[] segments;
 
     // A stack of method frame addresses
-    private Vector stackFrames;
+    private final Vector stackFrames;
 
     // The last instruction that was executed.
     private VMEmulatorInstruction currentInstruction;
@@ -401,7 +401,7 @@ public class CPU {
      */
     public void function(int numberOfLocals) throws ProgramException {
 
-        int newSP = (int)(getSP() + numberOfLocals);
+        int newSP = getSP() + numberOfLocals;
         checkSP(newSP);
         workingStackSegment.setStartAddress(newSP);
 
@@ -410,7 +410,7 @@ public class CPU {
         localSegment.setEnabledRange(getSP(), newSP - 1, true);
 
         for (int i = 0; i < numberOfLocals; i++) {
-            pushValue(MAIN_STACK, (int)0);
+            pushValue(MAIN_STACK, 0);
         }
 
         String functionName = currentInstruction.getStringArg();
@@ -462,7 +462,7 @@ public class CPU {
         bus.send(ram, Definitions.LOCAL_POINTER_ADDRESS, ram, Definitions.R13_ADDRESS); // R13 = lcl
         bus.send(stackSegment, stackSegment.getValueAt(Definitions.LOCAL_POINTER_ADDRESS) - 5, ram, Definitions.R14_ADDRESS); // R14 = return address
         bus.send(stackSegment, getSP() - 1, stackSegment, ram.getValueAt(Definitions.ARG_POINTER_ADDRESS)); // *arg = return value
-        setSP((int)(ram.getValueAt(Definitions.ARG_POINTER_ADDRESS) + 1)); // SP = arg + 1
+        setSP(ram.getValueAt(Definitions.ARG_POINTER_ADDRESS) + 1); // SP = arg + 1
         bus.send(stackSegment, ram.getValueAt(Definitions.R13_ADDRESS) - 1, ram, Definitions.THAT_POINTER_ADDRESS); // that = *(R13 - 1)
         bus.send(stackSegment, ram.getValueAt(Definitions.R13_ADDRESS) - 2, ram, Definitions.THIS_POINTER_ADDRESS); // this = *(R13 - 2)
         bus.send(stackSegment, ram.getValueAt(Definitions.R13_ADDRESS) - 3, ram, Definitions.ARG_POINTER_ADDRESS); // arg = *(R13 - 3)
@@ -509,7 +509,7 @@ public class CPU {
 											  Definitions.VAR_END_ADDRESS - 1,
 											  true);
 			}
-			program.setPC((int)(returnAddress-1)); // set previousPC currectly
+			program.setPC(returnAddress-1); // set previousPC currectly
 			program.setPC(returnAddress); // pc = *sp
 		} else {
             error("Illegal return address");
@@ -526,7 +526,7 @@ public class CPU {
 		for (int i=0; i<params.length; ++i) {
 			pushValue(METHOD_STACK, params[i]);
 		}
-		callFunction(program.getAddress(functionName), (int)params.length,
+		callFunction(program.getAddress(functionName), params.length,
 					 functionName, true);
 	}
 	
@@ -552,7 +552,7 @@ public class CPU {
         pushFromRAM(MAIN_STACK, Definitions.ARG_POINTER_ADDRESS);
         pushFromRAM(MAIN_STACK, Definitions.THIS_POINTER_ADDRESS);
         pushFromRAM(MAIN_STACK, Definitions.THAT_POINTER_ADDRESS);
-        ram.setValueAt(Definitions.ARG_POINTER_ADDRESS, (int)(getSP() - numberOfArguments - 5), false);
+        ram.setValueAt(Definitions.ARG_POINTER_ADDRESS, getSP() - numberOfArguments - 5, false);
         ram.setValueAt(Definitions.LOCAL_POINTER_ADDRESS, getSP(), false);
 
         // enable in the arg segment only the number of args that were sent to the called function.
@@ -628,8 +628,8 @@ public class CPU {
         else
             workingStackSegment.setValueAt(sp, value, false);
 
-        checkSP((int)(sp + 1));
-        setSP((int)(sp + 1));
+        checkSP(sp + 1);
+        setSP(sp + 1);
     }
 
     // Pushes a value from the RAM at the given index into the appropriate stack.
@@ -638,8 +638,8 @@ public class CPU {
         bus.send(ram, index,
                  (stackID == MAIN_STACK ? stackSegment : workingStackSegment), sp);
 
-        checkSP((int)(sp + 1));
-        setSP((int)(sp + 1));
+        checkSP(sp + 1);
+        setSP(sp + 1);
     }
 
     // Push a value from the calculator at the given index into the appropriate stack.
@@ -648,8 +648,8 @@ public class CPU {
         bus.send(calculator, index,
                  (stackID == MAIN_STACK ? stackSegment : workingStackSegment), sp);
 
-        checkSP((int)(sp + 1));
-        setSP((int)(sp + 1));
+        checkSP(sp + 1);
+        setSP(sp + 1);
     }
 
     // sends a value from the given segment at the the given index to the appropriate stack (at sp)
@@ -663,14 +663,14 @@ public class CPU {
         checkSegmentIndex(segment, segmentCode, index);
         bus.send(segment, index, (stackID == MAIN_STACK ? stackSegment : workingStackSegment), sp);
 
-        checkSP((int)(sp + 1));
-        setSP((int)(sp + 1));
+        checkSP(sp + 1);
+        setSP(sp + 1);
     }
 
     // sends a value from the appropriate stack (at sp-1) to the given segment at the given index
     // and increments sp.
     private void popToSegment(int stackID, int segmentCode, int index) throws ProgramException {
-        int newSP = (int)(getSP() - 1);
+        int newSP = getSP() - 1;
         MemorySegment segment = (segmentCode == HVMInstructionSet.STATIC_SEGMENT_CODE) ?
                                 staticSegment : segments[segmentCode];
 
@@ -685,7 +685,7 @@ public class CPU {
     // Pops the a value from the appropriate stack, decrements sp, and returns
 	// the popped value.
     private int popValue(int stackID) throws ProgramException {
-        int newSP = (int)(getSP() - 1);
+        int newSP = getSP() - 1;
 		int value;
 
         if (stackID == MAIN_STACK)
@@ -702,7 +702,7 @@ public class CPU {
     // sends a value from the appropriate stack (at sp-1) to the ram at the given index
     // and increments sp.
     private void popToRAM(int stackID, int index) throws ProgramException {
-        int newSP = (int)(getSP() - 1);
+        int newSP = getSP() - 1;
         bus.send((stackID == MAIN_STACK ? stackSegment : workingStackSegment), newSP,
                  ram, index);
 
@@ -738,7 +738,7 @@ public class CPU {
     // sends a value from the appropriate stack (at sp-1) to the calculator at the given index
     // and increments sp.
     private void popToCalculator(int stackID, int index) throws ProgramException {
-        int newSP = (int)(getSP() - 1);
+        int newSP = getSP() - 1;
         bus.send((stackID == MAIN_STACK ? stackSegment : workingStackSegment), newSP,
                  calculator, index);
 
@@ -748,7 +748,7 @@ public class CPU {
 
     // Returns the element at the top of the stack and decrements sp by 1.
     private int popAndReturn() throws ProgramException {
-        int newSP = (int)(getSP() - 1);
+        int newSP = getSP() - 1;
         checkSP(newSP);
         setSP(newSP);
         return stackSegment.getValueAt(newSP);
@@ -798,7 +798,7 @@ public class CPU {
     // Verifies that the given index of the given segment is valid.
     private void checkSegmentIndex(MemorySegment segment, int segmentCode, int index)
      throws ProgramException {
-        int loc = (int)(index + segment.getStartAddress());
+        int loc = index + segment.getStartAddress();
 
         if (segmentCode == HVMInstructionSet.THIS_SEGMENT_CODE) {
             if (loc < Definitions.HEAP_START_ADDRESS || loc > Definitions.HEAP_END_ADDRESS)

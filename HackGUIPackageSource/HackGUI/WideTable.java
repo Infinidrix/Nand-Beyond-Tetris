@@ -27,7 +27,7 @@ import java.awt.*;
 public class WideTable extends JTable {
 
     // The width of the table.
-    private int width;
+    private final int width;
 
     /**
      * Constructs a new WideTable with the given model and width.

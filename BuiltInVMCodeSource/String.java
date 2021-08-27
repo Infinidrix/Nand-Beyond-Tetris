@@ -99,7 +99,7 @@ public class String extends JackOSClass {
     public static void setInt(int str, int j)
 			throws TerminateVMProgramThrowable {
 		java.lang.String s = ""+j;
-		int l = (int)s.length();
+		int l = s.length();
 		int capacity = readMemory(str);
 		if (capacity < l) {
 			callFunction("Sys.error", STRING_SETINT_INSUFFICIENT_CAPACITY);

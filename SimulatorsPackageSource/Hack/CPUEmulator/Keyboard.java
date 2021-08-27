@@ -28,10 +28,10 @@ import Hack.ComputerParts.*;
 public class Keyboard extends ComputerPart implements KeyListener {
 
     // The ram (the keyboard address is changed according to the current key)
-    private RAM ram;
+    private final RAM ram;
 
     // The gui of the keyboard
-    private KeyboardGUI gui;
+    private final KeyboardGUI gui;
 
     /**
      * Constructs a new keyboard with the given RAM and keyboard GUI.
@@ -69,7 +69,7 @@ public class Keyboard extends ComputerPart implements KeyListener {
      * Activated when a key is released.
      */
     public void keyReleased(KeyEvent e) {
-        ram.setValueAt(Definitions.KEYBOARD_ADDRESS, (int)0, true);
+        ram.setValueAt(Definitions.KEYBOARD_ADDRESS, 0, true);
         gui.clearKey();
     }
 

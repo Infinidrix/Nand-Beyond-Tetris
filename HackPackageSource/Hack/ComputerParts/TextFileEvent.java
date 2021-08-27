@@ -25,10 +25,10 @@ import java.util.EventObject;
 public class TextFileEvent extends EventObject {
 
     // the changed row index;
-    private int rowIndex;
+    private final int rowIndex;
 
     // the changed row string
-    private String rowString;
+    private final String rowString;
 
     /**
      * Constructs a new TextFileEvent with the given source and the selected row

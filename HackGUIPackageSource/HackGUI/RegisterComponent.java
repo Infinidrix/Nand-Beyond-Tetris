@@ -36,10 +36,10 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
     protected JTextField registerValue = new JTextField();
 
     // A vector containing the listeners to this object.
-    private Vector listeners;
+    private final Vector listeners;
 
     // A vector containing the error listeners to this object.
-    private Vector errorEventListeners;
+    private final Vector errorEventListeners;
 
     // The value of the register
     protected int value;

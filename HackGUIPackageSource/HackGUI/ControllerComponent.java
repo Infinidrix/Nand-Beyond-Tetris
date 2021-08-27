@@ -44,7 +44,7 @@ public class ControllerComponent extends JFrame implements ControllerGUI,
     protected static final Dimension separatorDimension = new Dimension(3, TOOLBAR_HEIGHT - 5);
 
     // The vector of listeners to this component.
-    private Vector listeners;
+    private final Vector listeners;
 
     // The fast forward button.
     protected MouseOverJButton ffwdButton;
@@ -68,17 +68,17 @@ public class ControllerComponent extends JFrame implements ControllerGUI,
     protected MouseOverJButton loadProgramButton;
 
     // Creating the file chooser window & the breakpoint window.
-    private JFileChooser fileChooser = new JFileChooser();
-    private BreakpointWindow breakpointWindow = new BreakpointWindow();
+    private final JFileChooser fileChooser = new JFileChooser();
+    private final BreakpointWindow breakpointWindow = new BreakpointWindow();
 
     // Creating the icons for the buttons.
-    private ImageIcon rewindIcon = new ImageIcon(Utilities.imagesDir + "vcrrewind.gif");
-    private ImageIcon ffwdIcon = new ImageIcon(Utilities.imagesDir + "vcrfastforward.gif");
-    private ImageIcon singleStepIcon = new ImageIcon(Utilities.imagesDir + "vcrforward.gif");
-    private ImageIcon stopIcon = new ImageIcon(Utilities.imagesDir + "vcrstop.gif");
-    private ImageIcon breakIcon = new ImageIcon(Utilities.imagesDir + "redflag.gif");
-    private ImageIcon loadProgramIcon = new ImageIcon(Utilities.imagesDir + "opendoc.gif");
-    private ImageIcon scriptIcon = new ImageIcon(Utilities.imagesDir + "scroll.gif");
+    private final ImageIcon rewindIcon = new ImageIcon(Utilities.imagesDir + "vcrrewind.gif");
+    private final ImageIcon ffwdIcon = new ImageIcon(Utilities.imagesDir + "vcrfastforward.gif");
+    private final ImageIcon singleStepIcon = new ImageIcon(Utilities.imagesDir + "vcrforward.gif");
+    private final ImageIcon stopIcon = new ImageIcon(Utilities.imagesDir + "vcrstop.gif");
+    private final ImageIcon breakIcon = new ImageIcon(Utilities.imagesDir + "redflag.gif");
+    private final ImageIcon loadProgramIcon = new ImageIcon(Utilities.imagesDir + "opendoc.gif");
+    private final ImageIcon scriptIcon = new ImageIcon(Utilities.imagesDir + "scroll.gif");
 
     // The speed slider.
     protected JSlider speedSlider;
@@ -1012,7 +1012,7 @@ public class ControllerComponent extends JFrame implements ControllerGUI,
     public void SpeedSlider_stateChanged(ChangeEvent e) {
         JSlider source = (JSlider)e.getSource();
         if (!source.getValueIsAdjusting()) {
-            int speed = (int)source.getValue();
+            int speed = source.getValue();
             notifyControllerListeners(ControllerEvent.SPEED_CHANGE, new Integer(speed));
         }
     }

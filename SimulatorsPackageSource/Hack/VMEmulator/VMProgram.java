@@ -42,7 +42,7 @@ public class VMProgram extends InteractiveComputerPart
 	private static final int BUILTIN_ACCESS_DENIED = 2;
 
     // listeners to program changes
-    private Vector listeners;
+    private final Vector listeners;
 
     // The list of VM instructions
     private VMEmulatorInstruction[] instructions;
@@ -55,17 +55,17 @@ public class VMProgram extends InteractiveComputerPart
     private int prevPC;
 
     // The gui of the program.
-    private VMProgramGUI gui;
+    private final VMProgramGUI gui;
 
     // The address of the initial instruction
     private int startAddress;
 
     // Mapping from file names to an array of two elements, containing the start and
     // end addresses of the corresponding static segment.
-    private Hashtable staticRange;
+    private final Hashtable staticRange;
 
 	// Addresses of functions by name
-	private Hashtable functions;
+	private final Hashtable functions;
 	private int infiniteLoopForBuiltInsAddress;
 	
     // The current index of the static variables
@@ -197,7 +197,7 @@ public class VMProgram extends InteractiveComputerPart
 			// a-la proj7, but just to be on the safe side...).
 			instructions[nextPC] =
 				new VMEmulatorInstruction(HVMInstructionSet.GOTO_CODE,
-										  (int)instructionsLength,
+                        instructionsLength,
 										  indexInInvisibleCode);
 			instructions[nextPC].setStringArg("afterInvisibleCode");
 			nextPC++;
@@ -208,7 +208,7 @@ public class VMProgram extends InteractiveComputerPart
 			// finish running - a problem for the OS tests.
 			instructions[nextPC] =
 				new VMEmulatorInstruction(HVMInstructionSet.LABEL_CODE,
-										  (int)-1);
+                        -1);
 			instructions[nextPC].setStringArg("infiniteLoopForBuiltIns");
 			nextPC++;
 			infiniteLoopForBuiltInsAddress = nextPC;
@@ -220,7 +220,7 @@ public class VMProgram extends InteractiveComputerPart
 			if (addCallBuiltInSysInit) { // Add a call to the built-in Sys.init
 				instructions[nextPC] =
 					new VMEmulatorInstruction(HVMInstructionSet.CALL_CODE,
-											  getAddress("Sys.init"), (int)0,
+											  getAddress("Sys.init"), 0,
 											  ++indexInInvisibleCode);
 				instructions[nextPC].setStringArg("Sys.init");
 				startAddress = nextPC;
@@ -229,7 +229,7 @@ public class VMProgram extends InteractiveComputerPart
 			// Add the label that the first invisible code line jumps to
 			instructions[nextPC] =
 				new VMEmulatorInstruction(HVMInstructionSet.LABEL_CODE,
-										  (int)-1);
+                        -1);
 			instructions[nextPC].setStringArg("afterInvisibleCode");
 			nextPC++;
 		}
@@ -285,7 +285,7 @@ public class VMProgram extends InteractiveComputerPart
                         StringTokenizer tokenizer = new StringTokenizer(line);
                         tokenizer.nextToken();
                         label = currentFunction + "$" + tokenizer.nextToken();
-                        symbols.put(label, new Integer((int)(nextPC + 1)));
+                        symbols.put(label, new Integer(nextPC + 1));
                     }
 
                     nextPC++;
@@ -415,7 +415,7 @@ public class VMProgram extends InteractiveComputerPart
 
                         case HVMInstructionSet.LABEL_CODE:
                             label = currentFunction + "$" + tokenizer.nextToken();
-                            instructions[pc] = new VMEmulatorInstruction(opCode, (int)(-1));
+                            instructions[pc] = new VMEmulatorInstruction(opCode, -1);
                             instructions[pc].setStringArg(label);
                             indexInFunction--; // since Label is not a "physical" instruction
                             break;
@@ -726,7 +726,7 @@ public class VMProgram extends InteractiveComputerPart
     // The task that loads a new program into the emulator
     class LoadProgramTask implements Runnable {
 
-        private String fileName;
+        private final String fileName;
 
         public LoadProgramTask(String fileName) {
             this.fileName = fileName;

@@ -30,35 +30,35 @@ import java.awt.event.*;
 public class BreakpointWindow extends JFrame implements MouseListener, BreakpointChangedListener {
 
     // The table of breakpoints.
-    private JTable breakpointTable;
+    private final JTable breakpointTable;
 
     // The vector of breakpoints.
     private Vector breakpoints;
 
     // The model of this table.
-    private BreakpointTableModel model;
+    private final BreakpointTableModel model;
 
     // A vector containing the listeners to this object.
-    private Vector listeners;
+    private final Vector listeners;
 
     // The layout of this component.
-    private FlowLayout flowLayout = new FlowLayout();
+    private final FlowLayout flowLayout = new FlowLayout();
 
     // The add remove and ok buttons.
-    private JButton addButton = new JButton();
-    private JButton removeButton = new JButton();
-    private JButton okButton = new JButton();
+    private final JButton addButton = new JButton();
+    private final JButton removeButton = new JButton();
+    private final JButton okButton = new JButton();
 
     // The cell renderer of the table.
-    private ColoredTableCellRenderer coloredRenderer = new ColoredTableCellRenderer();
+    private final ColoredTableCellRenderer coloredRenderer = new ColoredTableCellRenderer();
 
     // Creating icons.
-    private ImageIcon addIcon = new ImageIcon(Utilities.imagesDir + "smallplus.gif");
-    private ImageIcon removeIcon = new ImageIcon(Utilities.imagesDir + "smallminus.gif");
-    private ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok2.gif");
+    private final ImageIcon addIcon = new ImageIcon(Utilities.imagesDir + "smallplus.gif");
+    private final ImageIcon removeIcon = new ImageIcon(Utilities.imagesDir + "smallminus.gif");
+    private final ImageIcon okIcon = new ImageIcon(Utilities.imagesDir + "ok2.gif");
 
     // Creating the window which allows adding and editing a given breakpoint.
-    private BreakpointVariablesWindow variables = new BreakpointVariablesWindow();
+    private final BreakpointVariablesWindow variables = new BreakpointVariablesWindow();
 
     // The selected row in the breakpoint table.
     private int selectedRowIndex = -1;

@@ -35,35 +35,35 @@ public class HardwareSimulatorComponent extends HackSimulatorComponent implement
     private static final int HEIGHT = 611;
 
     // The input pins of the hardware simulator.
-    private PinsComponent inputPins;
+    private final PinsComponent inputPins;
 
     // The output pins of the hardware simulator.
-    private PinsComponent outputPins;
+    private final PinsComponent outputPins;
 
     // The internal pins of the hardware simulator.
-    private PinsComponent internalPins;
+    private final PinsComponent internalPins;
 
     // The hdl view of the hardware simulator.
-    private TextFileComponent hdlView;
+    private final TextFileComponent hdlView;
 
     // The part pins of the hardware simulator.
-    private PartPinsComponent partPins;
+    private final PartPinsComponent partPins;
 
     // The parts of the hardware simulator.
-    private PartsComponent parts;
+    private final PartsComponent parts;
 
     // The message label
-    private JLabel messageLbl = new JLabel();
+    private final JLabel messageLbl = new JLabel();
 
     // The two optional gates panel (with different layouts)
-    private JPanel nullLayoutGatesPanel;
-    private JPanel flowLayoutGatesPanel;
+    private final JPanel nullLayoutGatesPanel;
+    private final JPanel flowLayoutGatesPanel;
 
     // True if the current layout is flow layout.
     private boolean flowLayout = false;
 
     // The gate info component of the current gate
-    private GateInfoComponent gateInfo;
+    private final GateInfoComponent gateInfo;
 
     /**
      * Constructs a new HardwareSimulatorComponent.

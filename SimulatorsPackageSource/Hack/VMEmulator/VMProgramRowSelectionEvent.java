@@ -27,10 +27,10 @@ import Hack.VirtualMachine.*;
 public class VMProgramRowSelectionEvent extends EventObject {
 
     // the changed row index;
-    private int rowIndex;
+    private final int rowIndex;
 
     // the changed row instruction
-    private HVMInstruction rowInstruction;
+    private final HVMInstruction rowInstruction;
 
     /**
      * Constructs a new VMProgramRowSelectionEvent with the given source and the selected row

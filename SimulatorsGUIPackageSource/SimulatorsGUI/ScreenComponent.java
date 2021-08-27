@@ -39,7 +39,8 @@ public class ScreenComponent extends JPanel implements ScreenGUI, ActionListener
     private boolean redraw = true;
 
     // screen location at a given index
-    private int[] x, y;
+    private final int[] x;
+    private final int[] y;
 
     // The screen redrawing timer
     protected Timer timer;
@@ -160,7 +161,7 @@ public class ScreenComponent extends JPanel implements ScreenGUI, ActionListener
                             // since there's no drawPixel, uses drawLine to draw one pixel
                             g.drawLine(x[i] + j, y[i], x[i] + j, y[i]);
 
-                        value = (int)(value >> 1);
+                        value = value >> 1;
                     }
                 }
             }

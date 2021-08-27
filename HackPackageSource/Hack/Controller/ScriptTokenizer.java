@@ -102,7 +102,7 @@ public class ScriptTokenizer {
     public static final int KW_CLEAR_ECHO	         = 10;
 
     // The parser
-    private StreamTokenizer parser;
+    private final StreamTokenizer parser;
 
     // Hashtable containing the keywords of the language
     private Hashtable keywords;
@@ -255,7 +255,7 @@ public class ScriptTokenizer {
      * Returns if there are more tokens in the stream
      */
     public boolean hasMoreTokens() {
-        return (parser.ttype != parser.TT_EOF);
+        return (parser.ttype != StreamTokenizer.TT_EOF);
     }
 
     /**

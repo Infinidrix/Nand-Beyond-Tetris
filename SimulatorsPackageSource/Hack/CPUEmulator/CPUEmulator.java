@@ -59,7 +59,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
     private static final String COMMAND_SETVAR = "set";
 
     // The simulating cpu
-    private CPU cpu;
+    private final CPU cpu;
 
     // The GUI of the CPUEmulator
     private CPUEmulatorGUI gui;
@@ -68,7 +68,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
     private String[] vars;
 
     // The keyboard
-    private Keyboard keyboard;
+    private final Keyboard keyboard;
 
     // The current animation mode
     private int animationMode;
@@ -236,17 +236,17 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
             if (varName.equals(VAR_A)) {
                 numValue = Integer.parseInt(value);
                 check_ram_address(varName, numValue);
-                cpu.getA().store((int)numValue);
+                cpu.getA().store(numValue);
             }
             else if (varName.equals(VAR_D)) {
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.getD().store((int)numValue);
+                cpu.getD().store(numValue);
             }
             else if (varName.equals(VAR_PC)) {
                 numValue = Integer.parseInt(value);
                 check_rom_address(varName, numValue);
-                cpu.getPC().store((int)numValue);
+                cpu.getPC().store(numValue);
             }
             else if (varName.equals(VAR_TIME))
                 throw new VariableException("Read Only variable", varName);
@@ -254,13 +254,13 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
                 int index = getRamIndex(varName);
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.getRAM().setValueAt(index, (int)numValue, false);
+                cpu.getRAM().setValueAt(index, numValue, false);
             }
             else if (varName.startsWith(VAR_ROM + "[")) {
                 int index = getRomIndex(varName);
                 numValue = Integer.parseInt(value);
                 check_value(varName, numValue);
-                cpu.getROM().setValueAt(index, (int)numValue, false);
+                cpu.getROM().setValueAt(index, numValue, false);
             }
             else
                 throw new VariableException("Unknown variable", varName);
@@ -474,7 +474,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         if (index < 0 || index >= Definitions.RAM_SIZE)
             throw new VariableException("Illegal variable index", varName);
 
-        return (int)index;
+        return index;
     }
 
     // receives a variable name of the form xxx[i] and returns the numeric
@@ -489,7 +489,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         if (index < 0 || index >= Definitions.ROM_SIZE)
             throw new VariableException("Illegal variable index", varName);
 
-        return (int)index;
+        return index;
     }
 
     // Checks that the given value is a legal 16-bit value

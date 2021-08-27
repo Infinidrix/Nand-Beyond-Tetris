@@ -31,7 +31,7 @@ public class Screen extends BuiltInGateWithGUI {
     private ScreenComponent gui;
 
     // The memory array
-    private int[] values;
+    private final int[] values;
 
     /**
      * Constructs a new Screen.

@@ -26,7 +26,7 @@ import Hack.Gates.*;
 public class Parts extends ComputerPart {
 
     // The gui
-    private PartsGUI gui;
+    private final PartsGUI gui;
 
     // The parts (gates) array
     private Gate[] parts;

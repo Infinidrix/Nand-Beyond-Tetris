@@ -29,13 +29,13 @@ import java.awt.event.*;
 public class KeyboardComponent extends JPanel implements KeyboardGUI {
 
     // The icon of the keyboard.
-    private ImageIcon keyboardIcon = new ImageIcon(Utilities.imagesDir + "keyboard.gif");
+    private final ImageIcon keyboardIcon = new ImageIcon(Utilities.imagesDir + "keyboard.gif");
 
     // The text field on which the letter are appearing.
-    private JTextField keyNameText = new JTextField();
+    private final JTextField keyNameText = new JTextField();
 
     // The keyboard's button.
-    private JButton keyButton = new JButton();
+    private final JButton keyButton = new JButton();
 
     /**
      * Constructs a new keyboard component.

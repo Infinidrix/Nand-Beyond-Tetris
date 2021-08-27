@@ -30,35 +30,35 @@ public interface HackSimulatorGUI {
      * If another component is already displayed, it will be removed.
      * If the given component is null, removes the currently displayed component.
      */
-    public void setAdditionalDisplay(JComponent component);
+    void setAdditionalDisplay(JComponent component);
 
     /**
      * Opens the program file dialog for choosing a new program.
      */
-    public void loadProgram();
+    void loadProgram();
 
     /**
      * Sets the name of the html file that contains the help usage.
      */
-    public void setUsageFileName(String fileName);
+    void setUsageFileName(String fileName);
 
     /**
      * Sets the name of the html file that contains the "about" information.
      */
-    public void setAboutFileName(String fileName);
+    void setAboutFileName(String fileName);
 
     /**
      * Returns the name of the help usage file.
      */
-    public String getUsageFileName();
+    String getUsageFileName();
 
     /**
      * Returns the name of the about information file.
      */
-    public String getAboutFileName();
+    String getAboutFileName();
 
     /**
      * Sets the working dir name with the given one.
      */
-    public void setWorkingDir(File file);
+    void setWorkingDir(File file);
 }
