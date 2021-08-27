@@ -46,6 +46,11 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
     private static final String VAR_PC = "PC";
     private static final String VAR_RAM = "RAM";
     private static final String VAR_ROM = "ROM";
+    private static final String VAR_PCS = "PCS";
+    private static final String VAR_CTR = "CTR";
+    private static final String VAR_BASE = "BASE";
+    private static final String VAR_TEMP = "TEMP";
+    private static final String VAR_INTH = "INTH";
     private static final String VAR_TIME = "time";
 
     // Commands
@@ -83,6 +88,20 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
 
         Register D = new Register(null);
         D.reset();
+        Register PCS = new Register(null);
+        PCS.reset();
+        Register CTR = new Register(null);
+        CTR.reset();
+        Register BASE = new Register(null);
+        BASE.reset();
+        Register INTH = new Register(null);
+        INTH.reset();
+        Register TEMP = new Register(null);
+        TEMP.reset();
+        Register RESET = new Register(null);
+        TEMP.reset();
+        Register TIMER = new Register(null);
+        TEMP.reset();
 
         PointerAddressRegisterAdapter PC = new PointerAddressRegisterAdapter(null, rom);
         PC.reset();
@@ -96,7 +115,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         Bus bus = new Bus(null);
         bus.reset();
 
-        cpu = new CPU(ram, rom, A, D, PC, alu, bus);
+        cpu = new CPU(ram, rom, A, D, PC, alu, bus, PCS, CTR, BASE, INTH, TEMP, RESET, TIMER);
 
         init();
     }
@@ -124,6 +143,34 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         D.addErrorListener(this);
         D.reset();
 
+        Register PCS = new Register(gui.getPCS());
+        PCS.addErrorListener(this);
+        PCS.reset();
+
+        Register CTR = new Register(gui.getCTR());
+        CTR.addErrorListener(this);
+        CTR.reset();
+
+        Register BASE = new Register(gui.getBASE());
+        BASE.addErrorListener(this);
+        BASE.reset();
+
+        Register INTH = new Register(gui.getINTH());
+        INTH.addErrorListener(this);
+        INTH.reset();
+
+        Register TEMP = new Register(gui.getTEMP());
+        TEMP.addErrorListener(this);
+        TEMP.reset();
+
+        Register RESET = new Register(gui.getRESET());
+        RESET.addErrorListener(this);
+        RESET.reset();
+
+        Register TIMER = new Register(gui.getTIMER());
+        TIMER.addErrorListener(this);
+        TIMER.reset();
+
         PointerAddressRegisterAdapter PC = new PointerAddressRegisterAdapter(gui.getPC(), rom);
         PC.addErrorListener(this);
         PC.reset();
@@ -137,7 +184,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         Bus bus = new Bus(gui.getBus());
         bus.reset();
 
-        cpu = new CPU(ram, rom, A, D, PC, alu, bus);
+        cpu = new CPU(ram, rom, A, D, PC, alu, bus, PCS, CTR, BASE, INTH, TEMP, RESET, TIMER);
 
         init();
     }
@@ -338,6 +385,11 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         cpu.getD().setNumericFormat(formatCode);
         cpu.getPC().setNumericFormat(formatCode);
         cpu.getALU().setNumericFormat(formatCode);
+        cpu.getPCS().setNumericFormat(formatCode);
+        cpu.getCTR().setNumericFormat(formatCode);
+        cpu.getBASE().setNumericFormat(formatCode);
+        cpu.getINTH().setNumericFormat(formatCode);
+        cpu.getTEMP().setNumericFormat(formatCode);
     }
 
     public void setAnimationSpeed(int speedUnit) {

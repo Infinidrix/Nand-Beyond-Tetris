@@ -11,7 +11,7 @@ BuiltinVMCodeJar = InstallDir/builtInVMCode/VMCode.jar
 MainClassesSource = $(wildcard MainClassesSource/*.java)
 MainClassesJar = InstallDir/bin/classes/MainClasses.jar
 
-main: $(Lib)/Hack.jar $(Lib)/HackGUI.jar $(Lib)/Compilers.jar $(Lib)/Simulators.jar $(Lib)/SimulatorsGUI.jar $(BuiltinChipsJar) $(BuiltinVMCodeJar) $(MainClassesJar)
+main: $(MainClassesJar)
 	./InstallDir/CPUEmulator.sh
 
 $(Lib)/Hack.jar: $(HackPackageSource)
@@ -28,7 +28,7 @@ $(Lib)/Compilers.jar: $(CompilersPackageSource)
 
 $(Lib)/Simulators.jar: $(SimulatorsPackageSource)
 	javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java -d $(Lib)/
-	jar cf $(Lib)/Simulators.jar $(Lib)/Hack/CPUEmulator/*.class $(Lib)/Hack/Gates/*.class $(Lib)/Hack/HardwareSimulator/*.class
+# 	jar cf Simulators.jar Hack/CPUEmulator/*.class Hack/Gates/*.class Hack/HardwareSimulator/*.class
 
 $(Lib)/SimulatorsGUI.jar: $(SimulatorsGUIPackageSource)
 	javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java SimulatorsGUIPackageSource/SimulatorsGUI/*.java -d $(Lib)/
@@ -46,6 +46,7 @@ $(BuiltinVMCodeJar): $(BuiltInVMCodeSource)
 	rsync -a InstallDir/temp/builtInVMCode/ InstallDir/builtInVMCode/
 	rm -r InstallDir/temp/
 
-$(MainClassesJar): $(MainClassesSource)
+$(MainClassesJar): $(MainClassesSource) $(SimulatorsGUIPackageSource) $(SimulatorsPackageSource) $(BuiltInVMCodeSource) $(BuiltInChipsSource)  $(CompilersPackageSource)  $(HackGUIPackageSource) $(HackPackageSource)
 	javac HackGUIPackageSource/HackGUI/*.java HackPackageSource/Hack/*/*.java CompilersPackageSource/Hack/*/*.java SimulatorsPackageSource/Hack/*/*.java SimulatorsGUIPackageSource/SimulatorsGUI/*.java BuiltInChipsSource/*.java  BuiltInVMCodeSource/*.java MainClassesSource/*.java -d InstallDir/bin/classes/
-	jar cf $(MainClassesJar) InstallDir/bin/classes/*.class
+	cd InstallDir/bin/classes; jar cf MainClasses.jar *.class Hack/*/*.class HackGUI/*.class SimulatorsGUI/*.class
+	rm -r InstallDir/bin/classes/*/

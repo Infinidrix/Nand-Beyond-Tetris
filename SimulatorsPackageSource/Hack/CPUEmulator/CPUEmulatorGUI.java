@@ -60,6 +60,13 @@ public interface CPUEmulatorGUI extends HackSimulatorGUI {
      * Returns the D register GUI component.
      */
     public RegisterGUI getD();
+    public RegisterGUI getPCS();
+    public RegisterGUI getCTR();
+    public RegisterGUI getBASE();
+    public RegisterGUI getINTH();
+    public RegisterGUI getTEMP();
+    public RegisterGUI getRESET();
+    public RegisterGUI getTIMER();
 
     /**
      * Returns the PC register GUI component.

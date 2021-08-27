@@ -1,0 +1,29 @@
+
+    Welcome to what might one day become V2.0 of the Hack computer. Before we begin, take a step back and marvel at what you've built so far. We have a simple OOP Language that is built on top of the VM code which in turn is compiled into assembly which is finally translated machine code. And then that machine code is decoded and executed on a CPU of our own design. We have a screen that is memory mapped onto a claustrophobia-inducing RAM segment. The rest of the RAM is split up between the static, stack and heap segment with one slot left for Keyboard. An application programmer for our platform would have the luxury of not having to code their own math library or worry too much about memory management since our OS can do it for them.
+
+Having taken a quick glance at what has been built so far, it's natural and encouraged to happy of your computer's progress so far. It's good to take pride in a work well done. I was of the same mind until one mild-mannered semester showed up with 2 courses up its sleeve: Computer Organization and Architecture (one course), and Operating Systems. This was an excellent opportunity to look at ways to improve the platform. More importantly, I could take up the role of a designer instead of just an implementer, finding elegant ways to make the most imapct in the system. This prospect excited me so I started before I finished those courses, reading on my own to the point of understanding the main points and thinking of a way to bring those concepts to the hack platform without sacrificing its simplicity.
+
+At first, I thought of implementing it as an addendum to each chapter adding more complexity and functionality on top of the course's content. I later remembered the intention of the original authors to help students see the forest for the trees (TODO: Check if this is right) and the course as it is accomplishes that task beautifully.
+Therefore, I thought to approach it in an iterative manner where we start with where the completed Hack computer then with the aim of adding a certain functionality, make modifications on the entire stack (keeping the excellent testing practices) to integrate the feature into the computer. By the end of each section, we'll have a working computer (albeit at times it might feel a bit incomplete) with an understanding of all aspects of its implementation. I personally recommend a reasonable break if you're just coming from Nand2Tetris as I'm sure it was a gruelling final few weeks. Aside from those notes, I bid you farewell and I hope you enjoy this segment as well
+
+Disclaimer: This is a personal pet project of an undergraduate student and has no affiliation with the original authors
+
+V1.1:
+Simple Process Scheduling and virtualization
+============================================
+
+    Main Points
+
+    -> Need for Processes and virtualization
+    -> Requirements for process scheduling and virtualization
+    -> How to solve process scheduling and virtualization on a normal machine
+    -> Bringing it to the Hack Machine
+    -> Implementation Notes
+
+    One ot the things that stand out from the hack platform is the fact that it is a single program application. There is always only one program loaded and running and in order to switch to another program you have to stop the computer, load the next program manually and then reset the computer and start. Even though that's tiresome, the more concerning aspect is if you want to return to the previous program, you'd have to start from the beginning. It currently seem to keep any state about the program you had just switched from.
+    This effect is not only true of application programs but also the OS. Once we switch programs the OS has to reboot, so to speak, losing all its previous state in the process. Coming to a real computer, this seems like a rather fundamental piece of the modern computer. Not only does it allow for the user to switch between programs without all this hassle, but it also feels as though it's running multiple programs simultaneously. (TODO: Finish this blog)
+
+
+V1.2:
+Journey to 32 bit
+=================

@@ -35,6 +35,13 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
     // Creating the RegisterComponents a, d and pc.
     private RegisterComponent a;
     private RegisterComponent d;
+    private RegisterComponent pcs;
+    private RegisterComponent ctr;
+    private RegisterComponent base;
+    private RegisterComponent inth;
+    private RegisterComponent temp;
+    private RegisterComponent reset;
+    private RegisterComponent timer;
     private RegisterComponent pc;
 
     // The screen of the CPUEmulator.
@@ -69,6 +76,13 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
         alu = new ALUComponent();
         a = new RegisterComponent();
         d = new RegisterComponent();
+        pcs = new RegisterComponent();
+        ctr = new RegisterComponent();
+        base = new RegisterComponent();
+        inth = new RegisterComponent();
+        temp = new RegisterComponent();
+        reset = new RegisterComponent();
+        timer = new RegisterComponent();
         pc = new RegisterComponent();
         setRegistersNames();
         bus = new BusComponent();
@@ -92,6 +106,13 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
         a.setName("A");
         d.setName("D");
         pc.setName("PC");
+        pcs.setName("PCS");
+        ctr.setName("CTR");
+        base.setName("B");
+        inth.setName("INT");
+        temp.setName("TMP");
+        reset.setName("RST");
+        timer.setName("TMR");
     }
 
     public Point getAdditionalDisplayLocation() {
@@ -154,6 +175,41 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
         return d;
     }
 
+    @Override
+    public RegisterGUI getPCS() {
+        return pcs;
+    }
+
+    @Override
+    public RegisterGUI getCTR() {
+        return ctr;
+    }
+
+    @Override
+    public RegisterGUI getBASE() {
+        return base;
+    }
+
+    @Override
+    public RegisterGUI getINTH() {
+        return inth;
+    }
+
+    @Override
+    public RegisterGUI getTEMP() {
+        return temp;
+    }
+
+    @Override
+    public RegisterGUI getRESET() {
+        return reset;
+    }
+
+    @Override
+    public RegisterGUI getTIMER() {
+        return timer;
+    }
+
     /**
      * Returns the screen GUI component.
      */
@@ -167,6 +223,13 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
         pc.setBounds(new Rectangle(35, 527, pc.getWidth(), pc.getHeight()));
         a.setBounds(new Rectangle(278, 527, a.getWidth(), a.getHeight()));
         d.setBounds(new Rectangle(646, 351, d.getWidth(), d.getHeight()));
+        pcs.setBounds(new Rectangle(460, 351, pcs.getWidth(), pcs.getHeight()));
+        ctr.setBounds(new Rectangle(460, 380, ctr.getWidth(), ctr.getHeight()));
+        base.setBounds(new Rectangle(646, 380, base.getWidth(), base.getHeight()));
+        inth.setBounds(new Rectangle(646, 320, inth.getWidth(), inth.getHeight()));
+        temp.setBounds(new Rectangle(460, 320, temp.getWidth(), temp.getHeight()));
+        reset.setBounds(new Rectangle(820, 320, reset.getWidth(), reset.getHeight()));
+        timer.setBounds(new Rectangle(820, 351, timer.getWidth(), timer.getHeight()));
         screen.setToolTipText("Screen");
         screen.setBounds(new Rectangle(476, 25, screen.getWidth(), screen.getHeight()));
         keyboard.setBounds(new Rectangle(476, 285, keyboard.getWidth(), keyboard.getHeight()));
@@ -187,6 +250,13 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
         this.add(keyboard, null);
         this.add(alu, null);
         this.add(d, null);
+        this.add(pcs, null);
+        this.add(ctr, null);
+        this.add(base, null);
+        this.add(inth, null);
+        this.add(temp, null);
+        this.add(reset, null);
+        this.add(timer, null);
         setSize(EMULATOR_WIDTH, EMULATOR_HEIGHT);
     }
 }

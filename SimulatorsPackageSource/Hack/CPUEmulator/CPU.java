@@ -21,6 +21,9 @@ import Hack.Controller.*;
 import Hack.ComputerParts.*;
 import Hack.Utilities.*;
 import Hack.Assembler.*;
+import builtInVMCode.Sys;
+
+import java.util.Timer;
 
 /**
  * A computer with memory (ROM & RAM) and two registers (A & D). Includes
@@ -35,6 +38,13 @@ public class CPU
 
     // The data register
     protected Register D;
+    protected Register PCS;
+    protected Register CTR;
+    protected Register BASE;
+    protected Register INTH;
+    protected Register TEMP;
+    protected Register RESET;
+    protected Register TIMER;
 
     // The RAM array.
     protected RAM M;
@@ -51,6 +61,8 @@ public class CPU
     // The time that passed since the program started running.
     protected long time;
 
+    protected Register[] choice;
+
     // An assembler transltor
     protected HackAssemblerTranslator assemblerTranslator;
 
@@ -58,7 +70,8 @@ public class CPU
      * Constructs a new cpu with the given ROM, RAM, A, D, PC & ALU.
      */
     public CPU(RAM ram, ROM rom, PointerAddressRegisterAdapter A, Register D,
-               PointerAddressRegisterAdapter PC, ALU alu, Bus bus) {
+               PointerAddressRegisterAdapter PC, ALU alu, Bus bus, Register PCS,
+               Register CTR, Register BASE, Register INTH, Register TEMP, Register RESET, Register TIMER) {
         this.M = ram;
         this.rom = rom;
         this.A = A;
@@ -66,6 +79,16 @@ public class CPU
         this.PC = PC;
         this.alu = alu;
         this.bus = bus;
+        this.PCS = PCS;
+        this.CTR = CTR;
+        this.BASE = BASE;
+        this.INTH = INTH;
+        this.TEMP = TEMP;
+        this.RESET = RESET;
+        this.TIMER = TIMER;
+
+        choice = new Register[]{ A, D, null, PCS, CTR, BASE, INTH, TEMP, RESET };
+
 
         A.setUpdatePointer(false);
 
@@ -121,6 +144,34 @@ public class CPU
         return alu;
     }
 
+    public Register getPCS() {
+        return PCS;
+    }
+
+    public Register getCTR() {
+        return CTR;
+    }
+
+    public Register getBASE() {
+        return BASE;
+    }
+
+    public Register getINTH() {
+        return INTH;
+    }
+
+    public Register getTEMP() {
+        return TEMP;
+    }
+
+    public Register getRESET() {
+        return RESET;
+    }
+
+    public Register getTIMER() {
+        return TIMER;
+    }
+
     /**
      * Returns the time that passed since the program started running.
      */
@@ -137,6 +188,14 @@ public class CPU
         A.setUpdatePointer(false);
 
         D.reset();
+        PCS.reset();
+        CTR.reset();
+        BASE.reset();
+        INTH.reset();
+        TEMP.reset();
+        RESET.reset();
+        TIMER.reset();
+
         PC.reset();
         alu.reset();
         M.clearScreen();
@@ -163,6 +222,9 @@ public class CPU
             computeExp(instruction);
             setDestination(instruction);
             pcChanged = checkJump(instruction);
+        } else if ((instruction & 0xa000) == 0xa000) {
+            computeNewExp(instruction);
+            setNewDestination(instruction);
         }
         else if (instruction != HackAssemblerTranslator.NOP)
             throw new ProgramException("At line " + PC.get() +
@@ -175,8 +237,60 @@ public class CPU
 										   ": Can't continue past last line");
             PC.setValueAt(0, newPC, true);
         }
-
+        short controlValue = CTR.getValueAt(0);
+        if ((controlValue & 0x1) > 0){
+            short timerValue = (short) (TIMER.getValueAt(0) - 1);
+            if (timerValue == 0) {
+                PCS.setValueAt(0, PC.get(), true);
+                TIMER.setValueAt(0, RESET.getValueAt(0), true);
+                PC.setValueAt(0, INTH.getValueAt(0), true);
+            } else if (timerValue < 0) {
+                TIMER.setValueAt(0, RESET.getValueAt(0), true);
+            } else {
+                TIMER.setValueAt(0, timerValue, true);
+            }
+        }
         time++;
+    }
+
+    private void computeNewExp(short instruction) {
+        int instructionSeg = (instruction & 0x0f00) >> 8;
+        boolean z0 = (instructionSeg == 0 || instructionSeg == 3 || instructionSeg == 5 || instructionSeg == 4); //Destination properties
+        // TODO: Doesn't work for NOR in this case: Current solution is to document it
+        boolean n0 = ((instruction & 0x0800) == 0);
+        boolean z1 = false; // Source properties
+        boolean n1 = (instructionSeg == 2 || instructionSeg == 5);
+        boolean f = (instructionSeg == 1 || instructionSeg == 4 || instructionSeg == 5 || instructionSeg == 8);
+        boolean no = (instructionSeg == 1 || instructionSeg == 2 || instructionSeg == 3 || instructionSeg == 5);
+        alu.setCommand("NONE", z0, n0, z1, n1, f, no);
+        int sourceIndex = (instruction & 0x00f0) >> 4;
+        if (sourceIndex == 2){
+            // TODO: Add bounds check and refactor
+            bus.send(M, A.get() + BASE.get(), alu, 1);
+        } else {
+            Register source = choice[sourceIndex];
+            bus.send(source, 0, alu, 1);
+        }
+
+        int destIndex = (instruction & 0x000f);
+        if (destIndex == 2){
+            bus.send(M, A.get() + BASE.get(), alu, 0);
+        } else {
+            Register destination = choice[destIndex];
+            bus.send(destination, 0, alu, 0);
+        }
+
+        alu.compute();
+    }
+
+    private void setNewDestination(short instruction) {
+        int destIndex = (instruction & 0x000f);
+        if (destIndex == 2){
+            bus.send(alu, 2, M, A.get() + BASE.get());
+        } else {
+            Register destination = choice[destIndex];
+            bus.send(alu, 2, destination, 0);
+        }
     }
 
     // computes the exp part of the given instruction.
@@ -192,6 +306,11 @@ public class CPU
         boolean f = (instruction & 0x0080) > 0;
         boolean no = (instruction & 0x0040) > 0;
 
+        boolean isJmp = (indirect & zd & nd & zm & nm & f & no);
+        if (isJmp){
+            return;
+        }
+
         try {
             alu.setCommand(assemblerTranslator.getExpByCode((short)(instruction & 0xffc0)),
                            zd, nd, zm, nm, f, no);
@@ -201,7 +320,7 @@ public class CPU
 
         // sends A or M[A] to input1 of the alu
         if (indirect) {
-			int address = A.get();
+			int address = A.get() + BASE.get();
 			if (address < 0 || address >= M.getSize())
 				throw new ProgramException("At line " + PC.get() +
 										   ": Expression involves M but A=" +
@@ -213,7 +332,6 @@ public class CPU
         }
         else
             bus.send(A, 0, alu, 1);
-
         alu.compute();
     }
 
@@ -227,7 +345,7 @@ public class CPU
         boolean destM = (instruction & 0x0008) > 0;
 
         if (destM) {
-			int address = A.get();
+			int address = A.get() + BASE.get();
 			if (address < 0 || address >= M.getSize())
 				throw new ProgramException("At line " + PC.get() +
 										   ": Destination is M but A=" +
@@ -252,6 +370,7 @@ public class CPU
         boolean jumpNegative = (instruction & 0x0004) > 0;
         boolean jumpEqual = (instruction & 0x0002) > 0;
         boolean jumpPositive = (instruction & 0x0001) > 0;
+        boolean useStore = (instruction & 0x1fc0) == 0x1fc0;
         boolean changed = false;
 
         short exp = alu.getValueAt(2);
@@ -264,7 +383,11 @@ public class CPU
 				throw new ProgramException("At line " + PC.get() +
 										   ": Jump requested but A=" + newPC +
 										   " is an illegal program address.");
-            bus.send(A, 0, PC, 0);
+            if (useStore){
+                bus.send(PCS, 0, PC, 0);
+            } else {
+                bus.send(A, 0, PC, 0);
+            }
             changed = true;
         }
 

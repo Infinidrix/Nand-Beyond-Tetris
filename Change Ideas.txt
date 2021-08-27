@@ -1,0 +1,48 @@
+Major changes:
+    Registers -> PC_STORE, BASE, CONTROL, INT_HANDLER, INT_TIMER, INT_TIMER_BASE
+    Properties:
+        -> Timer counts up every clock cycle
+        -> When timer gets to zero, PC is set to INT_HANDLER, INT_TIMER is set to page and interrupt bit on control timer is set off
+        -> Handler stores all registers (A, D, BASE, PC) for the program on the table (context switch set) then loads (possibly another) program by setting (A, D, BASE) then going to PC - (setting A might be challenging)
+
+    Project:
+        -> Simple OS when booted creates an int_handler (That saves state, does something on memory and restores the same state) sets INT_TIMER_BASE and starts another program
+        -> Other program does some memory manipulations (on an infinite loop) and has stack and segment variables but no heap
+
+    Steps:
+        -> Hardware Support:
+            -> Add registers
+        -> Assembler:
+            -> Add support for the 101 instructions:
+                 101     1    000    000     000     000
+                   3     1      3      3       3       3
+                Type  spec   ctrl   src1    src2    dest
+
+            Control is:
+                0000: MOV
+                0001: SUBS
+                0010: OR
+                0011: NOT
+                0100: DEC
+                0101: INC
+                1000: ADD
+                1001: AND
+
+            -> Add support for 111 111111111 all function controls set to 1 meaning jump should take from PC_STORE not A (EDITING the already existing assembler
+            -> Add support for the 101 instructions:
+                         101     0   0000   0000    0000
+                           3     1      4      4       4
+                        Type  spec   ctrl    src    dest
+
+                        D += A
+                        1010 0000 0001 0010
+            -> TODO: add move instruction
+
+        -> Code OS in assembly
+        -> Interrupts
+            -> Add interrupts
+
+
+TESTS:
+    -> move values into registers
+        All registers working

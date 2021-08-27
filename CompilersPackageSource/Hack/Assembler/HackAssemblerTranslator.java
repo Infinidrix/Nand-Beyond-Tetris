@@ -17,10 +17,17 @@
 
 package Hack.Assembler;
 
-import java.util.*;
-import java.io.*;
-import Hack.Utilities.*;
-import Hack.Translators.*;
+import Hack.Translators.HackTranslatorException;
+import Hack.Utilities.Conversions;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * A translation service between the Assembly text and the numeric instruction values.
@@ -82,11 +89,16 @@ public class HackAssemblerTranslator {
     private static final Short JMP_LESS_EQUAL   = new Short((short)0x6);
     private static final Short JMP_GREATER_EQUAL = new Short((short)0x3);
 
+    private static final String[] symbols = new String[] {"_", "-", "|", "!", "--", "++", "", "", "+", "&"};
+    private static final String[] registers = new String[] { "A", "D", "M", "P", "C", "B", "I", "T", "R" };
+
+
     // the single instance
     private static HackAssemblerTranslator instance;
 
     // The translation tables from text to codes
     private Hashtable expToCode, destToCode, jmpToCode;
+    private Map<String, Short> symbolLoc, registerLoc;
 
     // The translation table from code to text.
     private Hashtable expToText, destToText, jmpToText;
@@ -100,6 +112,20 @@ public class HackAssemblerTranslator {
         initExp();
         initDest();
         initJmp();
+        initNewInst();
+    }
+
+    private void initNewInst() {
+        symbolLoc= new HashMap<>();
+        for (int loc = 0; loc < symbols.length; loc++) {
+            symbolLoc.put(symbols[loc], (short) loc);
+        }
+
+        registerLoc= new HashMap<>();
+        for (int loc = 0; loc < registers.length; loc++) {
+            registerLoc.put(registers[loc], (short) loc);
+            registerLoc.put(registers[loc].toLowerCase(Locale.ROOT), (short) loc);
+        }
     }
 
     /**
@@ -196,6 +222,33 @@ public class HackAssemblerTranslator {
                 } catch (NumberFormatException nfe) {
                     throw new AssemblerException("A numeric value is expected");
                 }
+            } else if (input.isToken("jmp")){
+                code = (short) 0xffc7;
+            }
+            else if (input.isToken("=")){
+                short dest = 0, src = 0, exp = 0, type = 0xa, i = 0;
+                input.advance(true);
+                String secondToken = input.token();
+                dest = registerLoc.get(secondToken.substring(i, i + 1));
+                i++;
+                if (secondToken.length() > i){
+                    if (secondToken.length() > i + 1 && !Character.isAlphabetic(secondToken.charAt(i + 1))){
+                        exp = symbolLoc.get(secondToken.substring(i, i + 2));
+                        i += 2;
+                    } else {
+                        exp = symbolLoc.get(secondToken.substring(i, i + 1));
+                        i++;
+                    }
+                }
+                if (secondToken.length() > i){
+                    src = registerLoc.get(secondToken.substring(i, i + 1));
+                    i++;
+                }
+                if (secondToken.length() > i ){
+                    throw new AssemblerException("Instruction longer than expected");
+                }
+                input.ensureEnd();
+                code = (short) (type << 12 | exp << 8 | src << 4 | dest);
             }
             else { // compute-store-jump command
 
@@ -262,6 +315,16 @@ public class HackAssemblerTranslator {
             if ((code & 0x8000) == 0) {
                 command.append('@');
                 command.append(code);
+            } else if ((code & 0xf000) == 0xa000){
+                short src = (short) ((code & 0x00f0) >> 4);
+                short dest = (short) (code & 0x000f);
+                short symb = (short) ((code & 0x0f00) >> 8);
+
+                command.append("=");
+                command.append(registers[dest]);
+                command.append(symbols[symb]);
+                command.append(registers[src]);
+
             }
             else {
                 short exp = (short)(code & 0xffc0);

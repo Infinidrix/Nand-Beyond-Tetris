@@ -13,6 +13,28 @@ supports the book "The Elements of Computing Systems" by Nisan and Schocken,
 MIT Press 2005. If you modify the contents of this file, please document and
 mark your changes clearly, for the benefit of others.
 
+feat.interrupt
+==============
+
+Assembler
+---------
+Added: Support for the new R type instructions (=(DEST)(OP)(SRC))
+
+CPU Emulator
+------------
+
+Added: Registers PCS (Program Counter Store), CTR (Control), BASE, INTH (Interrupt Handler), TEMP, RESET, and TIMER
+Added: Support for the 1010 instructions (R type instructions)
+Added: Interrupts
+Added: BASE offset for the Memory access using A
+Added: instruction to JMP to PCS instead of A
+Added: Crude Makefile for easy compilation
+
+Known Bugs
+----------
+
+bug: =(DEST)++ gets replaced by =(DEST)++A instead of reporting an error
+bug fix - TODO: bounds checking with BASE not yet implemented
 
 2.5
 ===
