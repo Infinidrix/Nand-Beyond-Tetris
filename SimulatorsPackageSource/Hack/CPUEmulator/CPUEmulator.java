@@ -101,7 +101,9 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         Register RESET = new Register(null);
         TEMP.reset();
         Register TIMER = new Register(null);
-        TEMP.reset();
+        TIMER.reset();
+        Register ONE = new Register(null);
+        ONE.reset();
 
         PointerAddressRegisterAdapter PC = new PointerAddressRegisterAdapter(null, rom);
         PC.reset();
@@ -115,7 +117,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         Bus bus = new Bus(null);
         bus.reset();
 
-        cpu = new CPU(ram, rom, A, D, PC, alu, bus, PCS, CTR, BASE, INTH, TEMP, RESET, TIMER);
+        cpu = new CPU(ram, rom, A, D, PC, alu, bus, PCS, CTR, BASE, INTH, TEMP, RESET, TIMER, ONE);
 
         init();
     }
@@ -171,6 +173,12 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         TIMER.addErrorListener(this);
         TIMER.reset();
 
+        Register ONE = new Register(gui.getONE());
+        ONE.addErrorListener(this);
+        ONE.disableUserInput();
+        ONE.reset();
+        ONE.setValueAt(0, 0x8000, true);
+
         PointerAddressRegisterAdapter PC = new PointerAddressRegisterAdapter(gui.getPC(), rom);
         PC.addErrorListener(this);
         PC.reset();
@@ -184,7 +192,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         Bus bus = new Bus(gui.getBus());
         bus.reset();
 
-        cpu = new CPU(ram, rom, A, D, PC, alu, bus, PCS, CTR, BASE, INTH, TEMP, RESET, TIMER);
+        cpu = new CPU(ram, rom, A, D, PC, alu, bus, PCS, CTR, BASE, INTH, TEMP, RESET, TIMER, ONE);
 
         init();
     }
@@ -337,6 +345,12 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
                 cpu.getROM().disableUserInput();
                 cpu.getA().disableUserInput();
                 cpu.getD().disableUserInput();
+                cpu.getCTR().disableUserInput();
+                cpu.getTIMER().disableUserInput();
+                cpu.getTEMP().disableUserInput();
+                cpu.getBASE().disableUserInput();
+                cpu.getINTH().disableUserInput();
+                cpu.getPCS().disableUserInput();
                 cpu.getPC().disableUserInput();
 
                 ScreenGUI screen = gui.getScreen();
@@ -351,6 +365,13 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
                 cpu.getROM().enableUserInput();
                 cpu.getA().enableUserInput();
                 cpu.getD().enableUserInput();
+                cpu.getD().enableUserInput();
+                cpu.getTEMP().enableUserInput();
+                cpu.getTIMER().enableUserInput();
+                cpu.getBASE().enableUserInput();
+                cpu.getPCS().enableUserInput();
+                cpu.getINTH().enableUserInput();
+                cpu.getCTR().enableUserInput();
                 cpu.getPC().enableUserInput();
 
                 ScreenGUI screen = gui.getScreen();
@@ -390,6 +411,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         cpu.getBASE().setNumericFormat(formatCode);
         cpu.getINTH().setNumericFormat(formatCode);
         cpu.getTEMP().setNumericFormat(formatCode);
+        cpu.getONE().setNumericFormat(formatCode);
     }
 
     public void setAnimationSpeed(int speedUnit) {
@@ -412,6 +434,8 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         cpu.getD().refreshGUI();
         cpu.getPC().refreshGUI();
         cpu.getALU().refreshGUI();
+        cpu.getTEMP().refreshGUI();
+        cpu.getONE().refreshGUI();
 
         ScreenGUI screen = gui.getScreen();
         if (screen != null)

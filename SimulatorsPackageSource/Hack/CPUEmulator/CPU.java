@@ -45,6 +45,7 @@ public class CPU
     protected Register TEMP;
     protected Register RESET;
     protected Register TIMER;
+    protected Register ONE;
 
     // The RAM array.
     protected RAM M;
@@ -71,7 +72,8 @@ public class CPU
      */
     public CPU(RAM ram, ROM rom, PointerAddressRegisterAdapter A, Register D,
                PointerAddressRegisterAdapter PC, ALU alu, Bus bus, Register PCS,
-               Register CTR, Register BASE, Register INTH, Register TEMP, Register RESET, Register TIMER) {
+               Register CTR, Register BASE, Register INTH, Register TEMP, Register RESET,
+               Register TIMER, Register ONE) {
         this.M = ram;
         this.rom = rom;
         this.A = A;
@@ -86,8 +88,9 @@ public class CPU
         this.TEMP = TEMP;
         this.RESET = RESET;
         this.TIMER = TIMER;
+        this.ONE = ONE;
 
-        choice = new Register[]{ A, D, null, PCS, CTR, BASE, INTH, TEMP, RESET };
+        choice = new Register[]{ A, D, null, PCS, CTR, BASE, INTH, TEMP, RESET, ONE };
 
 
         A.setUpdatePointer(false);
@@ -195,6 +198,8 @@ public class CPU
         TEMP.reset();
         RESET.reset();
         TIMER.reset();
+        ONE.reset();
+        ONE.setValueAt(0, 0x8000, true);
 
         PC.reset();
         alu.reset();
@@ -225,6 +230,8 @@ public class CPU
         } else if ((instruction & 0xa000) == 0xa000) {
             computeNewExp(instruction);
             setNewDestination(instruction);
+        } else if ((instruction & 0xe000) == 0x8000 ){
+            setLoadDestination(instruction);
         }
         else if (instruction != HackAssemblerTranslator.NOP)
             throw new ProgramException("At line " + PC.get() +
@@ -251,6 +258,29 @@ public class CPU
             }
         }
         time++;
+    }
+
+    private void setLoadDestination(int instruction) throws ProgramException {
+        boolean highSet = (instruction & 0x1000) > 0;
+        int register = (instruction & 0x0f00);
+        int number = (instruction & 0x00ff) << 16;
+        if (highSet) {
+            number <<= 8;
+        }
+
+        if (register >= choice.length){
+            throw new ProgramException("Chosen register index: " + register + " is larger than expected.");
+        }
+        Register destination = choice[register];
+        // very hacky solution (won't run on resets) TODO: fix this
+//        rom.setValueAt(PC.get(), number, true);
+        int mask = highSet ? 0x00ffffff : 0xff00ffff;
+        int result = (mask & A.get()) | number;
+        alu.setInput0(result);
+
+        alu.setCommand(highSet ? "^" : "#", false, false, true, false, true, false);
+        alu.compute();
+        bus.send(alu, 2, destination, 0);
     }
 
     private void computeNewExp(int instruction) {
@@ -392,5 +422,9 @@ public class CPU
         }
 
         return changed;
+    }
+
+    public Register getONE() {
+        return ONE;
     }
 }

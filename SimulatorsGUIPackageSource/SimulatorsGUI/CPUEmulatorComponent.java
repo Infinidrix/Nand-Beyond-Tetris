@@ -42,6 +42,7 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
     private final RegisterComponent temp;
     private final RegisterComponent reset;
     private final RegisterComponent timer;
+    private final RegisterComponent one;
     private final RegisterComponent pc;
 
     // The screen of the CPUEmulator.
@@ -83,6 +84,7 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
         temp = new RegisterComponent();
         reset = new RegisterComponent();
         timer = new RegisterComponent();
+        one = new RegisterComponent();
         pc = new RegisterComponent();
         setRegistersNames();
         bus = new BusComponent();
@@ -113,6 +115,7 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
         temp.setName("TMP");
         reset.setName("RST");
         timer.setName("TMR");
+        one.setName("ONE");
     }
 
     public Point getAdditionalDisplayLocation() {
@@ -210,6 +213,11 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
         return timer;
     }
 
+    @Override
+    public RegisterGUI getONE() {
+        return one;
+    }
+
     /**
      * Returns the screen GUI component.
      */
@@ -230,6 +238,7 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
         temp.setBounds(new Rectangle(460, 320, temp.getWidth(), temp.getHeight()));
         reset.setBounds(new Rectangle(820, 320, reset.getWidth(), reset.getHeight()));
         timer.setBounds(new Rectangle(820, 351, timer.getWidth(), timer.getHeight()));
+        one.setBounds(new Rectangle(820, 380, timer.getWidth(), timer.getHeight()));
         screen.setToolTipText("Screen");
         screen.setBounds(new Rectangle(476, 25, screen.getWidth(), screen.getHeight()));
         keyboard.setBounds(new Rectangle(476, 285, keyboard.getWidth(), keyboard.getHeight()));
@@ -256,6 +265,7 @@ public class CPUEmulatorComponent extends HackSimulatorComponent implements CPUE
         this.add(inth, null);
         this.add(temp, null);
         this.add(reset, null);
+        this.add(one, null);
         this.add(timer, null);
         setSize(EMULATOR_WIDTH, EMULATOR_HEIGHT);
     }

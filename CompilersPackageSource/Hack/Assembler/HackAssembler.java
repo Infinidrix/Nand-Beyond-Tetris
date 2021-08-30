@@ -168,8 +168,25 @@ public class HackAssembler extends HackTranslator {
 
                         symbolTable.put(label,new Integer(pc));
                     }
-                    else if (input.contains("["))
+                    else if (input.isToken("@")){
+                        pc++;
+                        input.advance(true);
+                        int constant;
+                        try {
+                            constant = Integer.parseInt(input.token());
+                        } catch (NumberFormatException nfe){
+                            continue;
+                        }
+                        if ((constant & 0x8000) > 0)
+                            pc++;
+                        if ((constant & 0xff0000) > 0)
+                            pc++;
+                        if ((constant & 0xff000000) > 0)
+                            pc++;
+                    }
+                    else if (input.contains("[")) {
                         pc += 2;
+                    }
                     else
                         pc++;
                 }
@@ -290,8 +307,9 @@ public class HackAssembler extends HackTranslator {
                     boolean numeric = true;
                     String label = input.token();
                     input.ensureEnd();
+                    int constant = 0;
                     try {
-                        Integer.parseInt(label);
+                        constant = Integer.parseInt(label);
                     } catch (NumberFormatException nfe) {
                         numeric = false;
                     }
@@ -305,7 +323,16 @@ public class HackAssembler extends HackTranslator {
 
                         addCommand(translator.textToCode("@" + address.shortValue()));
                     }
-                    else
+                    else if (constant > (2 << 14)){
+                        // Negative numbers will still be dealt using neg -POSITIVE with room for optimization
+                        addCommand(translator.textToCode("@" + (constant & 0x7fff)));
+                        if ((constant & 0x8000) > 0)
+                            addCommand(translator.textToCode("=A|O"));
+                        if ((constant & 0xff0000) > 0)
+                            addCommand(translator.textToCode("#A=" + ((constant & 0xff0000) >> 16)));
+                        if ((constant & 0xff000000) > 0)
+                            addCommand(translator.textToCode("^A=" + ((constant & 0xff000000) >> 24)));
+                    } else
                         addCommand(translator.textToCode(line));
                 }
                 else { // try to compile normaly, if error - try to compile as compact assembly

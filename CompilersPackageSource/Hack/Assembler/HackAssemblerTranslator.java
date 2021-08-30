@@ -90,7 +90,7 @@ public class HackAssemblerTranslator {
     private static final Integer JMP_GREATER_EQUAL = new Integer(0x3);
 
     private static final String[] symbols = new String[] {"_", "-", "|", "!", "--", "++", "", "", "+", "&"};
-    private static final String[] registers = new String[] { "A", "D", "M", "P", "C", "B", "I", "T", "R" };
+    private static final String[] registers = new String[] { "A", "D", "M", "P", "C", "B", "I", "T", "R", "O" };
 
 
     // the single instance
@@ -250,6 +250,33 @@ public class HackAssemblerTranslator {
                 input.ensureEnd();
                 code = type << 12 | exp << 8 | src << 4 | dest;
             }
+
+            else if (input.isToken("#") || input.isToken("^")){
+                int isHighSet = input.isToken("^") ? 1 : 0;
+                int type = 0x8 | isHighSet;
+                input.advance(true);
+                String secondToken = input.token();
+                Integer destination = registerLoc.get(secondToken);
+                if (destination == null){
+                    throw new AssemblerException("Destination register unknown");
+                }
+                input.advance(true);
+                if (!input.isToken("=")){
+                    throw new AssemblerException("Equals sign expected");
+                }
+                input.advance(true);
+                int constant;
+                try {
+                    constant = Integer.parseInt(input.token());
+                    if (constant > (1 << 8)){
+                        throw new AssemblerException("Constant should be lower than 256");
+                    }
+                } catch (NumberFormatException formatException){
+                    throw new AssemblerException("Number expected after equals");
+                }
+                code = type << 12 | destination.shortValue() << 8 | constant;
+                input.ensureEnd();;
+            }
             else { // compute-store-jump command
 
                 String firstToken = input.token();
@@ -274,8 +301,8 @@ public class HackAssemblerTranslator {
 
                 if (exp == null)
                     throw new AssemblerException("Expression expected");
-
-                expCode = exp.shortValue();
+                // Changing this to int so that instruction will have leading zeros
+                expCode = exp.intValue();
                 input.advance(false);
 
                 if (input.isToken(";"))
@@ -325,6 +352,20 @@ public class HackAssemblerTranslator {
                 command.append(symbols[symb]);
                 command.append(registers[src]);
 
+            } else if ((code & 0xe000) == 0x8000){
+                int dest = (code & 0x0f00) >> 8;
+                int number = (code & 0x00ff);
+                boolean highSet = (code & 0x1000) > 0;
+                if (highSet){
+                    command.append("^");
+                } else {
+                    command.append("#");
+                }
+                command.append(registers[dest]);
+                command.append("=");
+                command.append(number);
+            } else if (code == 0xffc7){
+                command.append("jmp");
             }
             else {
                 int exp = code & 0xffc0;
@@ -383,6 +424,7 @@ public class HackAssemblerTranslator {
                         throw new AssemblerException("Program too large");
 
                     try {
+                        // TODO: convert large ints to multiple instructions
                         value = Conversions.binaryToInt(line);
                     } catch (NumberFormatException nfe) {
                         throw new AssemblerException("Illegal character");

@@ -385,7 +385,7 @@ public abstract class HackTranslator implements HackTranslatorEventListener, Act
             while(sourcePC < source.length) {
                 int[] compiledRange = compileLineAndCount(source[sourcePC]);
                 if (compiledRange != null) {
-                    compilationMap.put(new Integer(sourcePC), compiledRange);
+                    compilationMap.put(sourcePC, compiledRange);
                 }
 
                 sourcePC++;
