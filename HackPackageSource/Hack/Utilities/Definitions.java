@@ -33,7 +33,7 @@ public class Definitions {
     /**
      * Size of RAM
      */
-    public static final int RAM_SIZE = 24577;
+    public static final int RAM_SIZE = 1452277;
 
     /**
      * Size of ROM
